@@ -4,11 +4,11 @@
 #include <fileinfo.h>
 
 namespace net_drive {
-	class Drive {
-	private:
-		DOKAN_HANDLE instance = nullptr;
+    class Drive {
+    private:
+        DOKAN_HANDLE instance = nullptr;
 
-	public:
-		void Run();
-	};
+    public:
+        void Run();
+    };
 }

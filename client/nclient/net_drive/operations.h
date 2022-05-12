@@ -4,5 +4,5 @@
 #include <fileinfo.h>
 
 namespace net_drive {
-	extern DOKAN_OPERATIONS operations;
+    extern DOKAN_OPERATIONS operations;
 }
