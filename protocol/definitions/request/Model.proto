@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package drive_protocol.request;
+
+message RequestInfo {
+  uint64 process_id = 1;
+  bool is_directory = 2;
+  bool delete_on_close = 3;
+  bool paging_io = 4;
+  bool synchronous_io = 5;
+  bool no_cache = 6;
+  bool write_to_end_of_file = 7;
+}
+
+message CreateFileRequest {
+  RequestInfo req = 1;
+  string file_name = 2;
+}
+
+message CloseFileRequest {
+  RequestInfo req = 1;
+  string file_name = 2;
+}
+
+message ReadFileRequest {
+  RequestInfo req = 1;
+  string file_name = 2;
+  uint64 length = 3;
+  uint64 offset = 4;
+}
+
+message WriteFileRequest {
+  RequestInfo req = 1;
+  string file_name = 2;
+  uint64 length = 3;
+  uint64 offset = 4;
+  bytes buffer = 5;
+}

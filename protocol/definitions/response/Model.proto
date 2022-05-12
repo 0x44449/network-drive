@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package drive_protocol.response;
+
+message CreateFileResponse {
+  int64 status = 1;
+}
+
+message CloseFileResponse {
+  int64 status = 1;
+}

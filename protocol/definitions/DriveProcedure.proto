@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package drive_protocol;
+
+import "request/Model.proto";
+import "response/Model.proto";
+
+service DriveProcedure {
+  rpc CreateFile(drive_protocol.request.CreateFileRequest) returns (drive_protocol.response.CreateFileResponse) {};
+  rpc CloseFile(drive_protocol.request.CloseFileRequest) returns (drive_protocol.response.CloseFileResponse) {};
+}
