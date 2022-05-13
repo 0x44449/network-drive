@@ -72,19 +72,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\..\dokany-2.0.4.1000\dokan;$(ProjectDir)..\..\dokany-2.0.4.1000\sys;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\dokany\dokan;$(ProjectDir)..\..\dokany\sys;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\..\dokany-2.0.4.1000\dokan;$(ProjectDir)..\..\dokany-2.0.4.1000\sys;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\dokany\dokan;$(ProjectDir)..\..\dokany\sys;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\..\dokany-2.0.4.1000\dokan;$(ProjectDir)..\..\dokany-2.0.4.1000\sys;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\dokany\dokan;$(ProjectDir)..\..\dokany\sys;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\..\dokany-2.0.4.1000\dokan;$(ProjectDir)..\..\dokany-2.0.4.1000\sys;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\dokany\dokan;$(ProjectDir)..\..\dokany\sys;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
