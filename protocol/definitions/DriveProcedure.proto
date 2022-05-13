@@ -8,4 +8,16 @@ import "response/Model.proto";
 service DriveProcedure {
   rpc CreateFile(drive_protocol.request.CreateFileRequest) returns (drive_protocol.response.CreateFileResponse) {};
   rpc CloseFile(drive_protocol.request.CloseFileRequest) returns (drive_protocol.response.CloseFileResponse) {};
+  rpc ReadFile(drive_protocol.request.ReadFileRequest) returns (drive_protocol.response.ReadFileResponse) {};
+  rpc WriteFile(drive_protocol.request.WriteFileRequest) returns (drive_protocol.response.WriteFileResponse) {};
+  rpc FlushFileBuffer(drive_protocol.request.FlushFileBufferRequest) returns (drive_protocol.response.FlushFileBufferResponse) {};
+  rpc GetFileInformation(drive_protocol.request.GetFileInformationRequest) returns (drive_protocol.response.GetFileInformationResponse) {};
+  rpc DeleteFile(drive_protocol.request.DeleteFileRequest) returns (drive_protocol.response.DeleteFileResponse) {};
+  rpc DeleteDirectory(drive_protocol.request.DeleteDirectoryRequest) returns (drive_protocol.response.DeleteDirectoryResponse) {};
+  rpc MoveFile(drive_protocol.request.MoveFileRequest) returns (drive_protocol.response.MoveFileResponse) {};
+  rpc LockFile(drive_protocol.request.LockFileRequest) returns (drive_protocol.response.LockFileResponse) {};
+  rpc SetEndOfFile(drive_protocol.request.SetEndOfFileRequest) returns (drive_protocol.response.SetEndOfFileResponse) {};
+  rpc SetAllocationSize(drive_protocol.request.SetAllocationSizeRequest) returns (drive_protocol.response.SetAllocationSizeResponse) {};
+  rpc SetFileAttributes(drive_protocol.request.SetFileAttributesRequest) returns (drive_protocol.response.SetFileAttributesResponse) {};
+  rpc UnlockFile(drive_protocol.request.UnlockFileRequest) returns (drive_protocol.response.UnlockFileResponse) {};
 }

@@ -12,27 +12,110 @@ message RequestInfo {
   bool write_to_end_of_file = 7;
 }
 
+message CredentialInfo {
+
+}
+
 message CreateFileRequest {
   RequestInfo req = 1;
-  string file_name = 2;
+  CredentialInfo cred = 2;
+  string file_name = 3;
+  uint64 desired_access = 4;
+  uint64 file_attributes = 5;
+  uint64 share_access = 6;
+  uint64 create_disposition = 7;
+  uint64 create_options = 8;
 }
 
 message CloseFileRequest {
   RequestInfo req = 1;
-  string file_name = 2;
+  CredentialInfo cred = 2;
+  string file_name = 3;
 }
 
 message ReadFileRequest {
   RequestInfo req = 1;
-  string file_name = 2;
-  uint64 length = 3;
-  uint64 offset = 4;
+  CredentialInfo cred = 2;
+  string file_name = 3;
+  uint64 length = 4;
+  int64 offset = 5;
 }
 
 message WriteFileRequest {
   RequestInfo req = 1;
-  string file_name = 2;
-  uint64 length = 3;
-  uint64 offset = 4;
-  bytes buffer = 5;
+  CredentialInfo cred = 2;
+  string file_name = 3;
+  uint64 length = 4;
+  int64 offset = 5;
+  bytes buffer = 6;
 }
+
+message FlushFileBufferRequest {
+  RequestInfo req = 1;
+  CredentialInfo cred = 2;
+  string file_name = 3;
+}
+
+message GetFileInformationRequest {
+  RequestInfo req = 1;
+  CredentialInfo cred = 2;
+  string file_name = 3;
+}
+
+message DeleteFileRequest {
+  RequestInfo req = 1;
+  CredentialInfo cred = 2;
+  string file_name = 3;
+}
+
+message DeleteDirectoryRequest {
+  RequestInfo req = 1;
+  CredentialInfo cred = 2;
+  string file_name = 3;
+}
+
+message MoveFileRequest {
+  RequestInfo req = 1;
+  CredentialInfo cred = 2;
+  string file_name = 3;
+  string new_file_name = 4;
+  bool replace_if_existing = 5;
+}
+
+message LockFileRequest {
+  RequestInfo req = 1;
+  CredentialInfo cred = 2;
+  string file_name = 3;
+  int64 offset = 4;
+  int64 length = 5;
+}
+
+message SetEndOfFileRequest {
+  RequestInfo req = 1;
+  CredentialInfo cred = 2;
+  string file_name = 3;
+  int64 offset = 4;
+}
+
+message SetAllocationSizeRequest {
+  RequestInfo req = 1;
+  CredentialInfo cred = 2;
+  string file_name = 3;
+  int64 size = 4;
+}
+
+message SetFileAttributesRequest {
+  RequestInfo req = 1;
+  CredentialInfo cred = 2;
+  string file_name = 3;
+  uint64 file_attributes = 4;
+}
+
+message UnlockFileRequest {
+  RequestInfo req = 1;
+  CredentialInfo cred = 2;
+  string file_name = 3;
+  int64 offset = 4;
+  int64 length = 5;
+}
+
