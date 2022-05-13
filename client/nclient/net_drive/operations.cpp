@@ -181,27 +181,27 @@ namespace net_drive {
         CreateFileImpl,
         CleanupImpl,
         CloseFileImpl,
-        nullptr, // ReadFile
-        nullptr, // WriteFile
-        nullptr, // FlushFileBuffers
-        nullptr, // GetFileInformation
-        nullptr, // FindFiles
+        ReadFileImpl, // ReadFile
+        WriteFileImpl, // WriteFile
+        FlushFileBuffersImpl, // FlushFileBuffers
+        GetFileInformation, // GetFileInformation
+        FindFilesImpl, // FindFiles
         nullptr, // FindFilesWithPattern
-        nullptr, // SetFileAttributes
-        nullptr, // SetFileTime
-        nullptr, // DeleteFile
-        nullptr, // DeleteDirectory
-        nullptr, // MoveFile
-        nullptr, // SetEndOfFile
-        nullptr, // SetAllocationSize
-        nullptr, // LockFile
-        nullptr, // UnlockFile
-        nullptr, // GetDiskFreeSpace
-        nullptr, // GetVolumeInformation
-        nullptr, // Mounted
-        nullptr, // Unmounted
-        nullptr, // GetFileSecurity
-        nullptr, // SetFileSecurity
-        nullptr, // FindStreams
+        SetFileAttributesImpl, // SetFileAttributes
+        SetFileTimeImpl, // SetFileTime
+        DeleteFileImpl, // DeleteFile
+        DeleteDirectoryImpl, // DeleteDirectory
+        MoveFileImpl, // MoveFile
+        SetEndOfFileImpl, // SetEndOfFile
+        SetAllocationSizeImpl, // SetAllocationSize
+        LockFileImpl, // LockFile
+        UnlockFileImpl, // UnlockFile
+        GetDiskFreeSpaceImpl, // GetDiskFreeSpace
+        GetVolumeInformationImpl, // GetVolumeInformation
+        MountedImpl, // Mounted
+        UnmountedImpl, // Unmounted
+        GetFileSecurityImpl, // GetFileSecurity
+        SetFileSecurityImpl, // SetFileSecurity
+        FindStreamsImpl, // FindStreams
     };
 }
