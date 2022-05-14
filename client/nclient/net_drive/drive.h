@@ -3,6 +3,10 @@
 #include <dokan.h>
 #include <fileinfo.h>
 
+#include <iostream>
+
+#include "operations.h"
+
 namespace net_drive {
     class Drive {
     private:
@@ -10,5 +14,7 @@ namespace net_drive {
 
     public:
         void Run();
+        void Stop();
+        void Wait();
     };
 }
