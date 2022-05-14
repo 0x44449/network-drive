@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package drive_protocol.response;
 
+option java_package = "drive_protocol.response";
+option java_multiple_files = true;
+
 message CreateFileResponse {
   int64 status = 1;
 }
@@ -56,6 +59,6 @@ message SetFileAttributesResponse {
   int64 status = 1;
 }
 
-message UnlockFileRequest {
+message UnlockFileResponse {
   int64 status = 1;
 }
