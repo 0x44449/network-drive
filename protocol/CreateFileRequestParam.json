@@ -1,0 +1,18 @@
+{
+  "req": {
+    "processId": "123",
+    "isDirectory": true,
+    "deleteOnClose": true,
+    "pagingIo": true,
+    "synchronousIo": true,
+    "noCache": true,
+    "writeToEndOfFile": true
+  },
+  "cred": {},
+  "fileName": "faker.system.file_name",
+  "desiredAccess": "123",
+  "fileAttributes": "123",
+  "shareAccess": "123",
+  "createDisposition": "123",
+  "createOptions": "123"
+}
