@@ -10,7 +10,12 @@ import net.devh.boot.grpc.server.service.GrpcService;
 public class DriveProcedureService extends DriveProcedureGrpc.DriveProcedureImplBase {
     @Override
     public void createFile(CreateFileRequest request, StreamObserver<CreateFileResponse> responseObserver) {
-        super.createFile(request, responseObserver);
+        // super.createFile(request, responseObserver);
+        CreateFileResponse response = CreateFileResponse.newBuilder()
+                .setStatus(0)
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
