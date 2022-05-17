@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class NgserverApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(NgserverApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(NgserverApplication.class, args);
+    }
 }

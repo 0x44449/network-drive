@@ -1,4 +1,4 @@
-package com.ngserver.ServiceImpl;
+package com.ngserver;
 
 import drive_protocol.DriveProcedureGrpc;
 import drive_protocol.request.*;
@@ -10,7 +10,6 @@ import net.devh.boot.grpc.server.service.GrpcService;
 public class DriveProcedureService extends DriveProcedureGrpc.DriveProcedureImplBase {
     @Override
     public void createFile(CreateFileRequest request, StreamObserver<CreateFileResponse> responseObserver) {
-        // super.createFile(request, responseObserver);
         CreateFileResponse response = CreateFileResponse.newBuilder()
                 .setStatus(0)
                 .build();
@@ -20,66 +19,105 @@ public class DriveProcedureService extends DriveProcedureGrpc.DriveProcedureImpl
 
     @Override
     public void closeFile(CloseFileRequest request, StreamObserver<CloseFileResponse> responseObserver) {
-        super.closeFile(request, responseObserver);
+        CloseFileResponse response = CloseFileResponse.newBuilder()
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void deleteDirectory(DeleteDirectoryRequest request, StreamObserver<DeleteDirectoryResponse> responseObserver) {
-        super.deleteDirectory(request, responseObserver);
+        DeleteDirectoryResponse response = DeleteDirectoryResponse.newBuilder()
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void deleteFile(DeleteFileRequest request, StreamObserver<DeleteFileResponse> responseObserver) {
-        super.deleteFile(request, responseObserver);
+        DeleteFileResponse response = DeleteFileResponse.newBuilder()
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void flushFileBuffer(FlushFileBufferRequest request, StreamObserver<FlushFileBufferResponse> responseObserver) {
-        super.flushFileBuffer(request, responseObserver);
+        FlushFileBufferResponse response = FlushFileBufferResponse.newBuilder()
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void moveFile(MoveFileRequest request, StreamObserver<MoveFileResponse> responseObserver) {
-        super.moveFile(request, responseObserver);
+        MoveFileResponse response = MoveFileResponse.newBuilder()
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void getFileInformation(GetFileInformationRequest request, StreamObserver<GetFileInformationResponse> responseObserver) {
-        super.getFileInformation(request, responseObserver);
+        GetFileInformationResponse response = GetFileInformationResponse.newBuilder()
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void lockFile(LockFileRequest request, StreamObserver<LockFileResponse> responseObserver) {
-        super.lockFile(request, responseObserver);
+        LockFileResponse response = LockFileResponse.newBuilder()
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void readFile(ReadFileRequest request, StreamObserver<ReadFileResponse> responseObserver) {
-        super.readFile(request, responseObserver);
+        ReadFileResponse response = ReadFileResponse.newBuilder()
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void setAllocationSize(SetAllocationSizeRequest request, StreamObserver<SetAllocationSizeResponse> responseObserver) {
-        super.setAllocationSize(request, responseObserver);
+        SetAllocationSizeResponse response = SetAllocationSizeResponse.newBuilder()
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void setEndOfFile(SetEndOfFileRequest request, StreamObserver<SetEndOfFileResponse> responseObserver) {
-        super.setEndOfFile(request, responseObserver);
+        SetEndOfFileResponse response = SetEndOfFileResponse.newBuilder()
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void setFileAttributes(SetFileAttributesRequest request, StreamObserver<SetFileAttributesResponse> responseObserver) {
-        super.setFileAttributes(request, responseObserver);
+        SetFileAttributesResponse response = SetFileAttributesResponse.newBuilder()
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void unlockFile(UnlockFileRequest request, StreamObserver<UnlockFileResponse> responseObserver) {
-        super.unlockFile(request, responseObserver);
+        UnlockFileResponse response = UnlockFileResponse.newBuilder()
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void writeFile(WriteFileRequest request, StreamObserver<WriteFileResponse> responseObserver) {
-        super.writeFile(request, responseObserver);
+        WriteFileResponse response = WriteFileResponse.newBuilder()
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 }
