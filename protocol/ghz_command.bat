@@ -1,5 +1,6 @@
 ghz --insecure --async ^
   --proto ./definitions/DriveProcedure.proto ^
   --call drive_protocol.DriveProcedure.CreateFile ^
-  -c 10 -n 10000 --rps 200 ^
-  -D CreateFileRequestParam.json localhost:9090
+  --skipTLS --rps 200 --total 1000 --concurrency 20 ^
+  --output=./ghz_result.html --format=html ^
+  -D CreateFileRequestParam.json 127.0.0.1:9090
