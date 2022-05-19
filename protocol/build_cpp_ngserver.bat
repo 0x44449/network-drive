@@ -1,0 +1,4 @@
+protobuf-3.20.1\bin\protoc -I="./definitions" --cpp_out="../server/ngserver_c/ngserver/drive_protocol" "./definitions/Request.proto"
+protobuf-3.20.1\bin\protoc -I="./definitions" --cpp_out="../server/ngserver_c/ngserver/drive_protocol" "./definitions/Response.proto"
+protobuf-3.20.1\bin\protoc -I="./definitions" --cpp_out="../server/ngserver_c/ngserver/drive_protocol" "./definitions/DriveProcedure.proto"
+protobuf-3.20.1\bin\protoc --plugin=protoc-gen-grpc="./protobuf-3.20.1/cpp/grpc_cpp_plugin.exe" --grpc_out="../server/ngserver_c/ngserver/drive_protocol" --proto_path="./definitions" "./definitions/DriveProcedure.proto"
