@@ -1,29 +1,43 @@
 package com.ngserver.storage.minimal;
 
+import com.ngserver.dokan_port.constants.microsoft.CreateDisposition;
+import com.ngserver.dokan_port.constants.microsoft.CreateOption;
+import com.ngserver.dokan_port.constants.microsoft.FileAttribute;
 import com.ngserver.storage.NStorage;
 import drive_protocol.request.*;
 import drive_protocol.response.*;
 import org.springframework.stereotype.Service;
 
+import java.util.EnumSet;
+
 @Service
 public class MinimalStorage implements NStorage {
     @Override
     public CreateFileResponse createFile(CreateFileRequest request) {
+        // # https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/nf-ntifs-ntcreatefile?redirectedfrom=MSDN
         var requestInfo = request.getReq();
         var credentialInfo = request.getCred();
 
         var fileName = request.getFileName();
-        var createDisposition = request.getCreateDisposition();
+        var createDisposition = CreateDisposition.fromInt((int)request.getCreateDisposition());
         var desiredAccess = request.getDesiredAccess();
         var shareAccess = request.getShareAccess();
-        var fileAttributes = request.getFileAttributes();
-        var createOptions = request.getCreateOptions();
-
+        var fileAttributes = FileAttribute.maskValueSet((int)request.getFileAttributes());
+        var createOptions = CreateOption.maskValueSet((int)request.getCreateOptions());
         var isDirectory = requestInfo.getIsDirectory();
 
         // check file exists
 
         // check file is directory
+        /*
+        If the file is a directory, CreateFile is also called.
+        In this case, CreateFile should return STATUS_SUCCESS when that directory can be opened and DOKAN_FILE_INFO.IsDirectory has to be set to TRUE.
+        On the other hand, if DOKAN_FILE_INFO.IsDirectory is set to TRUE but the path targets a file, STATUS_NOT_A_DIRECTORY must be returned.
+         */
+
+        /*
+        In case OPEN_ALWAYS & CREATE_ALWAYS are successfully opening an existing file, STATUS_OBJECT_NAME_COLLISION should be returned instead of STATUS_SUCCESS.
+         */
 
         // if file is not directory, check oplock
         // related with desiredAccess, shareAccess
