@@ -1,0 +1,4 @@
+rootProject.name = 'ngserver-java'
+include 'drive-protocol'
+include 'phys-storage'
+
