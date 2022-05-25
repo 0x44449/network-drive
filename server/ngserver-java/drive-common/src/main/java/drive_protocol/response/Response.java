@@ -94,21 +94,21 @@ public final class Response {
   static {
     java.lang.String[] descriptorData = {
       "\n\016Response.proto\022\027drive_protocol.respons" +
-      "e\"$\n\022CreateFileResponse\022\016\n\006status\030\001 \001(\003\"" +
-      "#\n\021CloseFileResponse\022\016\n\006status\030\001 \001(\003\"2\n\020" +
-      "ReadFileResponse\022\016\n\006status\030\001 \001(\003\022\016\n\006buff" +
+      "e\"$\n\022CreateFileResponse\022\016\n\006status\030\001 \001(\005\"" +
+      "#\n\021CloseFileResponse\022\016\n\006status\030\001 \001(\005\"2\n\020" +
+      "ReadFileResponse\022\016\n\006status\030\001 \001(\005\022\016\n\006buff" +
       "er\030\002 \001(\014\"#\n\021WriteFileResponse\022\016\n\006status\030" +
-      "\001 \001(\003\")\n\027FlushFileBufferResponse\022\016\n\006stat" +
-      "us\030\001 \001(\003\"E\n\032GetFileInformationResponse\022\016" +
-      "\n\006status\030\001 \001(\003\022\027\n\017file_attributes\030\002 \001(\004\"" +
-      "$\n\022DeleteFileResponse\022\016\n\006status\030\001 \001(\003\")\n" +
-      "\027DeleteDirectoryResponse\022\016\n\006status\030\001 \001(\003" +
-      "\"\"\n\020MoveFileResponse\022\016\n\006status\030\001 \001(\003\"\"\n\020" +
-      "LockFileResponse\022\016\n\006status\030\001 \001(\003\"&\n\024SetE" +
-      "ndOfFileResponse\022\016\n\006status\030\001 \001(\003\"+\n\031SetA" +
-      "llocationSizeResponse\022\016\n\006status\030\001 \001(\003\"+\n" +
+      "\001 \001(\005\")\n\027FlushFileBufferResponse\022\016\n\006stat" +
+      "us\030\001 \001(\005\"E\n\032GetFileInformationResponse\022\016" +
+      "\n\006status\030\001 \001(\005\022\027\n\017file_attributes\030\002 \001(\004\"" +
+      "$\n\022DeleteFileResponse\022\016\n\006status\030\001 \001(\005\")\n" +
+      "\027DeleteDirectoryResponse\022\016\n\006status\030\001 \001(\005" +
+      "\"\"\n\020MoveFileResponse\022\016\n\006status\030\001 \001(\005\"\"\n\020" +
+      "LockFileResponse\022\016\n\006status\030\001 \001(\005\"&\n\024SetE" +
+      "ndOfFileResponse\022\016\n\006status\030\001 \001(\005\"+\n\031SetA" +
+      "llocationSizeResponse\022\016\n\006status\030\001 \001(\005\"+\n" +
       "\031SetFileAttributesResponse\022\016\n\006status\030\001 \001" +
-      "(\003\"$\n\022UnlockFileResponse\022\016\n\006status\030\001 \001(\003" +
+      "(\005\"$\n\022UnlockFileResponse\022\016\n\006status\030\001 \001(\005" +
       "B\033\n\027drive_protocol.responseP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

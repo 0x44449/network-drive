@@ -50,7 +50,7 @@ private static final long serialVersionUID = 0L;
             break;
           case 8: {
 
-            status_ = input.readInt64();
+            status_ = input.readInt32();
             break;
           }
           default: {
@@ -86,13 +86,13 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int STATUS_FIELD_NUMBER = 1;
-  private long status_;
+  private int status_;
   /**
-   * <code>int64 status = 1;</code>
+   * <code>int32 status = 1;</code>
    * @return The status.
    */
   @java.lang.Override
-  public long getStatus() {
+  public int getStatus() {
     return status_;
   }
 
@@ -110,8 +110,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (status_ != 0L) {
-      output.writeInt64(1, status_);
+    if (status_ != 0) {
+      output.writeInt32(1, status_);
     }
     unknownFields.writeTo(output);
   }
@@ -122,9 +122,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (status_ != 0L) {
+    if (status_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(1, status_);
+        .computeInt32Size(1, status_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -155,8 +155,7 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + STATUS_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getStatus());
+    hash = (53 * hash) + getStatus();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -290,7 +289,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      status_ = 0L;
+      status_ = 0;
 
       return this;
     }
@@ -367,7 +366,7 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(drive_protocol.response.MoveFileResponse other) {
       if (other == drive_protocol.response.MoveFileResponse.getDefaultInstance()) return this;
-      if (other.getStatus() != 0L) {
+      if (other.getStatus() != 0) {
         setStatus(other.getStatus());
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -399,33 +398,33 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private long status_ ;
+    private int status_ ;
     /**
-     * <code>int64 status = 1;</code>
+     * <code>int32 status = 1;</code>
      * @return The status.
      */
     @java.lang.Override
-    public long getStatus() {
+    public int getStatus() {
       return status_;
     }
     /**
-     * <code>int64 status = 1;</code>
+     * <code>int32 status = 1;</code>
      * @param value The status to set.
      * @return This builder for chaining.
      */
-    public Builder setStatus(long value) {
+    public Builder setStatus(int value) {
       
       status_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int64 status = 1;</code>
+     * <code>int32 status = 1;</code>
      * @return This builder for chaining.
      */
     public Builder clearStatus() {
       
-      status_ = 0L;
+      status_ = 0;
       onChanged();
       return this;
     }

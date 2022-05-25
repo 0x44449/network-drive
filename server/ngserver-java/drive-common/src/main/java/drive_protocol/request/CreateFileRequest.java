@@ -106,6 +106,16 @@ private static final long serialVersionUID = 0L;
             createOptions_ = input.readUInt32();
             break;
           }
+          case 72: {
+
+            fileMode_ = input.readUInt32();
+            break;
+          }
+          case 80: {
+
+            fileAttributesAndFlag_ = input.readUInt32();
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -283,6 +293,28 @@ private static final long serialVersionUID = 0L;
     return createOptions_;
   }
 
+  public static final int FILE_MODE_FIELD_NUMBER = 9;
+  private int fileMode_;
+  /**
+   * <code>uint32 file_mode = 9;</code>
+   * @return The fileMode.
+   */
+  @java.lang.Override
+  public int getFileMode() {
+    return fileMode_;
+  }
+
+  public static final int FILE_ATTRIBUTES_AND_FLAG_FIELD_NUMBER = 10;
+  private int fileAttributesAndFlag_;
+  /**
+   * <code>uint32 file_attributes_and_flag = 10;</code>
+   * @return The fileAttributesAndFlag.
+   */
+  @java.lang.Override
+  public int getFileAttributesAndFlag() {
+    return fileAttributesAndFlag_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -320,6 +352,12 @@ private static final long serialVersionUID = 0L;
     }
     if (createOptions_ != 0) {
       output.writeUInt32(8, createOptions_);
+    }
+    if (fileMode_ != 0) {
+      output.writeUInt32(9, fileMode_);
+    }
+    if (fileAttributesAndFlag_ != 0) {
+      output.writeUInt32(10, fileAttributesAndFlag_);
     }
     unknownFields.writeTo(output);
   }
@@ -361,6 +399,14 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeUInt32Size(8, createOptions_);
     }
+    if (fileMode_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeUInt32Size(9, fileMode_);
+    }
+    if (fileAttributesAndFlag_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeUInt32Size(10, fileAttributesAndFlag_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -398,6 +444,10 @@ private static final long serialVersionUID = 0L;
         != other.getCreateDisposition()) return false;
     if (getCreateOptions()
         != other.getCreateOptions()) return false;
+    if (getFileMode()
+        != other.getFileMode()) return false;
+    if (getFileAttributesAndFlag()
+        != other.getFileAttributesAndFlag()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -429,6 +479,10 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getCreateDisposition();
     hash = (37 * hash) + CREATE_OPTIONS_FIELD_NUMBER;
     hash = (53 * hash) + getCreateOptions();
+    hash = (37 * hash) + FILE_MODE_FIELD_NUMBER;
+    hash = (53 * hash) + getFileMode();
+    hash = (37 * hash) + FILE_ATTRIBUTES_AND_FLAG_FIELD_NUMBER;
+    hash = (53 * hash) + getFileAttributesAndFlag();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -586,6 +640,10 @@ private static final long serialVersionUID = 0L;
 
       createOptions_ = 0;
 
+      fileMode_ = 0;
+
+      fileAttributesAndFlag_ = 0;
+
       return this;
     }
 
@@ -628,6 +686,8 @@ private static final long serialVersionUID = 0L;
       result.shareAccess_ = shareAccess_;
       result.createDisposition_ = createDisposition_;
       result.createOptions_ = createOptions_;
+      result.fileMode_ = fileMode_;
+      result.fileAttributesAndFlag_ = fileAttributesAndFlag_;
       onBuilt();
       return result;
     }
@@ -700,6 +760,12 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getCreateOptions() != 0) {
         setCreateOptions(other.getCreateOptions());
+      }
+      if (other.getFileMode() != 0) {
+        setFileMode(other.getFileMode());
+      }
+      if (other.getFileAttributesAndFlag() != 0) {
+        setFileAttributesAndFlag(other.getFileAttributesAndFlag());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -1195,6 +1261,68 @@ private static final long serialVersionUID = 0L;
     public Builder clearCreateOptions() {
       
       createOptions_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int fileMode_ ;
+    /**
+     * <code>uint32 file_mode = 9;</code>
+     * @return The fileMode.
+     */
+    @java.lang.Override
+    public int getFileMode() {
+      return fileMode_;
+    }
+    /**
+     * <code>uint32 file_mode = 9;</code>
+     * @param value The fileMode to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFileMode(int value) {
+      
+      fileMode_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>uint32 file_mode = 9;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearFileMode() {
+      
+      fileMode_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int fileAttributesAndFlag_ ;
+    /**
+     * <code>uint32 file_attributes_and_flag = 10;</code>
+     * @return The fileAttributesAndFlag.
+     */
+    @java.lang.Override
+    public int getFileAttributesAndFlag() {
+      return fileAttributesAndFlag_;
+    }
+    /**
+     * <code>uint32 file_attributes_and_flag = 10;</code>
+     * @param value The fileAttributesAndFlag to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFileAttributesAndFlag(int value) {
+      
+      fileAttributesAndFlag_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>uint32 file_attributes_and_flag = 10;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearFileAttributesAndFlag() {
+      
+      fileAttributesAndFlag_ = 0;
       onChanged();
       return this;
     }

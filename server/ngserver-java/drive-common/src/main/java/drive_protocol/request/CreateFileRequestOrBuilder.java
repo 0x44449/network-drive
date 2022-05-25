@@ -78,4 +78,16 @@ public interface CreateFileRequestOrBuilder extends
    * @return The createOptions.
    */
   int getCreateOptions();
+
+  /**
+   * <code>uint32 file_mode = 9;</code>
+   * @return The fileMode.
+   */
+  int getFileMode();
+
+  /**
+   * <code>uint32 file_attributes_and_flag = 10;</code>
+   * @return The fileAttributesAndFlag.
+   */
+  int getFileAttributesAndFlag();
 }

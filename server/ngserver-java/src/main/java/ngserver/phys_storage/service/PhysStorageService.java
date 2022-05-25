@@ -4,43 +4,122 @@ import drive_common.dokan_port.constants.microsoft.*;
 import drive_common.drive_storage.NStorage;
 import drive_protocol.request.*;
 import drive_protocol.response.*;
-import ngserver.phys_storage.repository.PhysStorageRepository;
+import ngserver.phys_storage.repository.ObjectsRepository;
+import ngserver.phys_storage.repository.OplocksRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PhysStorageService implements NStorage {
-    PhysStorageRepository repository = new PhysStorageRepository();
+    @Autowired
+    ObjectsRepository objectsRepository;
+    @Autowired
+    OplocksRepository oplocksRepository;
 
     @Override
     public CreateFileResponse createFile(CreateFileRequest request) {
+        var responseBuilder = CreateFileResponse.newBuilder();
+
         // https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/nf-ntifs-ntcreatefile
         var requestInfo = request.getReq();
         var credentialInfo = request.getCred();
 
         var fileName = request.getFileName();
-        var createDisposition = CreateDisposition.fromInt((int)request.getCreateDisposition());
+        var createDisposition = CreateDisposition.fromInt(request.getCreateDisposition());
         var desiredAccess = request.getDesiredAccess();
-        var shareAccess = request.getShareAccess();
-        var fileAttributes = FileAttribute.maskValueSet((int)request.getFileAttributes());
-        var createOptions = CreateOption.maskValueSet((int)request.getCreateOptions());
+        var fileShare = FileShare.maskValueSet(request.getShareAccess());
+        var fileAttributes = FileAttribute.maskValueSet(request.getFileAttributes());
+        var createOptions = CreateOption.maskValueSet(request.getCreateOptions());
+        var fileMode = FileMode.fromInt(request.getFileMode());
         var isDirectory = requestInfo.getIsDirectory();
 
-        // check file exists
+        var objectEntities = objectsRepository.findObjectByFullPath(fileName);
+        var objectInfo = objectEntities.size() > 0 ? objectEntities.get(0) : null;
 
-        // check file is directory
         /*
         If the file is a directory, CreateFile is also called.
         In this case, CreateFile should return STATUS_SUCCESS when that directory can be opened and DOKAN_FILE_INFO.IsDirectory has to be set to TRUE.
         On the other hand, if DOKAN_FILE_INFO.IsDirectory is set to TRUE but the path targets a file, STATUS_NOT_A_DIRECTORY must be returned.
          */
+        if (isDirectory) {
+            if (objectInfo == null) {
+                if (fileMode == FileMode.OPEN) {
+                    return CreateFileResponse.newBuilder()
+                            .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
+                            .build();
+                }
+            }
+            else {
+                if (objectInfo.isFile()) {
+                    if (fileMode == FileMode.OPEN_OR_CREATE || fileMode == FileMode.OPEN || fileMode == FileMode.CREATE) {
+                        return CreateFileResponse.newBuilder()
+                                .setStatus(NtStatus.NOT_A_DIRECTORY.intValue())
+                                .build();
+                    }
+                }
+                else {
+                    if (fileMode == FileMode.CREATE_NEW) {
+                        return CreateFileResponse.newBuilder()
+                                .setStatus(NtStatus.OBJECT_NAME_COLLISION.intValue())
+                                .build();
+                    }
+                }
+            }
+        }
+        else {
+            // check file exists with FileMode
+            if (objectInfo == null) {
+                if (fileMode == FileMode.OPEN || fileMode == FileMode.TRUNCATE) {
+                    return CreateFileResponse.newBuilder()
+                            .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
+                            .build();
+                }
+            }
+            else {
+                if (objectInfo.isFile()) {
+                    if (fileMode == FileMode.OPEN || fileMode == FileMode.CREATE_NEW) {
+                        return CreateFileResponse.newBuilder()
+                                .setStatus(NtStatus.OBJECT_NAME_COLLISION.intValue())
+                                .build();
+                    }
+                }
+                else {
+                    if (fileMode == FileMode.CREATE_NEW) {
+                        return CreateFileResponse.newBuilder()
+                                .setStatus(NtStatus.OBJECT_NAME_COLLISION.intValue())
+                                .build();
+                    }
+                    else if (fileMode == FileMode.OPEN || fileMode == FileMode.OPEN_OR_CREATE || fileMode == FileMode.CREATE) {
+                        return CreateFileResponse.newBuilder()
+                                .setStatus(NtStatus.FILE_IS_A_DIRECTORY.intValue())
+                                .build();
+                    }
+                }
+            }
 
-        /*
-        In case OPEN_ALWAYS & CREATE_ALWAYS are successfully opening an existing file,
-        STATUS_OBJECT_NAME_COLLISION should be returned instead of STATUS_SUCCESS.
-         */
+            /*
+            In case OPEN_ALWAYS & CREATE_ALWAYS are successfully opening an existing file,
+            STATUS_OBJECT_NAME_COLLISION should be returned instead of STATUS_SUCCESS.
+             */
+        }
 
         // if file is not directory, check oplock
         // related with desiredAccess, shareAccess
+        if (objectInfo != null && objectInfo.isFile()) {
+            var oplockEntities = oplocksRepository.findOplockByFullPath(fileName);
+            var oplockInfo = oplockEntities.size() > 0 ? oplockEntities.get(0) : null;
+
+            if (oplockInfo != null) {
+                var lockBit = oplockInfo.getLockBit();
+
+                /*if (fileShare.contains(FileShare.WRITE)) {
+                    if (lockBit.contains("W") || lockBit.contains("D")) {
+
+                    }
+                }*/
+            }
+        }
+
 
         // oplocked file is requested, callback to locking client for unlock (closeFile)
 
@@ -52,7 +131,7 @@ public class PhysStorageService implements NStorage {
         // check SynchronousIO option
 
         return CreateFileResponse.newBuilder()
-                .setStatus(0)
+                .setStatus(NtStatus.SUCCESS.intValue())
                 .build();
     }
 

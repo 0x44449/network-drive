@@ -8,10 +8,10 @@ public interface GetFileInformationResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int64 status = 1;</code>
+   * <code>int32 status = 1;</code>
    * @return The status.
    */
-  long getStatus();
+  int getStatus();
 
   /**
    * <code>uint64 file_attributes = 2;</code>
