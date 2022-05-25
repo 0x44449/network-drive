@@ -28,6 +28,8 @@ message CreateFileRequest {
   uint32 share_access = 6;
   uint32 create_disposition = 7;
   uint32 create_options = 8;
+  uint32 file_mode = 9;
+  uint32 file_attributes_and_flag = 10;
 }
 
 message CloseFileRequest {
