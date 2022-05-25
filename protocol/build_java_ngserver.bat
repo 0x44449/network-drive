@@ -1,4 +1,4 @@
-protobuf-3.20.1\bin\protoc -I="./definitions" --java_out="../server/ngserver_j/src/main/java" "./definitions/Request.proto"
-protobuf-3.20.1\bin\protoc -I="./definitions" --java_out="../server/ngserver_j/src/main/java" "./definitions/Response.proto"
-protobuf-3.20.1\bin\protoc -I="./definitions" --java_out="../server/ngserver_j/src/main/java" "./definitions/DriveProcedure.proto"
-protobuf-3.20.1\bin\protoc --plugin=protoc-gen-grpc-java="./protobuf-3.20.1/java/protoc-gen-grpc-java-1.46.0-windows-x86_64.exe" --grpc-java_out="../server/ngserver_j/src/main/java" --proto_path="./definitions" "./definitions/DriveProcedure.proto"
+protobuf-3.20.1\bin\protoc -I="./definitions" --java_out="../server/ngserver-java/drive-common/src/main/java" "./definitions/Request.proto"
+protobuf-3.20.1\bin\protoc -I="./definitions" --java_out="../server/ngserver-java/drive-common/src/main/java" "./definitions/Response.proto"
+protobuf-3.20.1\bin\protoc -I="./definitions" --java_out="../server/ngserver-java/drive-common/src/main/java" "./definitions/DriveProcedure.proto"
+protobuf-3.20.1\bin\protoc --plugin=protoc-gen-grpc-java="./protobuf-3.20.1/java/protoc-gen-grpc-java-1.46.0-windows-x86_64.exe" --grpc-java_out="../server/ngserver-java/drive-common/src/main/java" --proto_path="./definitions" "./definitions/DriveProcedure.proto"
