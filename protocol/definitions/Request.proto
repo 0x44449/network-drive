@@ -23,11 +23,11 @@ message CreateFileRequest {
   RequestInfo req = 1;
   CredentialInfo cred = 2;
   string file_name = 3;
-  uint64 desired_access = 4;
-  uint64 file_attributes = 5;
-  uint64 share_access = 6;
-  uint64 create_disposition = 7;
-  uint64 create_options = 8;
+  uint32 desired_access = 4;
+  uint32 file_attributes = 5;
+  uint32 share_access = 6;
+  uint32 create_disposition = 7;
+  uint32 create_options = 8;
 }
 
 message CloseFileRequest {

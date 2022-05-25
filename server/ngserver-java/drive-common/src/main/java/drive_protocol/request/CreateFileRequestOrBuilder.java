@@ -50,32 +50,32 @@ public interface CreateFileRequestOrBuilder extends
       getFileNameBytes();
 
   /**
-   * <code>uint64 desired_access = 4;</code>
+   * <code>uint32 desired_access = 4;</code>
    * @return The desiredAccess.
    */
-  long getDesiredAccess();
+  int getDesiredAccess();
 
   /**
-   * <code>uint64 file_attributes = 5;</code>
+   * <code>uint32 file_attributes = 5;</code>
    * @return The fileAttributes.
    */
-  long getFileAttributes();
+  int getFileAttributes();
 
   /**
-   * <code>uint64 share_access = 6;</code>
+   * <code>uint32 share_access = 6;</code>
    * @return The shareAccess.
    */
-  long getShareAccess();
+  int getShareAccess();
 
   /**
-   * <code>uint64 create_disposition = 7;</code>
+   * <code>uint32 create_disposition = 7;</code>
    * @return The createDisposition.
    */
-  long getCreateDisposition();
+  int getCreateDisposition();
 
   /**
-   * <code>uint64 create_options = 8;</code>
+   * <code>uint32 create_options = 8;</code>
    * @return The createOptions.
    */
-  long getCreateOptions();
+  int getCreateOptions();
 }

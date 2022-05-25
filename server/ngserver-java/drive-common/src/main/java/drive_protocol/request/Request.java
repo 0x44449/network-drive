@@ -112,10 +112,10 @@ public final class Request {
       "teFileRequest\0220\n\003req\030\001 \001(\0132#.drive_proto" +
       "col.request.RequestInfo\0224\n\004cred\030\002 \001(\0132&." +
       "drive_protocol.request.CredentialInfo\022\021\n" +
-      "\tfile_name\030\003 \001(\t\022\026\n\016desired_access\030\004 \001(\004" +
-      "\022\027\n\017file_attributes\030\005 \001(\004\022\024\n\014share_acces" +
-      "s\030\006 \001(\004\022\032\n\022create_disposition\030\007 \001(\004\022\026\n\016c" +
-      "reate_options\030\010 \001(\004\"\215\001\n\020CloseFileRequest" +
+      "\tfile_name\030\003 \001(\t\022\026\n\016desired_access\030\004 \001(\r" +
+      "\022\027\n\017file_attributes\030\005 \001(\r\022\024\n\014share_acces" +
+      "s\030\006 \001(\r\022\032\n\022create_disposition\030\007 \001(\r\022\026\n\016c" +
+      "reate_options\030\010 \001(\r\"\215\001\n\020CloseFileRequest" +
       "\0220\n\003req\030\001 \001(\0132#.drive_protocol.request.R" +
       "equestInfo\0224\n\004cred\030\002 \001(\0132&.drive_protoco" +
       "l.request.CredentialInfo\022\021\n\tfile_name\030\003 " +

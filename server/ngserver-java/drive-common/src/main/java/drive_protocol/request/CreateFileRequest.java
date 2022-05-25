@@ -83,27 +83,27 @@ private static final long serialVersionUID = 0L;
           }
           case 32: {
 
-            desiredAccess_ = input.readUInt64();
+            desiredAccess_ = input.readUInt32();
             break;
           }
           case 40: {
 
-            fileAttributes_ = input.readUInt64();
+            fileAttributes_ = input.readUInt32();
             break;
           }
           case 48: {
 
-            shareAccess_ = input.readUInt64();
+            shareAccess_ = input.readUInt32();
             break;
           }
           case 56: {
 
-            createDisposition_ = input.readUInt64();
+            createDisposition_ = input.readUInt32();
             break;
           }
           case 64: {
 
-            createOptions_ = input.readUInt64();
+            createOptions_ = input.readUInt32();
             break;
           }
           default: {
@@ -229,57 +229,57 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int DESIRED_ACCESS_FIELD_NUMBER = 4;
-  private long desiredAccess_;
+  private int desiredAccess_;
   /**
-   * <code>uint64 desired_access = 4;</code>
+   * <code>uint32 desired_access = 4;</code>
    * @return The desiredAccess.
    */
   @java.lang.Override
-  public long getDesiredAccess() {
+  public int getDesiredAccess() {
     return desiredAccess_;
   }
 
   public static final int FILE_ATTRIBUTES_FIELD_NUMBER = 5;
-  private long fileAttributes_;
+  private int fileAttributes_;
   /**
-   * <code>uint64 file_attributes = 5;</code>
+   * <code>uint32 file_attributes = 5;</code>
    * @return The fileAttributes.
    */
   @java.lang.Override
-  public long getFileAttributes() {
+  public int getFileAttributes() {
     return fileAttributes_;
   }
 
   public static final int SHARE_ACCESS_FIELD_NUMBER = 6;
-  private long shareAccess_;
+  private int shareAccess_;
   /**
-   * <code>uint64 share_access = 6;</code>
+   * <code>uint32 share_access = 6;</code>
    * @return The shareAccess.
    */
   @java.lang.Override
-  public long getShareAccess() {
+  public int getShareAccess() {
     return shareAccess_;
   }
 
   public static final int CREATE_DISPOSITION_FIELD_NUMBER = 7;
-  private long createDisposition_;
+  private int createDisposition_;
   /**
-   * <code>uint64 create_disposition = 7;</code>
+   * <code>uint32 create_disposition = 7;</code>
    * @return The createDisposition.
    */
   @java.lang.Override
-  public long getCreateDisposition() {
+  public int getCreateDisposition() {
     return createDisposition_;
   }
 
   public static final int CREATE_OPTIONS_FIELD_NUMBER = 8;
-  private long createOptions_;
+  private int createOptions_;
   /**
-   * <code>uint64 create_options = 8;</code>
+   * <code>uint32 create_options = 8;</code>
    * @return The createOptions.
    */
   @java.lang.Override
-  public long getCreateOptions() {
+  public int getCreateOptions() {
     return createOptions_;
   }
 
@@ -306,20 +306,20 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(fileName_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, fileName_);
     }
-    if (desiredAccess_ != 0L) {
-      output.writeUInt64(4, desiredAccess_);
+    if (desiredAccess_ != 0) {
+      output.writeUInt32(4, desiredAccess_);
     }
-    if (fileAttributes_ != 0L) {
-      output.writeUInt64(5, fileAttributes_);
+    if (fileAttributes_ != 0) {
+      output.writeUInt32(5, fileAttributes_);
     }
-    if (shareAccess_ != 0L) {
-      output.writeUInt64(6, shareAccess_);
+    if (shareAccess_ != 0) {
+      output.writeUInt32(6, shareAccess_);
     }
-    if (createDisposition_ != 0L) {
-      output.writeUInt64(7, createDisposition_);
+    if (createDisposition_ != 0) {
+      output.writeUInt32(7, createDisposition_);
     }
-    if (createOptions_ != 0L) {
-      output.writeUInt64(8, createOptions_);
+    if (createOptions_ != 0) {
+      output.writeUInt32(8, createOptions_);
     }
     unknownFields.writeTo(output);
   }
@@ -341,25 +341,25 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(fileName_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, fileName_);
     }
-    if (desiredAccess_ != 0L) {
+    if (desiredAccess_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeUInt64Size(4, desiredAccess_);
+        .computeUInt32Size(4, desiredAccess_);
     }
-    if (fileAttributes_ != 0L) {
+    if (fileAttributes_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeUInt64Size(5, fileAttributes_);
+        .computeUInt32Size(5, fileAttributes_);
     }
-    if (shareAccess_ != 0L) {
+    if (shareAccess_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeUInt64Size(6, shareAccess_);
+        .computeUInt32Size(6, shareAccess_);
     }
-    if (createDisposition_ != 0L) {
+    if (createDisposition_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeUInt64Size(7, createDisposition_);
+        .computeUInt32Size(7, createDisposition_);
     }
-    if (createOptions_ != 0L) {
+    if (createOptions_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeUInt64Size(8, createOptions_);
+        .computeUInt32Size(8, createOptions_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -420,20 +420,15 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + FILE_NAME_FIELD_NUMBER;
     hash = (53 * hash) + getFileName().hashCode();
     hash = (37 * hash) + DESIRED_ACCESS_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getDesiredAccess());
+    hash = (53 * hash) + getDesiredAccess();
     hash = (37 * hash) + FILE_ATTRIBUTES_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getFileAttributes());
+    hash = (53 * hash) + getFileAttributes();
     hash = (37 * hash) + SHARE_ACCESS_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getShareAccess());
+    hash = (53 * hash) + getShareAccess();
     hash = (37 * hash) + CREATE_DISPOSITION_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getCreateDisposition());
+    hash = (53 * hash) + getCreateDisposition();
     hash = (37 * hash) + CREATE_OPTIONS_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getCreateOptions());
+    hash = (53 * hash) + getCreateOptions();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -581,15 +576,15 @@ private static final long serialVersionUID = 0L;
       }
       fileName_ = "";
 
-      desiredAccess_ = 0L;
+      desiredAccess_ = 0;
 
-      fileAttributes_ = 0L;
+      fileAttributes_ = 0;
 
-      shareAccess_ = 0L;
+      shareAccess_ = 0;
 
-      createDisposition_ = 0L;
+      createDisposition_ = 0;
 
-      createOptions_ = 0L;
+      createOptions_ = 0;
 
       return this;
     }
@@ -691,19 +686,19 @@ private static final long serialVersionUID = 0L;
         fileName_ = other.fileName_;
         onChanged();
       }
-      if (other.getDesiredAccess() != 0L) {
+      if (other.getDesiredAccess() != 0) {
         setDesiredAccess(other.getDesiredAccess());
       }
-      if (other.getFileAttributes() != 0L) {
+      if (other.getFileAttributes() != 0) {
         setFileAttributes(other.getFileAttributes());
       }
-      if (other.getShareAccess() != 0L) {
+      if (other.getShareAccess() != 0) {
         setShareAccess(other.getShareAccess());
       }
-      if (other.getCreateDisposition() != 0L) {
+      if (other.getCreateDisposition() != 0) {
         setCreateDisposition(other.getCreateDisposition());
       }
-      if (other.getCreateOptions() != 0L) {
+      if (other.getCreateOptions() != 0) {
         setCreateOptions(other.getCreateOptions());
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -1049,157 +1044,157 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private long desiredAccess_ ;
+    private int desiredAccess_ ;
     /**
-     * <code>uint64 desired_access = 4;</code>
+     * <code>uint32 desired_access = 4;</code>
      * @return The desiredAccess.
      */
     @java.lang.Override
-    public long getDesiredAccess() {
+    public int getDesiredAccess() {
       return desiredAccess_;
     }
     /**
-     * <code>uint64 desired_access = 4;</code>
+     * <code>uint32 desired_access = 4;</code>
      * @param value The desiredAccess to set.
      * @return This builder for chaining.
      */
-    public Builder setDesiredAccess(long value) {
+    public Builder setDesiredAccess(int value) {
       
       desiredAccess_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>uint64 desired_access = 4;</code>
+     * <code>uint32 desired_access = 4;</code>
      * @return This builder for chaining.
      */
     public Builder clearDesiredAccess() {
       
-      desiredAccess_ = 0L;
+      desiredAccess_ = 0;
       onChanged();
       return this;
     }
 
-    private long fileAttributes_ ;
+    private int fileAttributes_ ;
     /**
-     * <code>uint64 file_attributes = 5;</code>
+     * <code>uint32 file_attributes = 5;</code>
      * @return The fileAttributes.
      */
     @java.lang.Override
-    public long getFileAttributes() {
+    public int getFileAttributes() {
       return fileAttributes_;
     }
     /**
-     * <code>uint64 file_attributes = 5;</code>
+     * <code>uint32 file_attributes = 5;</code>
      * @param value The fileAttributes to set.
      * @return This builder for chaining.
      */
-    public Builder setFileAttributes(long value) {
+    public Builder setFileAttributes(int value) {
       
       fileAttributes_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>uint64 file_attributes = 5;</code>
+     * <code>uint32 file_attributes = 5;</code>
      * @return This builder for chaining.
      */
     public Builder clearFileAttributes() {
       
-      fileAttributes_ = 0L;
+      fileAttributes_ = 0;
       onChanged();
       return this;
     }
 
-    private long shareAccess_ ;
+    private int shareAccess_ ;
     /**
-     * <code>uint64 share_access = 6;</code>
+     * <code>uint32 share_access = 6;</code>
      * @return The shareAccess.
      */
     @java.lang.Override
-    public long getShareAccess() {
+    public int getShareAccess() {
       return shareAccess_;
     }
     /**
-     * <code>uint64 share_access = 6;</code>
+     * <code>uint32 share_access = 6;</code>
      * @param value The shareAccess to set.
      * @return This builder for chaining.
      */
-    public Builder setShareAccess(long value) {
+    public Builder setShareAccess(int value) {
       
       shareAccess_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>uint64 share_access = 6;</code>
+     * <code>uint32 share_access = 6;</code>
      * @return This builder for chaining.
      */
     public Builder clearShareAccess() {
       
-      shareAccess_ = 0L;
+      shareAccess_ = 0;
       onChanged();
       return this;
     }
 
-    private long createDisposition_ ;
+    private int createDisposition_ ;
     /**
-     * <code>uint64 create_disposition = 7;</code>
+     * <code>uint32 create_disposition = 7;</code>
      * @return The createDisposition.
      */
     @java.lang.Override
-    public long getCreateDisposition() {
+    public int getCreateDisposition() {
       return createDisposition_;
     }
     /**
-     * <code>uint64 create_disposition = 7;</code>
+     * <code>uint32 create_disposition = 7;</code>
      * @param value The createDisposition to set.
      * @return This builder for chaining.
      */
-    public Builder setCreateDisposition(long value) {
+    public Builder setCreateDisposition(int value) {
       
       createDisposition_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>uint64 create_disposition = 7;</code>
+     * <code>uint32 create_disposition = 7;</code>
      * @return This builder for chaining.
      */
     public Builder clearCreateDisposition() {
       
-      createDisposition_ = 0L;
+      createDisposition_ = 0;
       onChanged();
       return this;
     }
 
-    private long createOptions_ ;
+    private int createOptions_ ;
     /**
-     * <code>uint64 create_options = 8;</code>
+     * <code>uint32 create_options = 8;</code>
      * @return The createOptions.
      */
     @java.lang.Override
-    public long getCreateOptions() {
+    public int getCreateOptions() {
       return createOptions_;
     }
     /**
-     * <code>uint64 create_options = 8;</code>
+     * <code>uint32 create_options = 8;</code>
      * @param value The createOptions to set.
      * @return This builder for chaining.
      */
-    public Builder setCreateOptions(long value) {
+    public Builder setCreateOptions(int value) {
       
       createOptions_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>uint64 create_options = 8;</code>
+     * <code>uint32 create_options = 8;</code>
      * @return This builder for chaining.
      */
     public Builder clearCreateOptions() {
       
-      createOptions_ = 0L;
+      createOptions_ = 0;
       onChanged();
       return this;
     }
