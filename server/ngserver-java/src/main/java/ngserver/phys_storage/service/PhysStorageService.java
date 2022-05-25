@@ -4,10 +4,13 @@ import drive_common.dokan_port.constants.microsoft.*;
 import drive_common.drive_storage.NStorage;
 import drive_protocol.request.*;
 import drive_protocol.response.*;
+import ngserver.phys_storage.repository.PhysStorageRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PhysStorageService implements NStorage {
+    PhysStorageRepository repository = new PhysStorageRepository();
+
     @Override
     public CreateFileResponse createFile(CreateFileRequest request) {
         // https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/nf-ntifs-ntcreatefile
