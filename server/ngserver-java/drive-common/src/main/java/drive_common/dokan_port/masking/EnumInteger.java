@@ -1,4 +1,4 @@
-package dokan_port.masking;
+package drive_common.dokan_port.masking;
 
 /**
  * An EnumInteger is an enum that is represented by an 32bit integer value.

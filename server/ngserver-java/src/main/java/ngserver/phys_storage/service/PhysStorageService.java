@@ -1,11 +1,13 @@
-package phys_storage;
+package ngserver.phys_storage.service;
 
-import dokan_port.constants.microsoft.*;
+import drive_common.dokan_port.constants.microsoft.*;
+import drive_common.drive_storage.NStorage;
 import drive_protocol.request.*;
 import drive_protocol.response.*;
-import drive_storage.NStorage;
+import org.springframework.stereotype.Service;
 
-public class Storage implements NStorage {
+@Service
+public class PhysStorageService implements NStorage {
     @Override
     public CreateFileResponse createFile(CreateFileRequest request) {
         // https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/nf-ntifs-ntcreatefile
@@ -30,7 +32,8 @@ public class Storage implements NStorage {
          */
 
         /*
-        In case OPEN_ALWAYS & CREATE_ALWAYS are successfully opening an existing file, STATUS_OBJECT_NAME_COLLISION should be returned instead of STATUS_SUCCESS.
+        In case OPEN_ALWAYS & CREATE_ALWAYS are successfully opening an existing file,
+        STATUS_OBJECT_NAME_COLLISION should be returned instead of STATUS_SUCCESS.
          */
 
         // if file is not directory, check oplock

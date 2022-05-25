@@ -1,6 +1,6 @@
-package dokan_port.constants.microsoft;
+package drive_common.dokan_port.constants.microsoft;
 
-import dokan_port.masking.EnumInteger;
+import drive_common.dokan_port.masking.EnumInteger;
 
 /**
  * @see <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/content/wdm/nf-wdm-zwcreatefile#parameters">Microsoft documentation of ZwCreateFile</a>

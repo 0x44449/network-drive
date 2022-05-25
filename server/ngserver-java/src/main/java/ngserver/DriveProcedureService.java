@@ -1,9 +1,9 @@
-package ngserver.service;
+package ngserver;
 
 import drive_protocol.DriveProcedureGrpc;
 import drive_protocol.request.*;
 import drive_protocol.response.*;
-import drive_storage.NStorage;
+import drive_common.drive_storage.NStorage;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.beans.factory.annotation.Autowired;

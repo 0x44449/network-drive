@@ -1,4 +1,4 @@
-package dokan_port.masking;
+package drive_common.dokan_port.masking;
 
 /**
  * An IntegerConvertible is an object that is represented by an 32bit integer value.

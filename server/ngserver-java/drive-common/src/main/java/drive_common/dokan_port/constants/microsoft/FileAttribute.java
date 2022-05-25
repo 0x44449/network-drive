@@ -1,7 +1,7 @@
-package dokan_port.constants.microsoft;
+package drive_common.dokan_port.constants.microsoft;
 
-import dokan_port.masking.MaskValueEnum;
-import dokan_port.masking.MaskValueSet;
+import drive_common.dokan_port.masking.MaskValueEnum;
+import drive_common.dokan_port.masking.MaskValueSet;
 import com.sun.jna.platform.win32.WinNT;
 
 /**
