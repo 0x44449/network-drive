@@ -8,10 +8,88 @@ import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.function.BiConsumer;
+
 @GrpcService
 public class DriveProcedureService extends DriveProcedureGrpc.DriveProcedureImplBase {
     @Autowired
     NStorage storage;
+
+    final Map<String, StreamObserver<PubMessage>> connectionMap = new HashMap<String, StreamObserver<PubMessage>>();
+    final ReentrantReadWriteLock connectionLock = new ReentrantReadWriteLock();
+    final Lock connectionReadLock = connectionLock.readLock();
+    final Lock connectionWriteLock = connectionLock.writeLock();
+
+    @Override
+    public StreamObserver<SubMessage> subscribe(StreamObserver<PubMessage> responseObserver) {
+        return new StreamObserver<SubMessage>() {
+            @Override
+            public void onNext(SubMessage value) {
+                var command = value.getCommand();
+                var machineId = value.getCred().getMachineId();
+
+                if (command == SubMessage.Command.Handshake) {
+                    connectionWriteLock.lock();
+                    try {
+                        if (!connectionMap.containsKey(machineId)) {
+                            connectionMap.put(machineId, responseObserver);
+                        }
+                    }
+                    finally {
+                        connectionWriteLock.unlock();
+                    }
+
+                    PubMessage response = PubMessage.newBuilder()
+                            .setCommand(PubMessage.Command.Handshake)
+                            .build();
+                    responseObserver.onNext(response);
+                    return;
+                }
+
+                var otherResponses = new ArrayList<StreamObserver<PubMessage>>();
+                connectionReadLock.lock();
+                try {
+                    connectionMap.forEach((kMachineId, vResponse) -> {
+                        if (!machineId.equals(kMachineId)) {
+                            otherResponses.add(vResponse);
+                        }
+                    });
+                }
+                finally {
+                    connectionReadLock.unlock();
+                }
+
+                if (otherResponses.size() > 0) {
+                    PubMessage broadcastResponse = PubMessage.newBuilder()
+                            .setCommand(PubMessage.Command.Test)
+                            .build();
+                    for (var otherResponse : otherResponses) {
+                        otherResponse.onNext(broadcastResponse);
+                    }
+                }
+                PubMessage response = PubMessage.newBuilder()
+                        .setCommand(PubMessage.Command.Test)
+                        .build();
+                responseObserver.onNext(response);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onCompleted();
+            }
+        };
+    }
 
     @Override
     public void createFile(CreateFileRequest request, StreamObserver<CreateFileResponse> responseObserver) {
