@@ -449,6 +449,37 @@ public final class DriveProcedureGrpc {
     return getUnlockFileMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<drive_protocol.request.SubMessage,
+      drive_protocol.response.PubMessage> getSubscribeMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Subscribe",
+      requestType = drive_protocol.request.SubMessage.class,
+      responseType = drive_protocol.response.PubMessage.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+  public static io.grpc.MethodDescriptor<drive_protocol.request.SubMessage,
+      drive_protocol.response.PubMessage> getSubscribeMethod() {
+    io.grpc.MethodDescriptor<drive_protocol.request.SubMessage, drive_protocol.response.PubMessage> getSubscribeMethod;
+    if ((getSubscribeMethod = DriveProcedureGrpc.getSubscribeMethod) == null) {
+      synchronized (DriveProcedureGrpc.class) {
+        if ((getSubscribeMethod = DriveProcedureGrpc.getSubscribeMethod) == null) {
+          DriveProcedureGrpc.getSubscribeMethod = getSubscribeMethod =
+              io.grpc.MethodDescriptor.<drive_protocol.request.SubMessage, drive_protocol.response.PubMessage>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Subscribe"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  drive_protocol.request.SubMessage.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  drive_protocol.response.PubMessage.getDefaultInstance()))
+              .setSchemaDescriptor(new DriveProcedureMethodDescriptorSupplier("Subscribe"))
+              .build();
+        }
+      }
+    }
+    return getSubscribeMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -595,6 +626,13 @@ public final class DriveProcedureGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUnlockFileMethod(), responseObserver);
     }
 
+    /**
+     */
+    public io.grpc.stub.StreamObserver<drive_protocol.request.SubMessage> subscribe(
+        io.grpc.stub.StreamObserver<drive_protocol.response.PubMessage> responseObserver) {
+      return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getSubscribeMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -695,6 +733,13 @@ public final class DriveProcedureGrpc {
                 drive_protocol.request.UnlockFileRequest,
                 drive_protocol.response.UnlockFileResponse>(
                   this, METHODID_UNLOCK_FILE)))
+          .addMethod(
+            getSubscribeMethod(),
+            io.grpc.stub.ServerCalls.asyncBidiStreamingCall(
+              new MethodHandlers<
+                drive_protocol.request.SubMessage,
+                drive_protocol.response.PubMessage>(
+                  this, METHODID_SUBSCRIBE)))
           .build();
     }
   }
@@ -823,6 +868,14 @@ public final class DriveProcedureGrpc {
         io.grpc.stub.StreamObserver<drive_protocol.response.UnlockFileResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getUnlockFileMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<drive_protocol.request.SubMessage> subscribe(
+        io.grpc.stub.StreamObserver<drive_protocol.response.PubMessage> responseObserver) {
+      return io.grpc.stub.ClientCalls.asyncBidiStreamingCall(
+          getChannel().newCall(getSubscribeMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -1080,6 +1133,7 @@ public final class DriveProcedureGrpc {
   private static final int METHODID_SET_ALLOCATION_SIZE = 11;
   private static final int METHODID_SET_FILE_ATTRIBUTES = 12;
   private static final int METHODID_UNLOCK_FILE = 13;
+  private static final int METHODID_SUBSCRIBE = 14;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1164,6 +1218,9 @@ public final class DriveProcedureGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_SUBSCRIBE:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.subscribe(
+              (io.grpc.stub.StreamObserver<drive_protocol.response.PubMessage>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -1229,6 +1286,7 @@ public final class DriveProcedureGrpc {
               .addMethod(getSetAllocationSizeMethod())
               .addMethod(getSetFileAttributesMethod())
               .addMethod(getUnlockFileMethod())
+              .addMethod(getSubscribeMethod())
               .build();
         }
       }

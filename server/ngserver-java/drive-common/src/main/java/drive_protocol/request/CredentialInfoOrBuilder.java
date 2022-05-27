@@ -6,4 +6,40 @@ package drive_protocol.request;
 public interface CredentialInfoOrBuilder extends
     // @@protoc_insertion_point(interface_extends:drive_protocol.request.CredentialInfo)
     com.google.protobuf.MessageOrBuilder {
+
+  /**
+   * <code>string machine_id = 1;</code>
+   * @return The machineId.
+   */
+  java.lang.String getMachineId();
+  /**
+   * <code>string machine_id = 1;</code>
+   * @return The bytes for machineId.
+   */
+  com.google.protobuf.ByteString
+      getMachineIdBytes();
+
+  /**
+   * <code>string user_id = 2;</code>
+   * @return The userId.
+   */
+  java.lang.String getUserId();
+  /**
+   * <code>string user_id = 2;</code>
+   * @return The bytes for userId.
+   */
+  com.google.protobuf.ByteString
+      getUserIdBytes();
+
+  /**
+   * <code>string session_id = 3;</code>
+   * @return The sessionId.
+   */
+  java.lang.String getSessionId();
+  /**
+   * <code>string session_id = 3;</code>
+   * @return The bytes for sessionId.
+   */
+  com.google.protobuf.ByteString
+      getSessionIdBytes();
 }

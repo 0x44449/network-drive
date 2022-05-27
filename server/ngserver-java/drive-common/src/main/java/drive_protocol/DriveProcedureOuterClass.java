@@ -24,47 +24,48 @@ public final class DriveProcedureOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\024DriveProcedure.proto\022\016drive_protocol\032\r" +
-      "Request.proto\032\016Response.proto2\216\014\n\016DriveP" +
-      "rocedure\022f\n\nCreateFile\022).drive_protocol." +
+      "Request.proto\032\016Response.proto2\314\014\n\016DriveP" +
+      "rocedure\022d\n\nCreateFile\022).drive_protocol." +
       "request.CreateFileRequest\032+.drive_protoc" +
-      "ol.response.CreateFileResponse\"\000\022c\n\tClos" +
-      "eFile\022(.drive_protocol.request.CloseFile" +
-      "Request\032*.drive_protocol.response.CloseF" +
-      "ileResponse\"\000\022`\n\010ReadFile\022\'.drive_protoc" +
-      "ol.request.ReadFileRequest\032).drive_proto" +
-      "col.response.ReadFileResponse\"\000\022c\n\tWrite" +
-      "File\022(.drive_protocol.request.WriteFileR" +
-      "equest\032*.drive_protocol.response.WriteFi" +
-      "leResponse\"\000\022u\n\017FlushFileBuffer\022..drive_" +
-      "protocol.request.FlushFileBufferRequest\032" +
-      "0.drive_protocol.response.FlushFileBuffe" +
-      "rResponse\"\000\022~\n\022GetFileInformation\0221.driv" +
-      "e_protocol.request.GetFileInformationReq" +
-      "uest\0323.drive_protocol.response.GetFileIn" +
-      "formationResponse\"\000\022f\n\nDeleteFile\022).driv" +
-      "e_protocol.request.DeleteFileRequest\032+.d" +
-      "rive_protocol.response.DeleteFileRespons" +
-      "e\"\000\022u\n\017DeleteDirectory\022..drive_protocol." +
-      "request.DeleteDirectoryRequest\0320.drive_p" +
-      "rotocol.response.DeleteDirectoryResponse" +
-      "\"\000\022`\n\010MoveFile\022\'.drive_protocol.request." +
-      "MoveFileRequest\032).drive_protocol.respons" +
-      "e.MoveFileResponse\"\000\022`\n\010LockFile\022\'.drive" +
-      "_protocol.request.LockFileRequest\032).driv" +
-      "e_protocol.response.LockFileResponse\"\000\022l" +
-      "\n\014SetEndOfFile\022+.drive_protocol.request." +
-      "SetEndOfFileRequest\032-.drive_protocol.res" +
-      "ponse.SetEndOfFileResponse\"\000\022{\n\021SetAlloc" +
-      "ationSize\0220.drive_protocol.request.SetAl" +
-      "locationSizeRequest\0322.drive_protocol.res" +
-      "ponse.SetAllocationSizeResponse\"\000\022{\n\021Set" +
-      "FileAttributes\0220.drive_protocol.request." +
-      "SetFileAttributesRequest\0322.drive_protoco" +
-      "l.response.SetFileAttributesResponse\"\000\022f" +
-      "\n\nUnlockFile\022).drive_protocol.request.Un" +
-      "lockFileRequest\032+.drive_protocol.respons" +
-      "e.UnlockFileResponse\"\000B\022\n\016drive_protocol" +
-      "P\001b\006proto3"
+      "ol.response.CreateFileResponse\022a\n\tCloseF" +
+      "ile\022(.drive_protocol.request.CloseFileRe" +
+      "quest\032*.drive_protocol.response.CloseFil" +
+      "eResponse\022^\n\010ReadFile\022\'.drive_protocol.r" +
+      "equest.ReadFileRequest\032).drive_protocol." +
+      "response.ReadFileResponse\022a\n\tWriteFile\022(" +
+      ".drive_protocol.request.WriteFileRequest" +
+      "\032*.drive_protocol.response.WriteFileResp" +
+      "onse\022s\n\017FlushFileBuffer\022..drive_protocol" +
+      ".request.FlushFileBufferRequest\0320.drive_" +
+      "protocol.response.FlushFileBufferRespons" +
+      "e\022|\n\022GetFileInformation\0221.drive_protocol" +
+      ".request.GetFileInformationRequest\0323.dri" +
+      "ve_protocol.response.GetFileInformationR" +
+      "esponse\022d\n\nDeleteFile\022).drive_protocol.r" +
+      "equest.DeleteFileRequest\032+.drive_protoco" +
+      "l.response.DeleteFileResponse\022s\n\017DeleteD" +
+      "irectory\022..drive_protocol.request.Delete" +
+      "DirectoryRequest\0320.drive_protocol.respon" +
+      "se.DeleteDirectoryResponse\022^\n\010MoveFile\022\'" +
+      ".drive_protocol.request.MoveFileRequest\032" +
+      ").drive_protocol.response.MoveFileRespon" +
+      "se\022^\n\010LockFile\022\'.drive_protocol.request." +
+      "LockFileRequest\032).drive_protocol.respons" +
+      "e.LockFileResponse\022j\n\014SetEndOfFile\022+.dri" +
+      "ve_protocol.request.SetEndOfFileRequest\032" +
+      "-.drive_protocol.response.SetEndOfFileRe" +
+      "sponse\022y\n\021SetAllocationSize\0220.drive_prot" +
+      "ocol.request.SetAllocationSizeRequest\0322." +
+      "drive_protocol.response.SetAllocationSiz" +
+      "eResponse\022y\n\021SetFileAttributes\0220.drive_p" +
+      "rotocol.request.SetFileAttributesRequest" +
+      "\0322.drive_protocol.response.SetFileAttrib" +
+      "utesResponse\022d\n\nUnlockFile\022).drive_proto" +
+      "col.request.UnlockFileRequest\032+.drive_pr" +
+      "otocol.response.UnlockFileResponse\022X\n\tSu" +
+      "bscribe\022\".drive_protocol.request.SubMess" +
+      "age\032#.drive_protocol.response.PubMessage" +
+      "(\0010\001B\022\n\016drive_protocolP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

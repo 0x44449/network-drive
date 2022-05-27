@@ -15,6 +15,11 @@ public final class Response {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_drive_protocol_response_PubMessage_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_drive_protocol_response_PubMessage_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_drive_protocol_response_CreateFileResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -94,107 +99,116 @@ public final class Response {
   static {
     java.lang.String[] descriptorData = {
       "\n\016Response.proto\022\027drive_protocol.respons" +
-      "e\"$\n\022CreateFileResponse\022\016\n\006status\030\001 \001(\005\"" +
-      "#\n\021CloseFileResponse\022\016\n\006status\030\001 \001(\005\"2\n\020" +
-      "ReadFileResponse\022\016\n\006status\030\001 \001(\005\022\016\n\006buff" +
-      "er\030\002 \001(\014\"#\n\021WriteFileResponse\022\016\n\006status\030" +
-      "\001 \001(\005\")\n\027FlushFileBufferResponse\022\016\n\006stat" +
-      "us\030\001 \001(\005\"E\n\032GetFileInformationResponse\022\016" +
-      "\n\006status\030\001 \001(\005\022\027\n\017file_attributes\030\002 \001(\004\"" +
-      "$\n\022DeleteFileResponse\022\016\n\006status\030\001 \001(\005\")\n" +
-      "\027DeleteDirectoryResponse\022\016\n\006status\030\001 \001(\005" +
-      "\"\"\n\020MoveFileResponse\022\016\n\006status\030\001 \001(\005\"\"\n\020" +
-      "LockFileResponse\022\016\n\006status\030\001 \001(\005\"&\n\024SetE" +
-      "ndOfFileResponse\022\016\n\006status\030\001 \001(\005\"+\n\031SetA" +
-      "llocationSizeResponse\022\016\n\006status\030\001 \001(\005\"+\n" +
-      "\031SetFileAttributesResponse\022\016\n\006status\030\001 \001" +
-      "(\005\"$\n\022UnlockFileResponse\022\016\n\006status\030\001 \001(\005" +
-      "B\033\n\027drive_protocol.responseP\001b\006proto3"
+      "e\"n\n\nPubMessage\022<\n\007command\030\001 \001(\0162+.drive" +
+      "_protocol.response.PubMessage.Command\"\"\n" +
+      "\007Command\022\r\n\tHandshake\020\000\022\010\n\004Test\020\001\"$\n\022Cre" +
+      "ateFileResponse\022\016\n\006status\030\001 \001(\005\"#\n\021Close" +
+      "FileResponse\022\016\n\006status\030\001 \001(\005\"2\n\020ReadFile" +
+      "Response\022\016\n\006status\030\001 \001(\005\022\016\n\006buffer\030\002 \001(\014" +
+      "\"#\n\021WriteFileResponse\022\016\n\006status\030\001 \001(\005\")\n" +
+      "\027FlushFileBufferResponse\022\016\n\006status\030\001 \001(\005" +
+      "\"E\n\032GetFileInformationResponse\022\016\n\006status" +
+      "\030\001 \001(\005\022\027\n\017file_attributes\030\002 \001(\004\"$\n\022Delet" +
+      "eFileResponse\022\016\n\006status\030\001 \001(\005\")\n\027DeleteD" +
+      "irectoryResponse\022\016\n\006status\030\001 \001(\005\"\"\n\020Move" +
+      "FileResponse\022\016\n\006status\030\001 \001(\005\"\"\n\020LockFile" +
+      "Response\022\016\n\006status\030\001 \001(\005\"&\n\024SetEndOfFile" +
+      "Response\022\016\n\006status\030\001 \001(\005\"+\n\031SetAllocatio" +
+      "nSizeResponse\022\016\n\006status\030\001 \001(\005\"+\n\031SetFile" +
+      "AttributesResponse\022\016\n\006status\030\001 \001(\005\"$\n\022Un" +
+      "lockFileResponse\022\016\n\006status\030\001 \001(\005B\033\n\027driv" +
+      "e_protocol.responseP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_drive_protocol_response_CreateFileResponse_descriptor =
+    internal_static_drive_protocol_response_PubMessage_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_drive_protocol_response_PubMessage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_drive_protocol_response_PubMessage_descriptor,
+        new java.lang.String[] { "Command", });
+    internal_static_drive_protocol_response_CreateFileResponse_descriptor =
+      getDescriptor().getMessageTypes().get(1);
     internal_static_drive_protocol_response_CreateFileResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_CreateFileResponse_descriptor,
         new java.lang.String[] { "Status", });
     internal_static_drive_protocol_response_CloseFileResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_drive_protocol_response_CloseFileResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_CloseFileResponse_descriptor,
         new java.lang.String[] { "Status", });
     internal_static_drive_protocol_response_ReadFileResponse_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_drive_protocol_response_ReadFileResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_ReadFileResponse_descriptor,
         new java.lang.String[] { "Status", "Buffer", });
     internal_static_drive_protocol_response_WriteFileResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_drive_protocol_response_WriteFileResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_WriteFileResponse_descriptor,
         new java.lang.String[] { "Status", });
     internal_static_drive_protocol_response_FlushFileBufferResponse_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_drive_protocol_response_FlushFileBufferResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_FlushFileBufferResponse_descriptor,
         new java.lang.String[] { "Status", });
     internal_static_drive_protocol_response_GetFileInformationResponse_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_drive_protocol_response_GetFileInformationResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_GetFileInformationResponse_descriptor,
         new java.lang.String[] { "Status", "FileAttributes", });
     internal_static_drive_protocol_response_DeleteFileResponse_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_drive_protocol_response_DeleteFileResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_DeleteFileResponse_descriptor,
         new java.lang.String[] { "Status", });
     internal_static_drive_protocol_response_DeleteDirectoryResponse_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_drive_protocol_response_DeleteDirectoryResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_DeleteDirectoryResponse_descriptor,
         new java.lang.String[] { "Status", });
     internal_static_drive_protocol_response_MoveFileResponse_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_drive_protocol_response_MoveFileResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_MoveFileResponse_descriptor,
         new java.lang.String[] { "Status", });
     internal_static_drive_protocol_response_LockFileResponse_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_drive_protocol_response_LockFileResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_LockFileResponse_descriptor,
         new java.lang.String[] { "Status", });
     internal_static_drive_protocol_response_SetEndOfFileResponse_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_drive_protocol_response_SetEndOfFileResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_SetEndOfFileResponse_descriptor,
         new java.lang.String[] { "Status", });
     internal_static_drive_protocol_response_SetAllocationSizeResponse_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_drive_protocol_response_SetAllocationSizeResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_SetAllocationSizeResponse_descriptor,
         new java.lang.String[] { "Status", });
     internal_static_drive_protocol_response_SetFileAttributesResponse_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_drive_protocol_response_SetFileAttributesResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_SetFileAttributesResponse_descriptor,
         new java.lang.String[] { "Status", });
     internal_static_drive_protocol_response_UnlockFileResponse_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_drive_protocol_response_UnlockFileResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_UnlockFileResponse_descriptor,
