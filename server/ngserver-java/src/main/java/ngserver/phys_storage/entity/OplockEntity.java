@@ -11,20 +11,14 @@ public class OplockEntity {
     @Id
     @Column(name = "full_path")
     private String fullPath;
-    @Column(name = "owner")
-    private String owner;
     @Column(name = "lock_bit")
-    private String lockBit;
+    private int lockBit;
 
     public String getFullPath() {
         return fullPath;
     }
 
-    public String getOwner() {
-        return owner;
-    }
-
-    public String getLockBit() {
+    public int getLockBit() {
         return lockBit;
     }
 
@@ -32,11 +26,7 @@ public class OplockEntity {
         this.fullPath = fullPath;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public void setLockBit(String lockBit) {
+    public void setLockBit(int lockBit) {
         this.lockBit = lockBit;
     }
 }
