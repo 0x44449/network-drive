@@ -16,7 +16,18 @@ message RequestInfo {
 }
 
 message CredentialInfo {
+  string machine_id = 1;
+  string user_id = 2;
+  string session_id = 3;
+}
 
+message SubMessage {
+  enum Command {
+    Handshake = 0;
+    Test = 1;
+  }
+  CredentialInfo cred = 1;
+  Command command = 2;
 }
 
 message CreateFileRequest {
