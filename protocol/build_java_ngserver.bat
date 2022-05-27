@@ -1,3 +1,4 @@
+protobuf-3.20.1\bin\protoc -I="./definitions" --java_out="../server/ngserver-java/drive-common/src/main/java" "./definitions/Comm.proto"
 protobuf-3.20.1\bin\protoc -I="./definitions" --java_out="../server/ngserver-java/drive-common/src/main/java" "./definitions/Request.proto"
 protobuf-3.20.1\bin\protoc -I="./definitions" --java_out="../server/ngserver-java/drive-common/src/main/java" "./definitions/Response.proto"
 protobuf-3.20.1\bin\protoc -I="./definitions" --java_out="../server/ngserver-java/drive-common/src/main/java" "./definitions/DriveProcedure.proto"

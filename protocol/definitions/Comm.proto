@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package drive_protocol.comm;
+
+option java_package = "drive_protocol";
+option java_multiple_files = true;
+
+message ConnectionInfo {
+  string machine_id = 1;
+  string user_id = 2;
+  string session_id = 3;
+}
+
+enum Command {
+  Handshake = 0;
+  Test = 1;
+}

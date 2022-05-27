@@ -5,6 +5,8 @@ package drive_protocol.request;
 option java_package = "drive_protocol.request";
 option java_multiple_files = true;
 
+import "Comm.proto";
+
 message RequestInfo {
   uint64 process_id = 1;
   bool is_directory = 2;
@@ -22,12 +24,8 @@ message CredentialInfo {
 }
 
 message SubMessage {
-  enum Command {
-    Handshake = 0;
-    Test = 1;
-  }
-  CredentialInfo cred = 1;
-  Command command = 2;
+  drive_protocol.comm.Command command = 1;
+  drive_protocol.comm.ConnectionInfo connection = 2;
 }
 
 message CreateFileRequest {
