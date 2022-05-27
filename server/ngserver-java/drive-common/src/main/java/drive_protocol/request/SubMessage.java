@@ -49,23 +49,23 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
-            drive_protocol.request.CredentialInfo.Builder subBuilder = null;
-            if (cred_ != null) {
-              subBuilder = cred_.toBuilder();
-            }
-            cred_ = input.readMessage(drive_protocol.request.CredentialInfo.parser(), extensionRegistry);
-            if (subBuilder != null) {
-              subBuilder.mergeFrom(cred_);
-              cred_ = subBuilder.buildPartial();
-            }
-
-            break;
-          }
-          case 16: {
+          case 8: {
             int rawValue = input.readEnum();
 
             command_ = rawValue;
+            break;
+          }
+          case 18: {
+            drive_protocol.ConnectionInfo.Builder subBuilder = null;
+            if (connection_ != null) {
+              subBuilder = connection_.toBuilder();
+            }
+            connection_ = input.readMessage(drive_protocol.ConnectionInfo.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(connection_);
+              connection_ = subBuilder.buildPartial();
+            }
+
             break;
           }
           default: {
@@ -100,157 +100,49 @@ private static final long serialVersionUID = 0L;
             drive_protocol.request.SubMessage.class, drive_protocol.request.SubMessage.Builder.class);
   }
 
-  /**
-   * Protobuf enum {@code drive_protocol.request.SubMessage.Command}
-   */
-  public enum Command
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>Handshake = 0;</code>
-     */
-    Handshake(0),
-    /**
-     * <code>Test = 1;</code>
-     */
-    Test(1),
-    UNRECOGNIZED(-1),
-    ;
-
-    /**
-     * <code>Handshake = 0;</code>
-     */
-    public static final int Handshake_VALUE = 0;
-    /**
-     * <code>Test = 1;</code>
-     */
-    public static final int Test_VALUE = 1;
-
-
-    public final int getNumber() {
-      if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
-            "Can't get the number of an unknown enum value.");
-      }
-      return value;
-    }
-
-    /**
-     * @param value The numeric wire value of the corresponding enum entry.
-     * @return The enum associated with the given numeric wire value.
-     * @deprecated Use {@link #forNumber(int)} instead.
-     */
-    @java.lang.Deprecated
-    public static Command valueOf(int value) {
-      return forNumber(value);
-    }
-
-    /**
-     * @param value The numeric wire value of the corresponding enum entry.
-     * @return The enum associated with the given numeric wire value.
-     */
-    public static Command forNumber(int value) {
-      switch (value) {
-        case 0: return Handshake;
-        case 1: return Test;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<Command>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static final com.google.protobuf.Internal.EnumLiteMap<
-        Command> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<Command>() {
-            public Command findValueByNumber(int number) {
-              return Command.forNumber(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalStateException(
-            "Can't get the descriptor of an unrecognized enum value.");
-      }
-      return getDescriptor().getValues().get(ordinal());
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return drive_protocol.request.SubMessage.getDescriptor().getEnumTypes().get(0);
-    }
-
-    private static final Command[] VALUES = values();
-
-    public static Command valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      if (desc.getIndex() == -1) {
-        return UNRECOGNIZED;
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int value;
-
-    private Command(int value) {
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:drive_protocol.request.SubMessage.Command)
-  }
-
-  public static final int CRED_FIELD_NUMBER = 1;
-  private drive_protocol.request.CredentialInfo cred_;
-  /**
-   * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-   * @return Whether the cred field is set.
-   */
-  @java.lang.Override
-  public boolean hasCred() {
-    return cred_ != null;
-  }
-  /**
-   * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-   * @return The cred.
-   */
-  @java.lang.Override
-  public drive_protocol.request.CredentialInfo getCred() {
-    return cred_ == null ? drive_protocol.request.CredentialInfo.getDefaultInstance() : cred_;
-  }
-  /**
-   * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-   */
-  @java.lang.Override
-  public drive_protocol.request.CredentialInfoOrBuilder getCredOrBuilder() {
-    return getCred();
-  }
-
-  public static final int COMMAND_FIELD_NUMBER = 2;
+  public static final int COMMAND_FIELD_NUMBER = 1;
   private int command_;
   /**
-   * <code>.drive_protocol.request.SubMessage.Command command = 2;</code>
+   * <code>.drive_protocol.comm.Command command = 1;</code>
    * @return The enum numeric value on the wire for command.
    */
   @java.lang.Override public int getCommandValue() {
     return command_;
   }
   /**
-   * <code>.drive_protocol.request.SubMessage.Command command = 2;</code>
+   * <code>.drive_protocol.comm.Command command = 1;</code>
    * @return The command.
    */
-  @java.lang.Override public drive_protocol.request.SubMessage.Command getCommand() {
+  @java.lang.Override public drive_protocol.Command getCommand() {
     @SuppressWarnings("deprecation")
-    drive_protocol.request.SubMessage.Command result = drive_protocol.request.SubMessage.Command.valueOf(command_);
-    return result == null ? drive_protocol.request.SubMessage.Command.UNRECOGNIZED : result;
+    drive_protocol.Command result = drive_protocol.Command.valueOf(command_);
+    return result == null ? drive_protocol.Command.UNRECOGNIZED : result;
+  }
+
+  public static final int CONNECTION_FIELD_NUMBER = 2;
+  private drive_protocol.ConnectionInfo connection_;
+  /**
+   * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+   * @return Whether the connection field is set.
+   */
+  @java.lang.Override
+  public boolean hasConnection() {
+    return connection_ != null;
+  }
+  /**
+   * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+   * @return The connection.
+   */
+  @java.lang.Override
+  public drive_protocol.ConnectionInfo getConnection() {
+    return connection_ == null ? drive_protocol.ConnectionInfo.getDefaultInstance() : connection_;
+  }
+  /**
+   * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+   */
+  @java.lang.Override
+  public drive_protocol.ConnectionInfoOrBuilder getConnectionOrBuilder() {
+    return getConnection();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -267,11 +159,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (cred_ != null) {
-      output.writeMessage(1, getCred());
+    if (command_ != drive_protocol.Command.Handshake.getNumber()) {
+      output.writeEnum(1, command_);
     }
-    if (command_ != drive_protocol.request.SubMessage.Command.Handshake.getNumber()) {
-      output.writeEnum(2, command_);
+    if (connection_ != null) {
+      output.writeMessage(2, getConnection());
     }
     unknownFields.writeTo(output);
   }
@@ -282,13 +174,13 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (cred_ != null) {
+    if (command_ != drive_protocol.Command.Handshake.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(1, getCred());
+        .computeEnumSize(1, command_);
     }
-    if (command_ != drive_protocol.request.SubMessage.Command.Handshake.getNumber()) {
+    if (connection_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeEnumSize(2, command_);
+        .computeMessageSize(2, getConnection());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -305,12 +197,12 @@ private static final long serialVersionUID = 0L;
     }
     drive_protocol.request.SubMessage other = (drive_protocol.request.SubMessage) obj;
 
-    if (hasCred() != other.hasCred()) return false;
-    if (hasCred()) {
-      if (!getCred()
-          .equals(other.getCred())) return false;
-    }
     if (command_ != other.command_) return false;
+    if (hasConnection() != other.hasConnection()) return false;
+    if (hasConnection()) {
+      if (!getConnection()
+          .equals(other.getConnection())) return false;
+    }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -322,12 +214,12 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (hasCred()) {
-      hash = (37 * hash) + CRED_FIELD_NUMBER;
-      hash = (53 * hash) + getCred().hashCode();
-    }
     hash = (37 * hash) + COMMAND_FIELD_NUMBER;
     hash = (53 * hash) + command_;
+    if (hasConnection()) {
+      hash = (37 * hash) + CONNECTION_FIELD_NUMBER;
+      hash = (53 * hash) + getConnection().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -461,14 +353,14 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      if (credBuilder_ == null) {
-        cred_ = null;
-      } else {
-        cred_ = null;
-        credBuilder_ = null;
-      }
       command_ = 0;
 
+      if (connectionBuilder_ == null) {
+        connection_ = null;
+      } else {
+        connection_ = null;
+        connectionBuilder_ = null;
+      }
       return this;
     }
 
@@ -495,12 +387,12 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public drive_protocol.request.SubMessage buildPartial() {
       drive_protocol.request.SubMessage result = new drive_protocol.request.SubMessage(this);
-      if (credBuilder_ == null) {
-        result.cred_ = cred_;
-      } else {
-        result.cred_ = credBuilder_.build();
-      }
       result.command_ = command_;
+      if (connectionBuilder_ == null) {
+        result.connection_ = connection_;
+      } else {
+        result.connection_ = connectionBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -549,11 +441,11 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(drive_protocol.request.SubMessage other) {
       if (other == drive_protocol.request.SubMessage.getDefaultInstance()) return this;
-      if (other.hasCred()) {
-        mergeCred(other.getCred());
-      }
       if (other.command_ != 0) {
         setCommandValue(other.getCommandValue());
+      }
+      if (other.hasConnection()) {
+        mergeConnection(other.getConnection());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -584,135 +476,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private drive_protocol.request.CredentialInfo cred_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        drive_protocol.request.CredentialInfo, drive_protocol.request.CredentialInfo.Builder, drive_protocol.request.CredentialInfoOrBuilder> credBuilder_;
-    /**
-     * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-     * @return Whether the cred field is set.
-     */
-    public boolean hasCred() {
-      return credBuilder_ != null || cred_ != null;
-    }
-    /**
-     * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-     * @return The cred.
-     */
-    public drive_protocol.request.CredentialInfo getCred() {
-      if (credBuilder_ == null) {
-        return cred_ == null ? drive_protocol.request.CredentialInfo.getDefaultInstance() : cred_;
-      } else {
-        return credBuilder_.getMessage();
-      }
-    }
-    /**
-     * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-     */
-    public Builder setCred(drive_protocol.request.CredentialInfo value) {
-      if (credBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        cred_ = value;
-        onChanged();
-      } else {
-        credBuilder_.setMessage(value);
-      }
-
-      return this;
-    }
-    /**
-     * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-     */
-    public Builder setCred(
-        drive_protocol.request.CredentialInfo.Builder builderForValue) {
-      if (credBuilder_ == null) {
-        cred_ = builderForValue.build();
-        onChanged();
-      } else {
-        credBuilder_.setMessage(builderForValue.build());
-      }
-
-      return this;
-    }
-    /**
-     * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-     */
-    public Builder mergeCred(drive_protocol.request.CredentialInfo value) {
-      if (credBuilder_ == null) {
-        if (cred_ != null) {
-          cred_ =
-            drive_protocol.request.CredentialInfo.newBuilder(cred_).mergeFrom(value).buildPartial();
-        } else {
-          cred_ = value;
-        }
-        onChanged();
-      } else {
-        credBuilder_.mergeFrom(value);
-      }
-
-      return this;
-    }
-    /**
-     * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-     */
-    public Builder clearCred() {
-      if (credBuilder_ == null) {
-        cred_ = null;
-        onChanged();
-      } else {
-        cred_ = null;
-        credBuilder_ = null;
-      }
-
-      return this;
-    }
-    /**
-     * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-     */
-    public drive_protocol.request.CredentialInfo.Builder getCredBuilder() {
-      
-      onChanged();
-      return getCredFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-     */
-    public drive_protocol.request.CredentialInfoOrBuilder getCredOrBuilder() {
-      if (credBuilder_ != null) {
-        return credBuilder_.getMessageOrBuilder();
-      } else {
-        return cred_ == null ?
-            drive_protocol.request.CredentialInfo.getDefaultInstance() : cred_;
-      }
-    }
-    /**
-     * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        drive_protocol.request.CredentialInfo, drive_protocol.request.CredentialInfo.Builder, drive_protocol.request.CredentialInfoOrBuilder> 
-        getCredFieldBuilder() {
-      if (credBuilder_ == null) {
-        credBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            drive_protocol.request.CredentialInfo, drive_protocol.request.CredentialInfo.Builder, drive_protocol.request.CredentialInfoOrBuilder>(
-                getCred(),
-                getParentForChildren(),
-                isClean());
-        cred_ = null;
-      }
-      return credBuilder_;
-    }
-
     private int command_ = 0;
     /**
-     * <code>.drive_protocol.request.SubMessage.Command command = 2;</code>
+     * <code>.drive_protocol.comm.Command command = 1;</code>
      * @return The enum numeric value on the wire for command.
      */
     @java.lang.Override public int getCommandValue() {
       return command_;
     }
     /**
-     * <code>.drive_protocol.request.SubMessage.Command command = 2;</code>
+     * <code>.drive_protocol.comm.Command command = 1;</code>
      * @param value The enum numeric value on the wire for command to set.
      * @return This builder for chaining.
      */
@@ -723,21 +496,21 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.drive_protocol.request.SubMessage.Command command = 2;</code>
+     * <code>.drive_protocol.comm.Command command = 1;</code>
      * @return The command.
      */
     @java.lang.Override
-    public drive_protocol.request.SubMessage.Command getCommand() {
+    public drive_protocol.Command getCommand() {
       @SuppressWarnings("deprecation")
-      drive_protocol.request.SubMessage.Command result = drive_protocol.request.SubMessage.Command.valueOf(command_);
-      return result == null ? drive_protocol.request.SubMessage.Command.UNRECOGNIZED : result;
+      drive_protocol.Command result = drive_protocol.Command.valueOf(command_);
+      return result == null ? drive_protocol.Command.UNRECOGNIZED : result;
     }
     /**
-     * <code>.drive_protocol.request.SubMessage.Command command = 2;</code>
+     * <code>.drive_protocol.comm.Command command = 1;</code>
      * @param value The command to set.
      * @return This builder for chaining.
      */
-    public Builder setCommand(drive_protocol.request.SubMessage.Command value) {
+    public Builder setCommand(drive_protocol.Command value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -747,7 +520,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.drive_protocol.request.SubMessage.Command command = 2;</code>
+     * <code>.drive_protocol.comm.Command command = 1;</code>
      * @return This builder for chaining.
      */
     public Builder clearCommand() {
@@ -755,6 +528,125 @@ private static final long serialVersionUID = 0L;
       command_ = 0;
       onChanged();
       return this;
+    }
+
+    private drive_protocol.ConnectionInfo connection_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        drive_protocol.ConnectionInfo, drive_protocol.ConnectionInfo.Builder, drive_protocol.ConnectionInfoOrBuilder> connectionBuilder_;
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+     * @return Whether the connection field is set.
+     */
+    public boolean hasConnection() {
+      return connectionBuilder_ != null || connection_ != null;
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+     * @return The connection.
+     */
+    public drive_protocol.ConnectionInfo getConnection() {
+      if (connectionBuilder_ == null) {
+        return connection_ == null ? drive_protocol.ConnectionInfo.getDefaultInstance() : connection_;
+      } else {
+        return connectionBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+     */
+    public Builder setConnection(drive_protocol.ConnectionInfo value) {
+      if (connectionBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        connection_ = value;
+        onChanged();
+      } else {
+        connectionBuilder_.setMessage(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+     */
+    public Builder setConnection(
+        drive_protocol.ConnectionInfo.Builder builderForValue) {
+      if (connectionBuilder_ == null) {
+        connection_ = builderForValue.build();
+        onChanged();
+      } else {
+        connectionBuilder_.setMessage(builderForValue.build());
+      }
+
+      return this;
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+     */
+    public Builder mergeConnection(drive_protocol.ConnectionInfo value) {
+      if (connectionBuilder_ == null) {
+        if (connection_ != null) {
+          connection_ =
+            drive_protocol.ConnectionInfo.newBuilder(connection_).mergeFrom(value).buildPartial();
+        } else {
+          connection_ = value;
+        }
+        onChanged();
+      } else {
+        connectionBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+     */
+    public Builder clearConnection() {
+      if (connectionBuilder_ == null) {
+        connection_ = null;
+        onChanged();
+      } else {
+        connection_ = null;
+        connectionBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+     */
+    public drive_protocol.ConnectionInfo.Builder getConnectionBuilder() {
+      
+      onChanged();
+      return getConnectionFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+     */
+    public drive_protocol.ConnectionInfoOrBuilder getConnectionOrBuilder() {
+      if (connectionBuilder_ != null) {
+        return connectionBuilder_.getMessageOrBuilder();
+      } else {
+        return connection_ == null ?
+            drive_protocol.ConnectionInfo.getDefaultInstance() : connection_;
+      }
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        drive_protocol.ConnectionInfo, drive_protocol.ConnectionInfo.Builder, drive_protocol.ConnectionInfoOrBuilder> 
+        getConnectionFieldBuilder() {
+      if (connectionBuilder_ == null) {
+        connectionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            drive_protocol.ConnectionInfo, drive_protocol.ConnectionInfo.Builder, drive_protocol.ConnectionInfoOrBuilder>(
+                getConnection(),
+                getParentForChildren(),
+                isClean());
+        connection_ = null;
+      }
+      return connectionBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

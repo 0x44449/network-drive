@@ -99,36 +99,38 @@ public final class Response {
   static {
     java.lang.String[] descriptorData = {
       "\n\016Response.proto\022\027drive_protocol.respons" +
-      "e\"n\n\nPubMessage\022<\n\007command\030\001 \001(\0162+.drive" +
-      "_protocol.response.PubMessage.Command\"\"\n" +
-      "\007Command\022\r\n\tHandshake\020\000\022\010\n\004Test\020\001\"$\n\022Cre" +
-      "ateFileResponse\022\016\n\006status\030\001 \001(\005\"#\n\021Close" +
-      "FileResponse\022\016\n\006status\030\001 \001(\005\"2\n\020ReadFile" +
-      "Response\022\016\n\006status\030\001 \001(\005\022\016\n\006buffer\030\002 \001(\014" +
-      "\"#\n\021WriteFileResponse\022\016\n\006status\030\001 \001(\005\")\n" +
-      "\027FlushFileBufferResponse\022\016\n\006status\030\001 \001(\005" +
-      "\"E\n\032GetFileInformationResponse\022\016\n\006status" +
-      "\030\001 \001(\005\022\027\n\017file_attributes\030\002 \001(\004\"$\n\022Delet" +
-      "eFileResponse\022\016\n\006status\030\001 \001(\005\")\n\027DeleteD" +
-      "irectoryResponse\022\016\n\006status\030\001 \001(\005\"\"\n\020Move" +
-      "FileResponse\022\016\n\006status\030\001 \001(\005\"\"\n\020LockFile" +
-      "Response\022\016\n\006status\030\001 \001(\005\"&\n\024SetEndOfFile" +
-      "Response\022\016\n\006status\030\001 \001(\005\"+\n\031SetAllocatio" +
-      "nSizeResponse\022\016\n\006status\030\001 \001(\005\"+\n\031SetFile" +
-      "AttributesResponse\022\016\n\006status\030\001 \001(\005\"$\n\022Un" +
-      "lockFileResponse\022\016\n\006status\030\001 \001(\005B\033\n\027driv" +
-      "e_protocol.responseP\001b\006proto3"
+      "e\032\nComm.proto\"\204\001\n\nPubMessage\022\016\n\006status\030\001" +
+      " \001(\005\022-\n\007command\030\002 \001(\0162\034.drive_protocol.c" +
+      "omm.Command\0227\n\nconnection\030\003 \001(\0132#.drive_" +
+      "protocol.comm.ConnectionInfo\"$\n\022CreateFi" +
+      "leResponse\022\016\n\006status\030\001 \001(\005\"#\n\021CloseFileR" +
+      "esponse\022\016\n\006status\030\001 \001(\005\"2\n\020ReadFileRespo" +
+      "nse\022\016\n\006status\030\001 \001(\005\022\016\n\006buffer\030\002 \001(\014\"#\n\021W" +
+      "riteFileResponse\022\016\n\006status\030\001 \001(\005\")\n\027Flus" +
+      "hFileBufferResponse\022\016\n\006status\030\001 \001(\005\"E\n\032G" +
+      "etFileInformationResponse\022\016\n\006status\030\001 \001(" +
+      "\005\022\027\n\017file_attributes\030\002 \001(\004\"$\n\022DeleteFile" +
+      "Response\022\016\n\006status\030\001 \001(\005\")\n\027DeleteDirect" +
+      "oryResponse\022\016\n\006status\030\001 \001(\005\"\"\n\020MoveFileR" +
+      "esponse\022\016\n\006status\030\001 \001(\005\"\"\n\020LockFileRespo" +
+      "nse\022\016\n\006status\030\001 \001(\005\"&\n\024SetEndOfFileRespo" +
+      "nse\022\016\n\006status\030\001 \001(\005\"+\n\031SetAllocationSize" +
+      "Response\022\016\n\006status\030\001 \001(\005\"+\n\031SetFileAttri" +
+      "butesResponse\022\016\n\006status\030\001 \001(\005\"$\n\022UnlockF" +
+      "ileResponse\022\016\n\006status\030\001 \001(\005B\033\n\027drive_pro" +
+      "tocol.responseP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          drive_protocol.Comm.getDescriptor(),
         });
     internal_static_drive_protocol_response_PubMessage_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_drive_protocol_response_PubMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_PubMessage_descriptor,
-        new java.lang.String[] { "Command", });
+        new java.lang.String[] { "Status", "Command", "Connection", });
     internal_static_drive_protocol_response_CreateFileResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_drive_protocol_response_CreateFileResponse_fieldAccessorTable = new
@@ -213,6 +215,7 @@ public final class Response {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_UnlockFileResponse_descriptor,
         new java.lang.String[] { "Status", });
+    drive_protocol.Comm.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

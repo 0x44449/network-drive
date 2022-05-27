@@ -8,13 +8,34 @@ public interface PubMessageOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.drive_protocol.response.PubMessage.Command command = 1;</code>
+   * <code>int32 status = 1;</code>
+   * @return The status.
+   */
+  int getStatus();
+
+  /**
+   * <code>.drive_protocol.comm.Command command = 2;</code>
    * @return The enum numeric value on the wire for command.
    */
   int getCommandValue();
   /**
-   * <code>.drive_protocol.response.PubMessage.Command command = 1;</code>
+   * <code>.drive_protocol.comm.Command command = 2;</code>
    * @return The command.
    */
-  drive_protocol.response.PubMessage.Command getCommand();
+  drive_protocol.Command getCommand();
+
+  /**
+   * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+   * @return Whether the connection field is set.
+   */
+  boolean hasConnection();
+  /**
+   * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+   * @return The connection.
+   */
+  drive_protocol.ConnectionInfo getConnection();
+  /**
+   * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+   */
+  drive_protocol.ConnectionInfoOrBuilder getConnectionOrBuilder();
 }

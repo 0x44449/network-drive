@@ -50,9 +50,27 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 8: {
+
+            status_ = input.readInt32();
+            break;
+          }
+          case 16: {
             int rawValue = input.readEnum();
 
             command_ = rawValue;
+            break;
+          }
+          case 26: {
+            drive_protocol.ConnectionInfo.Builder subBuilder = null;
+            if (connection_ != null) {
+              subBuilder = connection_.toBuilder();
+            }
+            connection_ = input.readMessage(drive_protocol.ConnectionInfo.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(connection_);
+              connection_ = subBuilder.buildPartial();
+            }
+
             break;
           }
           default: {
@@ -87,131 +105,60 @@ private static final long serialVersionUID = 0L;
             drive_protocol.response.PubMessage.class, drive_protocol.response.PubMessage.Builder.class);
   }
 
+  public static final int STATUS_FIELD_NUMBER = 1;
+  private int status_;
   /**
-   * Protobuf enum {@code drive_protocol.response.PubMessage.Command}
+   * <code>int32 status = 1;</code>
+   * @return The status.
    */
-  public enum Command
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>Handshake = 0;</code>
-     */
-    Handshake(0),
-    /**
-     * <code>Test = 1;</code>
-     */
-    Test(1),
-    UNRECOGNIZED(-1),
-    ;
-
-    /**
-     * <code>Handshake = 0;</code>
-     */
-    public static final int Handshake_VALUE = 0;
-    /**
-     * <code>Test = 1;</code>
-     */
-    public static final int Test_VALUE = 1;
-
-
-    public final int getNumber() {
-      if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
-            "Can't get the number of an unknown enum value.");
-      }
-      return value;
-    }
-
-    /**
-     * @param value The numeric wire value of the corresponding enum entry.
-     * @return The enum associated with the given numeric wire value.
-     * @deprecated Use {@link #forNumber(int)} instead.
-     */
-    @java.lang.Deprecated
-    public static Command valueOf(int value) {
-      return forNumber(value);
-    }
-
-    /**
-     * @param value The numeric wire value of the corresponding enum entry.
-     * @return The enum associated with the given numeric wire value.
-     */
-    public static Command forNumber(int value) {
-      switch (value) {
-        case 0: return Handshake;
-        case 1: return Test;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<Command>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static final com.google.protobuf.Internal.EnumLiteMap<
-        Command> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<Command>() {
-            public Command findValueByNumber(int number) {
-              return Command.forNumber(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalStateException(
-            "Can't get the descriptor of an unrecognized enum value.");
-      }
-      return getDescriptor().getValues().get(ordinal());
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return drive_protocol.response.PubMessage.getDescriptor().getEnumTypes().get(0);
-    }
-
-    private static final Command[] VALUES = values();
-
-    public static Command valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      if (desc.getIndex() == -1) {
-        return UNRECOGNIZED;
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int value;
-
-    private Command(int value) {
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:drive_protocol.response.PubMessage.Command)
+  @java.lang.Override
+  public int getStatus() {
+    return status_;
   }
 
-  public static final int COMMAND_FIELD_NUMBER = 1;
+  public static final int COMMAND_FIELD_NUMBER = 2;
   private int command_;
   /**
-   * <code>.drive_protocol.response.PubMessage.Command command = 1;</code>
+   * <code>.drive_protocol.comm.Command command = 2;</code>
    * @return The enum numeric value on the wire for command.
    */
   @java.lang.Override public int getCommandValue() {
     return command_;
   }
   /**
-   * <code>.drive_protocol.response.PubMessage.Command command = 1;</code>
+   * <code>.drive_protocol.comm.Command command = 2;</code>
    * @return The command.
    */
-  @java.lang.Override public drive_protocol.response.PubMessage.Command getCommand() {
+  @java.lang.Override public drive_protocol.Command getCommand() {
     @SuppressWarnings("deprecation")
-    drive_protocol.response.PubMessage.Command result = drive_protocol.response.PubMessage.Command.valueOf(command_);
-    return result == null ? drive_protocol.response.PubMessage.Command.UNRECOGNIZED : result;
+    drive_protocol.Command result = drive_protocol.Command.valueOf(command_);
+    return result == null ? drive_protocol.Command.UNRECOGNIZED : result;
+  }
+
+  public static final int CONNECTION_FIELD_NUMBER = 3;
+  private drive_protocol.ConnectionInfo connection_;
+  /**
+   * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+   * @return Whether the connection field is set.
+   */
+  @java.lang.Override
+  public boolean hasConnection() {
+    return connection_ != null;
+  }
+  /**
+   * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+   * @return The connection.
+   */
+  @java.lang.Override
+  public drive_protocol.ConnectionInfo getConnection() {
+    return connection_ == null ? drive_protocol.ConnectionInfo.getDefaultInstance() : connection_;
+  }
+  /**
+   * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+   */
+  @java.lang.Override
+  public drive_protocol.ConnectionInfoOrBuilder getConnectionOrBuilder() {
+    return getConnection();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -228,8 +175,14 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (command_ != drive_protocol.response.PubMessage.Command.Handshake.getNumber()) {
-      output.writeEnum(1, command_);
+    if (status_ != 0) {
+      output.writeInt32(1, status_);
+    }
+    if (command_ != drive_protocol.Command.Handshake.getNumber()) {
+      output.writeEnum(2, command_);
+    }
+    if (connection_ != null) {
+      output.writeMessage(3, getConnection());
     }
     unknownFields.writeTo(output);
   }
@@ -240,9 +193,17 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (command_ != drive_protocol.response.PubMessage.Command.Handshake.getNumber()) {
+    if (status_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeEnumSize(1, command_);
+        .computeInt32Size(1, status_);
+    }
+    if (command_ != drive_protocol.Command.Handshake.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(2, command_);
+    }
+    if (connection_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(3, getConnection());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -259,7 +220,14 @@ private static final long serialVersionUID = 0L;
     }
     drive_protocol.response.PubMessage other = (drive_protocol.response.PubMessage) obj;
 
+    if (getStatus()
+        != other.getStatus()) return false;
     if (command_ != other.command_) return false;
+    if (hasConnection() != other.hasConnection()) return false;
+    if (hasConnection()) {
+      if (!getConnection()
+          .equals(other.getConnection())) return false;
+    }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -271,8 +239,14 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + STATUS_FIELD_NUMBER;
+    hash = (53 * hash) + getStatus();
     hash = (37 * hash) + COMMAND_FIELD_NUMBER;
     hash = (53 * hash) + command_;
+    if (hasConnection()) {
+      hash = (37 * hash) + CONNECTION_FIELD_NUMBER;
+      hash = (53 * hash) + getConnection().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -406,8 +380,16 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      status_ = 0;
+
       command_ = 0;
 
+      if (connectionBuilder_ == null) {
+        connection_ = null;
+      } else {
+        connection_ = null;
+        connectionBuilder_ = null;
+      }
       return this;
     }
 
@@ -434,7 +416,13 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public drive_protocol.response.PubMessage buildPartial() {
       drive_protocol.response.PubMessage result = new drive_protocol.response.PubMessage(this);
+      result.status_ = status_;
       result.command_ = command_;
+      if (connectionBuilder_ == null) {
+        result.connection_ = connection_;
+      } else {
+        result.connection_ = connectionBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -483,8 +471,14 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(drive_protocol.response.PubMessage other) {
       if (other == drive_protocol.response.PubMessage.getDefaultInstance()) return this;
+      if (other.getStatus() != 0) {
+        setStatus(other.getStatus());
+      }
       if (other.command_ != 0) {
         setCommandValue(other.getCommandValue());
+      }
+      if (other.hasConnection()) {
+        mergeConnection(other.getConnection());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -515,16 +509,47 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private int status_ ;
+    /**
+     * <code>int32 status = 1;</code>
+     * @return The status.
+     */
+    @java.lang.Override
+    public int getStatus() {
+      return status_;
+    }
+    /**
+     * <code>int32 status = 1;</code>
+     * @param value The status to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStatus(int value) {
+      
+      status_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 status = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearStatus() {
+      
+      status_ = 0;
+      onChanged();
+      return this;
+    }
+
     private int command_ = 0;
     /**
-     * <code>.drive_protocol.response.PubMessage.Command command = 1;</code>
+     * <code>.drive_protocol.comm.Command command = 2;</code>
      * @return The enum numeric value on the wire for command.
      */
     @java.lang.Override public int getCommandValue() {
       return command_;
     }
     /**
-     * <code>.drive_protocol.response.PubMessage.Command command = 1;</code>
+     * <code>.drive_protocol.comm.Command command = 2;</code>
      * @param value The enum numeric value on the wire for command to set.
      * @return This builder for chaining.
      */
@@ -535,21 +560,21 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.drive_protocol.response.PubMessage.Command command = 1;</code>
+     * <code>.drive_protocol.comm.Command command = 2;</code>
      * @return The command.
      */
     @java.lang.Override
-    public drive_protocol.response.PubMessage.Command getCommand() {
+    public drive_protocol.Command getCommand() {
       @SuppressWarnings("deprecation")
-      drive_protocol.response.PubMessage.Command result = drive_protocol.response.PubMessage.Command.valueOf(command_);
-      return result == null ? drive_protocol.response.PubMessage.Command.UNRECOGNIZED : result;
+      drive_protocol.Command result = drive_protocol.Command.valueOf(command_);
+      return result == null ? drive_protocol.Command.UNRECOGNIZED : result;
     }
     /**
-     * <code>.drive_protocol.response.PubMessage.Command command = 1;</code>
+     * <code>.drive_protocol.comm.Command command = 2;</code>
      * @param value The command to set.
      * @return This builder for chaining.
      */
-    public Builder setCommand(drive_protocol.response.PubMessage.Command value) {
+    public Builder setCommand(drive_protocol.Command value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -559,7 +584,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.drive_protocol.response.PubMessage.Command command = 1;</code>
+     * <code>.drive_protocol.comm.Command command = 2;</code>
      * @return This builder for chaining.
      */
     public Builder clearCommand() {
@@ -567,6 +592,125 @@ private static final long serialVersionUID = 0L;
       command_ = 0;
       onChanged();
       return this;
+    }
+
+    private drive_protocol.ConnectionInfo connection_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        drive_protocol.ConnectionInfo, drive_protocol.ConnectionInfo.Builder, drive_protocol.ConnectionInfoOrBuilder> connectionBuilder_;
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+     * @return Whether the connection field is set.
+     */
+    public boolean hasConnection() {
+      return connectionBuilder_ != null || connection_ != null;
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+     * @return The connection.
+     */
+    public drive_protocol.ConnectionInfo getConnection() {
+      if (connectionBuilder_ == null) {
+        return connection_ == null ? drive_protocol.ConnectionInfo.getDefaultInstance() : connection_;
+      } else {
+        return connectionBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+     */
+    public Builder setConnection(drive_protocol.ConnectionInfo value) {
+      if (connectionBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        connection_ = value;
+        onChanged();
+      } else {
+        connectionBuilder_.setMessage(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+     */
+    public Builder setConnection(
+        drive_protocol.ConnectionInfo.Builder builderForValue) {
+      if (connectionBuilder_ == null) {
+        connection_ = builderForValue.build();
+        onChanged();
+      } else {
+        connectionBuilder_.setMessage(builderForValue.build());
+      }
+
+      return this;
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+     */
+    public Builder mergeConnection(drive_protocol.ConnectionInfo value) {
+      if (connectionBuilder_ == null) {
+        if (connection_ != null) {
+          connection_ =
+            drive_protocol.ConnectionInfo.newBuilder(connection_).mergeFrom(value).buildPartial();
+        } else {
+          connection_ = value;
+        }
+        onChanged();
+      } else {
+        connectionBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+     */
+    public Builder clearConnection() {
+      if (connectionBuilder_ == null) {
+        connection_ = null;
+        onChanged();
+      } else {
+        connection_ = null;
+        connectionBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+     */
+    public drive_protocol.ConnectionInfo.Builder getConnectionBuilder() {
+      
+      onChanged();
+      return getConnectionFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+     */
+    public drive_protocol.ConnectionInfoOrBuilder getConnectionOrBuilder() {
+      if (connectionBuilder_ != null) {
+        return connectionBuilder_.getMessageOrBuilder();
+      } else {
+        return connection_ == null ?
+            drive_protocol.ConnectionInfo.getDefaultInstance() : connection_;
+      }
+    }
+    /**
+     * <code>.drive_protocol.comm.ConnectionInfo connection = 3;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        drive_protocol.ConnectionInfo, drive_protocol.ConnectionInfo.Builder, drive_protocol.ConnectionInfoOrBuilder> 
+        getConnectionFieldBuilder() {
+      if (connectionBuilder_ == null) {
+        connectionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            drive_protocol.ConnectionInfo, drive_protocol.ConnectionInfo.Builder, drive_protocol.ConnectionInfoOrBuilder>(
+                getConnection(),
+                getParentForChildren(),
+                isClean());
+        connection_ = null;
+      }
+      return connectionBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

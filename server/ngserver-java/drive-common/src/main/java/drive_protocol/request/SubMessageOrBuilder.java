@@ -8,28 +8,28 @@ public interface SubMessageOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-   * @return Whether the cred field is set.
-   */
-  boolean hasCred();
-  /**
-   * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-   * @return The cred.
-   */
-  drive_protocol.request.CredentialInfo getCred();
-  /**
-   * <code>.drive_protocol.request.CredentialInfo cred = 1;</code>
-   */
-  drive_protocol.request.CredentialInfoOrBuilder getCredOrBuilder();
-
-  /**
-   * <code>.drive_protocol.request.SubMessage.Command command = 2;</code>
+   * <code>.drive_protocol.comm.Command command = 1;</code>
    * @return The enum numeric value on the wire for command.
    */
   int getCommandValue();
   /**
-   * <code>.drive_protocol.request.SubMessage.Command command = 2;</code>
+   * <code>.drive_protocol.comm.Command command = 1;</code>
    * @return The command.
    */
-  drive_protocol.request.SubMessage.Command getCommand();
+  drive_protocol.Command getCommand();
+
+  /**
+   * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+   * @return Whether the connection field is set.
+   */
+  boolean hasConnection();
+  /**
+   * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+   * @return The connection.
+   */
+  drive_protocol.ConnectionInfo getConnection();
+  /**
+   * <code>.drive_protocol.comm.ConnectionInfo connection = 2;</code>
+   */
+  drive_protocol.ConnectionInfoOrBuilder getConnectionOrBuilder();
 }
