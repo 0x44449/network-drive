@@ -106,17 +106,22 @@ public class PhysStorageService implements NStorage {
         // if file is not directory, check oplock
         // related with desiredAccess, shareAccess
         if (objectInfo != null && objectInfo.isFile()) {
-            var oplockEntities = oplocksRepository.findOplockByFullPath(fileName);
-            var oplockInfo = oplockEntities.size() > 0 ? oplockEntities.get(0) : null;
+            if (fileShare.intValue() != 0) {
+                var machineId = credentialInfo.getMachineId();
+                var acquireResult = oplocksRepository.acquireOplockLockBitByFullPath(fileName, machineId, fileShare.intValue());
 
-            if (oplockInfo != null) {
-                var lockBit = oplockInfo.getLockBit();
-
-                /*if (fileShare.contains(FileShare.WRITE)) {
-                    if (lockBit.contains("W") || lockBit.contains("D")) {
-
+                switch (acquireResult) {
+                    case -1 -> {
+                        return CreateFileResponse.newBuilder()
+                                .setStatus(NtStatus.SHARING_VIOLATION.intValue())
+                                .build();
                     }
-                }*/
+                    case -2 -> {
+                        return CreateFileResponse.newBuilder()
+                                .setStatus(NtStatus.ACCESS_DENIED.intValue())
+                                .build();
+                    }
+                }
             }
         }
 
