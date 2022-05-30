@@ -1,30 +1,24 @@
-package ngserver;
+package ngserver.procedure;
 
+import drive_common.drive_storage.NStorage;
 import drive_protocol.DriveProcedureGrpc;
 import drive_protocol.request.*;
 import drive_protocol.response.*;
-import drive_common.drive_storage.NStorage;
+import io.grpc.Context;
+import io.grpc.Status;
+import io.grpc.StatusException;
+import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
+import ngserver.procedure.connection.ConnectionManager;
+import ngserver.procedure.connection.ConnectionState;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.function.BiConsumer;
-
 @GrpcService
-public class DriveProcedureService extends DriveProcedureGrpc.DriveProcedureImplBase {
+public class ProcedureService extends DriveProcedureGrpc.DriveProcedureImplBase {
     @Autowired
     NStorage storage;
-
-    final Map<String, StreamObserver<PubMessage>> connectionMap = new HashMap<String, StreamObserver<PubMessage>>();
-    final ReentrantReadWriteLock connectionLock = new ReentrantReadWriteLock();
-    final Lock connectionReadLock = connectionLock.readLock();
-    final Lock connectionWriteLock = connectionLock.writeLock();
+    static final ConnectionManager<PubMessage> connectionManager = new ConnectionManager<PubMessage>();
 
     @Override
     public StreamObserver<SubMessage> subscribe(StreamObserver<PubMessage> responseObserver) {
@@ -32,60 +26,69 @@ public class DriveProcedureService extends DriveProcedureGrpc.DriveProcedureImpl
             @Override
             public void onNext(SubMessage value) {
                 var command = value.getCommand();
-                var machineId = value.getCred().getMachineId();
+                var machineId = value.getConnection().getMachineId();
 
-                if (command == SubMessage.Command.Handshake) {
-                    connectionWriteLock.lock();
-                    try {
-                        if (!connectionMap.containsKey(machineId)) {
-                            connectionMap.put(machineId, responseObserver);
+                switch (command) {
+                    case Handshake -> {
+                        var connectionId = ContextVariables.CONNECTION_ID.get(Context.current());
+                        var state = new ConnectionState<PubMessage>(connectionId, responseObserver, Context.current());
+                        connectionManager.addOrReplace(connectionId, state);
+
+                        PubMessage response = PubMessage.newBuilder()
+                                .setCommand(command)
+                                .setStatus(0)
+                                .build();
+                        responseObserver.onNext(response);
+                        return;
+                    }
+                    default -> {
+                        var connectionId = ContextVariables.CONNECTION_ID.get(Context.current());
+                        var states = connectionManager.getAllExcept(connectionId);
+                        if (states.size() > 0) {
+                            PubMessage broadcastResponse = PubMessage.newBuilder()
+                                    .setCommand(command)
+                                    .setStatus(1)
+                                    .build();
+                            for (var state : states) {
+                                if (!state.getContext().isCancelled()) {
+                                    state.getStream().onNext(broadcastResponse);
+                                }
+                            }
                         }
-                    }
-                    finally {
-                        connectionWriteLock.unlock();
-                    }
 
-                    PubMessage response = PubMessage.newBuilder()
-                            .setCommand(PubMessage.Command.Handshake)
-                            .build();
-                    responseObserver.onNext(response);
-                    return;
-                }
-
-                var otherResponses = new ArrayList<StreamObserver<PubMessage>>();
-                connectionReadLock.lock();
-                try {
-                    connectionMap.forEach((kMachineId, vResponse) -> {
-                        if (!machineId.equals(kMachineId)) {
-                            otherResponses.add(vResponse);
-                        }
-                    });
-                }
-                finally {
-                    connectionReadLock.unlock();
-                }
-
-                if (otherResponses.size() > 0) {
-                    PubMessage broadcastResponse = PubMessage.newBuilder()
-                            .setCommand(PubMessage.Command.Test)
-                            .build();
-                    for (var otherResponse : otherResponses) {
-                        otherResponse.onNext(broadcastResponse);
+                        PubMessage response = PubMessage.newBuilder()
+                                .setCommand(command)
+                                .setStatus(0)
+                                .build();
+                        responseObserver.onNext(response);
+                        return;
                     }
                 }
-                PubMessage response = PubMessage.newBuilder()
-                        .setCommand(PubMessage.Command.Test)
-                        .build();
-                responseObserver.onNext(response);
             }
 
             @Override
             public void onError(Throwable t) {
-
+                if (t instanceof StatusException gse) {
+                    var code = gse.getStatus().getCode();
+                    if (code == Status.Code.CANCELLED) {
+                        var connectionId = ContextVariables.CONNECTION_ID.get(Context.current());
+                        connectionManager.remove(connectionId);
+                    }
+                }
+                else if (t instanceof StatusRuntimeException gsre) {
+                    var code = gsre.getStatus().getCode();
+                    if (code == Status.Code.CANCELLED) {
+                        var connectionId = ContextVariables.CONNECTION_ID.get(Context.current());
+                        connectionManager.remove(connectionId);
+                    }
+                }
             }
 
             @Override
             public void onCompleted() {
+                var connectionId = ContextVariables.CONNECTION_ID.get(Context.current());
+                connectionManager.remove(connectionId);
+
                 responseObserver.onCompleted();
             }
         };
