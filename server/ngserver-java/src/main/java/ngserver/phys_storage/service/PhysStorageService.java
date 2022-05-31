@@ -41,58 +41,70 @@ public class PhysStorageService implements NStorage {
         In this case, CreateFile should return STATUS_SUCCESS when that directory can be opened and DOKAN_FILE_INFO.IsDirectory has to be set to TRUE.
         On the other hand, if DOKAN_FILE_INFO.IsDirectory is set to TRUE but the path targets a file, STATUS_NOT_A_DIRECTORY must be returned.
          */
-        if (isDirectory) {
-            if (objectInfo == null) {
-                if (fileMode == FileMode.OPEN) {
-                    return CreateFileResponse.newBuilder()
-                            .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
-                            .build();
-                }
-            }
-            else {
-                if (objectInfo.isFile()) {
-                    if (fileMode == FileMode.OPEN_OR_CREATE || fileMode == FileMode.OPEN || fileMode == FileMode.CREATE) {
+        if (isDirectory) { // assume file is directory
+            if (objectInfo == null) { // if object not exists
+                switch (fileMode) {
+                    case OPEN -> {
                         return CreateFileResponse.newBuilder()
-                                .setStatus(NtStatus.NOT_A_DIRECTORY.intValue())
+                                .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
                                 .build();
                     }
                 }
-                else {
-                    if (fileMode == FileMode.CREATE_NEW) {
-                        return CreateFileResponse.newBuilder()
-                                .setStatus(NtStatus.OBJECT_NAME_COLLISION.intValue())
-                                .build();
+            }
+            else { // if object exists
+                if (objectInfo.isFile()) { // if object is file * unmatched
+                    switch (fileMode) {
+                        case OPEN_OR_CREATE, OPEN, CREATE -> {
+                            return CreateFileResponse.newBuilder()
+                                    .setStatus(NtStatus.NOT_A_DIRECTORY.intValue())
+                                    .build();
+                        }
+                    }
+                }
+                else { // if object is directory
+                    switch (fileMode) {
+                        case CREATE_NEW -> {
+                            return CreateFileResponse.newBuilder()
+                                    .setStatus(NtStatus.OBJECT_NAME_COLLISION.intValue())
+                                    .build();
+                        }
                     }
                 }
             }
         }
-        else {
+        else { // assume file is file
             // check file exists with FileMode
-            if (objectInfo == null) {
-                if (fileMode == FileMode.OPEN || fileMode == FileMode.TRUNCATE) {
-                    return CreateFileResponse.newBuilder()
-                            .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
-                            .build();
+            if (objectInfo == null) { // if object is not exists
+                switch (fileMode) {
+                    case OPEN, TRUNCATE -> {
+                        return CreateFileResponse.newBuilder()
+                                .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
+                                .build();
+                    }
                 }
             }
-            else {
-                if (objectInfo.isFile()) {
-                    if (fileMode == FileMode.OPEN || fileMode == FileMode.CREATE_NEW) {
-                        return CreateFileResponse.newBuilder()
-                                .setStatus(NtStatus.OBJECT_NAME_COLLISION.intValue())
-                                .build();
+            else { // if object is exists
+                if (objectInfo.isFile()) { // if object is file
+                    switch (fileMode) {
+                        case OPEN, CREATE_NEW -> {
+                            return CreateFileResponse.newBuilder()
+                                    .setStatus(NtStatus.OBJECT_NAME_COLLISION.intValue())
+                                    .build();
+                        }
                     }
                 }
-                else {
-                    if (fileMode == FileMode.CREATE_NEW) {
-                        return CreateFileResponse.newBuilder()
-                                .setStatus(NtStatus.OBJECT_NAME_COLLISION.intValue())
-                                .build();
-                    }
-                    else if (fileMode == FileMode.OPEN || fileMode == FileMode.OPEN_OR_CREATE || fileMode == FileMode.CREATE) {
-                        return CreateFileResponse.newBuilder()
-                                .setStatus(NtStatus.FILE_IS_A_DIRECTORY.intValue())
-                                .build();
+                else { // if object is directory * unmatched
+                    switch (fileMode) {
+                        case CREATE_NEW -> {
+                            return CreateFileResponse.newBuilder()
+                                    .setStatus(NtStatus.OBJECT_NAME_COLLISION.intValue())
+                                    .build();
+                        }
+                        case OPEN, OPEN_OR_CREATE, CREATE -> {
+                            return CreateFileResponse.newBuilder()
+                                    .setStatus(NtStatus.FILE_IS_A_DIRECTORY.intValue())
+                                    .build();
+                        }
                     }
                 }
             }
@@ -108,7 +120,7 @@ public class PhysStorageService implements NStorage {
         if (objectInfo != null && objectInfo.isFile()) {
             if (fileShare.intValue() != 0) {
                 var machineId = credentialInfo.getMachineId();
-                var acquireResult = oplocksRepository.acquireOplockLockBitByFullPath(fileName, machineId, fileShare.intValue());
+                var acquireResult = oplocksRepository.acquireOplockLockBit(fileName, machineId, fileShare.intValue());
 
                 switch (acquireResult) {
                     case -1 -> {
@@ -124,7 +136,6 @@ public class PhysStorageService implements NStorage {
                 }
             }
         }
-
 
         // oplocked file is requested, callback to locking client for unlock (closeFile)
 
@@ -146,9 +157,16 @@ public class PhysStorageService implements NStorage {
         var credentialInfo = request.getCred();
 
         var fileName = request.getFileName();
+        var fileShare = FileShare.maskValueSet(request.getShareAccess());
         var deleteOnClose = requestInfo.getDeleteOnClose();
 
         // release oplock
+        var machineId = credentialInfo.getMachineId();
+        var releaseResult = oplocksRepository.releaseOplockLockBit(fileName, machineId, fileShare.intValue());
+
+        if (deleteOnClose) {
+            // TODO: delete file
+        }
 
         return CloseFileResponse.newBuilder()
                 .setStatus(0)
@@ -157,6 +175,14 @@ public class PhysStorageService implements NStorage {
 
     @Override
     public ReadFileResponse readFile(ReadFileRequest request) {
+        var requestInfo = request.getReq();
+        var credentialInfo = request.getCred();
+
+        var fileName = request.getFileName();
+        var length = request.getLength();
+        var offset = request.getOffset();
+        var fileMode = FileMode.fromInt(request.getFileMode());
+
         return ReadFileResponse.newBuilder()
                 .setStatus(0)
                 .build();
@@ -164,6 +190,14 @@ public class PhysStorageService implements NStorage {
 
     @Override
     public WriteFileResponse writeFile(WriteFileRequest request) {
+        var requestInfo = request.getReq();
+        var credentialInfo = request.getCred();
+
+        var fileName = request.getFileName();
+        var length = request.getLength();
+        var offset = request.getOffset();
+        var fileMode = FileMode.fromInt(request.getFileMode());
+
         return WriteFileResponse.newBuilder()
                 .setStatus(0)
                 .build();
@@ -171,6 +205,11 @@ public class PhysStorageService implements NStorage {
 
     @Override
     public GetFileInformationResponse getFileInformation(GetFileInformationRequest request) {
+        var requestInfo = request.getReq();
+        var credentialInfo = request.getCred();
+
+        var fileName = request.getFileName();
+
         return GetFileInformationResponse.newBuilder()
                 .setStatus(0)
                 .build();
@@ -178,6 +217,11 @@ public class PhysStorageService implements NStorage {
 
     @Override
     public DeleteFileResponse deleteFile(DeleteFileRequest request) {
+        var requestInfo = request.getReq();
+        var credentialInfo = request.getCred();
+
+        var fileName = request.getFileName();
+
         return DeleteFileResponse.newBuilder()
                 .setStatus(0)
                 .build();
@@ -185,6 +229,11 @@ public class PhysStorageService implements NStorage {
 
     @Override
     public DeleteDirectoryResponse deleteDirectory(DeleteDirectoryRequest request) {
+        var requestInfo = request.getReq();
+        var credentialInfo = request.getCred();
+
+        var fileName = request.getFileName();
+
         return DeleteDirectoryResponse.newBuilder()
                 .setStatus(0)
                 .build();
@@ -192,6 +241,12 @@ public class PhysStorageService implements NStorage {
 
     @Override
     public MoveFileResponse moveFile(MoveFileRequest request) {
+        var requestInfo = request.getReq();
+        var credentialInfo = request.getCred();
+
+        var fileName = request.getFileName();
+        var newFileName = request.getNewFileName();
+
         return MoveFileResponse.newBuilder()
                 .setStatus(0)
                 .build();
@@ -199,6 +254,11 @@ public class PhysStorageService implements NStorage {
 
     @Override
     public FlushFileBufferResponse flushFileBuffer(FlushFileBufferRequest request) {
+        var requestInfo = request.getReq();
+        var credentialInfo = request.getCred();
+
+        var fileName = request.getFileName();
+
         return FlushFileBufferResponse.newBuilder()
                 .setStatus(0)
                 .build();
@@ -206,6 +266,11 @@ public class PhysStorageService implements NStorage {
 
     @Override
     public SetAllocationSizeResponse setAllocationSize(SetAllocationSizeRequest request) {
+        var requestInfo = request.getReq();
+        var credentialInfo = request.getCred();
+
+        var fileName = request.getFileName();
+
         return SetAllocationSizeResponse.newBuilder()
                 .setStatus(0)
                 .build();
@@ -213,6 +278,11 @@ public class PhysStorageService implements NStorage {
 
     @Override
     public SetEndOfFileResponse setEndOfFile(SetEndOfFileRequest request) {
+        var requestInfo = request.getReq();
+        var credentialInfo = request.getCred();
+
+        var fileName = request.getFileName();
+
         return SetEndOfFileResponse.newBuilder()
                 .setStatus(0)
                 .build();
@@ -220,6 +290,12 @@ public class PhysStorageService implements NStorage {
 
     @Override
     public SetFileAttributesResponse setFileAttributes(SetFileAttributesRequest request) {
+        var requestInfo = request.getReq();
+        var credentialInfo = request.getCred();
+
+        var fileName = request.getFileName();
+        var fileAttributes = request.getFileAttributes();
+
         return SetFileAttributesResponse.newBuilder()
                 .setStatus(0)
                 .build();
@@ -227,6 +303,13 @@ public class PhysStorageService implements NStorage {
 
     @Override
     public LockFileResponse lockFile(LockFileRequest request) {
+        var requestInfo = request.getReq();
+        var credentialInfo = request.getCred();
+
+        var fileName = request.getFileName();
+        var offset = request.getOffset();
+        var length = request.getLength();
+
         return LockFileResponse.newBuilder()
                 .setStatus(0)
                 .build();
@@ -234,6 +317,13 @@ public class PhysStorageService implements NStorage {
 
     @Override
     public UnlockFileResponse unlockFile(UnlockFileRequest request) {
+        var requestInfo = request.getReq();
+        var credentialInfo = request.getCred();
+
+        var fileName = request.getFileName();
+        var offset = request.getOffset();
+        var length = request.getLength();
+
         return UnlockFileResponse.newBuilder()
                 .setStatus(0)
                 .build();
