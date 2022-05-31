@@ -60,4 +60,10 @@ public interface ReadFileRequestOrBuilder extends
    * @return The offset.
    */
   long getOffset();
+
+  /**
+   * <code>uint32 file_mode = 6;</code>
+   * @return The fileMode.
+   */
+  int getFileMode();
 }

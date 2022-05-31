@@ -97,6 +97,11 @@ private static final long serialVersionUID = 0L;
             buffer_ = input.readBytes();
             break;
           }
+          case 56: {
+
+            fileMode_ = input.readUInt32();
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -252,6 +257,17 @@ private static final long serialVersionUID = 0L;
     return buffer_;
   }
 
+  public static final int FILE_MODE_FIELD_NUMBER = 7;
+  private int fileMode_;
+  /**
+   * <code>uint32 file_mode = 7;</code>
+   * @return The fileMode.
+   */
+  @java.lang.Override
+  public int getFileMode() {
+    return fileMode_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -284,6 +300,9 @@ private static final long serialVersionUID = 0L;
     if (!buffer_.isEmpty()) {
       output.writeBytes(6, buffer_);
     }
+    if (fileMode_ != 0) {
+      output.writeUInt32(7, fileMode_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -315,6 +334,10 @@ private static final long serialVersionUID = 0L;
     if (!buffer_.isEmpty()) {
       size += com.google.protobuf.CodedOutputStream
         .computeBytesSize(6, buffer_);
+    }
+    if (fileMode_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeUInt32Size(7, fileMode_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -349,6 +372,8 @@ private static final long serialVersionUID = 0L;
         != other.getOffset()) return false;
     if (!getBuffer()
         .equals(other.getBuffer())) return false;
+    if (getFileMode()
+        != other.getFileMode()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -378,6 +403,8 @@ private static final long serialVersionUID = 0L;
         getOffset());
     hash = (37 * hash) + BUFFER_FIELD_NUMBER;
     hash = (53 * hash) + getBuffer().hashCode();
+    hash = (37 * hash) + FILE_MODE_FIELD_NUMBER;
+    hash = (53 * hash) + getFileMode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -531,6 +558,8 @@ private static final long serialVersionUID = 0L;
 
       buffer_ = com.google.protobuf.ByteString.EMPTY;
 
+      fileMode_ = 0;
+
       return this;
     }
 
@@ -571,6 +600,7 @@ private static final long serialVersionUID = 0L;
       result.length_ = length_;
       result.offset_ = offset_;
       result.buffer_ = buffer_;
+      result.fileMode_ = fileMode_;
       onBuilt();
       return result;
     }
@@ -637,6 +667,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getBuffer() != com.google.protobuf.ByteString.EMPTY) {
         setBuffer(other.getBuffer());
+      }
+      if (other.getFileMode() != 0) {
+        setFileMode(other.getFileMode());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -1073,6 +1106,37 @@ private static final long serialVersionUID = 0L;
     public Builder clearBuffer() {
       
       buffer_ = getDefaultInstance().getBuffer();
+      onChanged();
+      return this;
+    }
+
+    private int fileMode_ ;
+    /**
+     * <code>uint32 file_mode = 7;</code>
+     * @return The fileMode.
+     */
+    @java.lang.Override
+    public int getFileMode() {
+      return fileMode_;
+    }
+    /**
+     * <code>uint32 file_mode = 7;</code>
+     * @param value The fileMode to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFileMode(int value) {
+      
+      fileMode_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>uint32 file_mode = 7;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearFileMode() {
+      
+      fileMode_ = 0;
       onChanged();
       return this;
     }

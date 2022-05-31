@@ -48,4 +48,10 @@ public interface CloseFileRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getFileNameBytes();
+
+  /**
+   * <code>uint32 share_access = 4;</code>
+   * @return The shareAccess.
+   */
+  int getShareAccess();
 }

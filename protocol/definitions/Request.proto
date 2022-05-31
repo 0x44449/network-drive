@@ -45,6 +45,7 @@ message CloseFileRequest {
   RequestInfo req = 1;
   CredentialInfo cred = 2;
   string file_name = 3;
+  uint32 share_access = 4;
 }
 
 message ReadFileRequest {
@@ -53,6 +54,7 @@ message ReadFileRequest {
   string file_name = 3;
   uint64 length = 4;
   int64 offset = 5;
+  uint32 file_mode = 6;
 }
 
 message WriteFileRequest {
@@ -62,6 +64,7 @@ message WriteFileRequest {
   uint64 length = 4;
   int64 offset = 5;
   bytes buffer = 6;
+  uint32 file_mode = 7;
 }
 
 message FlushFileBufferRequest {

@@ -126,62 +126,63 @@ public final class Request {
       "ibutes\030\005 \001(\r\022\024\n\014share_access\030\006 \001(\r\022\032\n\022cr" +
       "eate_disposition\030\007 \001(\r\022\026\n\016create_options" +
       "\030\010 \001(\r\022\021\n\tfile_mode\030\t \001(\r\022 \n\030file_attrib" +
-      "utes_and_flag\030\n \001(\r\"\215\001\n\020CloseFileRequest" +
+      "utes_and_flag\030\n \001(\r\"\243\001\n\020CloseFileRequest" +
       "\0220\n\003req\030\001 \001(\0132#.drive_protocol.request.R" +
       "equestInfo\0224\n\004cred\030\002 \001(\0132&.drive_protoco" +
       "l.request.CredentialInfo\022\021\n\tfile_name\030\003 " +
-      "\001(\t\"\254\001\n\017ReadFileRequest\0220\n\003req\030\001 \001(\0132#.d" +
-      "rive_protocol.request.RequestInfo\0224\n\004cre" +
-      "d\030\002 \001(\0132&.drive_protocol.request.Credent" +
-      "ialInfo\022\021\n\tfile_name\030\003 \001(\t\022\016\n\006length\030\004 \001" +
-      "(\004\022\016\n\006offset\030\005 \001(\003\"\275\001\n\020WriteFileRequest\022" +
-      "0\n\003req\030\001 \001(\0132#.drive_protocol.request.Re" +
-      "questInfo\0224\n\004cred\030\002 \001(\0132&.drive_protocol" +
-      ".request.CredentialInfo\022\021\n\tfile_name\030\003 \001" +
-      "(\t\022\016\n\006length\030\004 \001(\004\022\016\n\006offset\030\005 \001(\003\022\016\n\006bu" +
-      "ffer\030\006 \001(\014\"\223\001\n\026FlushFileBufferRequest\0220\n" +
-      "\003req\030\001 \001(\0132#.drive_protocol.request.Requ" +
-      "estInfo\0224\n\004cred\030\002 \001(\0132&.drive_protocol.r" +
-      "equest.CredentialInfo\022\021\n\tfile_name\030\003 \001(\t" +
-      "\"\226\001\n\031GetFileInformationRequest\0220\n\003req\030\001 " +
-      "\001(\0132#.drive_protocol.request.RequestInfo" +
-      "\0224\n\004cred\030\002 \001(\0132&.drive_protocol.request." +
-      "CredentialInfo\022\021\n\tfile_name\030\003 \001(\t\"\216\001\n\021De" +
-      "leteFileRequest\0220\n\003req\030\001 \001(\0132#.drive_pro" +
-      "tocol.request.RequestInfo\0224\n\004cred\030\002 \001(\0132" +
-      "&.drive_protocol.request.CredentialInfo\022" +
-      "\021\n\tfile_name\030\003 \001(\t\"\223\001\n\026DeleteDirectoryRe" +
+      "\001(\t\022\024\n\014share_access\030\004 \001(\r\"\277\001\n\017ReadFileRe" +
       "quest\0220\n\003req\030\001 \001(\0132#.drive_protocol.requ" +
       "est.RequestInfo\0224\n\004cred\030\002 \001(\0132&.drive_pr" +
       "otocol.request.CredentialInfo\022\021\n\tfile_na" +
-      "me\030\003 \001(\t\"\300\001\n\017MoveFileRequest\0220\n\003req\030\001 \001(" +
-      "\0132#.drive_protocol.request.RequestInfo\0224" +
-      "\n\004cred\030\002 \001(\0132&.drive_protocol.request.Cr" +
-      "edentialInfo\022\021\n\tfile_name\030\003 \001(\t\022\025\n\rnew_f" +
-      "ile_name\030\004 \001(\t\022\033\n\023replace_if_existing\030\005 " +
-      "\001(\010\"\254\001\n\017LockFileRequest\0220\n\003req\030\001 \001(\0132#.d" +
-      "rive_protocol.request.RequestInfo\0224\n\004cre" +
-      "d\030\002 \001(\0132&.drive_protocol.request.Credent" +
-      "ialInfo\022\021\n\tfile_name\030\003 \001(\t\022\016\n\006offset\030\004 \001" +
-      "(\003\022\016\n\006length\030\005 \001(\003\"\240\001\n\023SetEndOfFileReque" +
-      "st\0220\n\003req\030\001 \001(\0132#.drive_protocol.request" +
-      ".RequestInfo\0224\n\004cred\030\002 \001(\0132&.drive_proto" +
-      "col.request.CredentialInfo\022\021\n\tfile_name\030" +
-      "\003 \001(\t\022\016\n\006offset\030\004 \001(\003\"\243\001\n\030SetAllocationS" +
-      "izeRequest\0220\n\003req\030\001 \001(\0132#.drive_protocol" +
+      "me\030\003 \001(\t\022\016\n\006length\030\004 \001(\004\022\016\n\006offset\030\005 \001(\003" +
+      "\022\021\n\tfile_mode\030\006 \001(\r\"\320\001\n\020WriteFileRequest" +
+      "\0220\n\003req\030\001 \001(\0132#.drive_protocol.request.R" +
+      "equestInfo\0224\n\004cred\030\002 \001(\0132&.drive_protoco" +
+      "l.request.CredentialInfo\022\021\n\tfile_name\030\003 " +
+      "\001(\t\022\016\n\006length\030\004 \001(\004\022\016\n\006offset\030\005 \001(\003\022\016\n\006b" +
+      "uffer\030\006 \001(\014\022\021\n\tfile_mode\030\007 \001(\r\"\223\001\n\026Flush" +
+      "FileBufferRequest\0220\n\003req\030\001 \001(\0132#.drive_p" +
+      "rotocol.request.RequestInfo\0224\n\004cred\030\002 \001(" +
+      "\0132&.drive_protocol.request.CredentialInf" +
+      "o\022\021\n\tfile_name\030\003 \001(\t\"\226\001\n\031GetFileInformat" +
+      "ionRequest\0220\n\003req\030\001 \001(\0132#.drive_protocol" +
       ".request.RequestInfo\0224\n\004cred\030\002 \001(\0132&.dri" +
       "ve_protocol.request.CredentialInfo\022\021\n\tfi" +
-      "le_name\030\003 \001(\t\022\014\n\004size\030\004 \001(\003\"\256\001\n\030SetFileA" +
-      "ttributesRequest\0220\n\003req\030\001 \001(\0132#.drive_pr" +
-      "otocol.request.RequestInfo\0224\n\004cred\030\002 \001(\013" +
-      "2&.drive_protocol.request.CredentialInfo" +
-      "\022\021\n\tfile_name\030\003 \001(\t\022\027\n\017file_attributes\030\004" +
-      " \001(\004\"\256\001\n\021UnlockFileRequest\0220\n\003req\030\001 \001(\0132" +
-      "#.drive_protocol.request.RequestInfo\0224\n\004" +
-      "cred\030\002 \001(\0132&.drive_protocol.request.Cred" +
-      "entialInfo\022\021\n\tfile_name\030\003 \001(\t\022\016\n\006offset\030" +
-      "\004 \001(\003\022\016\n\006length\030\005 \001(\003B\032\n\026drive_protocol." +
-      "requestP\001b\006proto3"
+      "le_name\030\003 \001(\t\"\216\001\n\021DeleteFileRequest\0220\n\003r" +
+      "eq\030\001 \001(\0132#.drive_protocol.request.Reques" +
+      "tInfo\0224\n\004cred\030\002 \001(\0132&.drive_protocol.req" +
+      "uest.CredentialInfo\022\021\n\tfile_name\030\003 \001(\t\"\223" +
+      "\001\n\026DeleteDirectoryRequest\0220\n\003req\030\001 \001(\0132#" +
+      ".drive_protocol.request.RequestInfo\0224\n\004c" +
+      "red\030\002 \001(\0132&.drive_protocol.request.Crede" +
+      "ntialInfo\022\021\n\tfile_name\030\003 \001(\t\"\300\001\n\017MoveFil" +
+      "eRequest\0220\n\003req\030\001 \001(\0132#.drive_protocol.r" +
+      "equest.RequestInfo\0224\n\004cred\030\002 \001(\0132&.drive" +
+      "_protocol.request.CredentialInfo\022\021\n\tfile" +
+      "_name\030\003 \001(\t\022\025\n\rnew_file_name\030\004 \001(\t\022\033\n\023re" +
+      "place_if_existing\030\005 \001(\010\"\254\001\n\017LockFileRequ" +
+      "est\0220\n\003req\030\001 \001(\0132#.drive_protocol.reques" +
+      "t.RequestInfo\0224\n\004cred\030\002 \001(\0132&.drive_prot" +
+      "ocol.request.CredentialInfo\022\021\n\tfile_name" +
+      "\030\003 \001(\t\022\016\n\006offset\030\004 \001(\003\022\016\n\006length\030\005 \001(\003\"\240" +
+      "\001\n\023SetEndOfFileRequest\0220\n\003req\030\001 \001(\0132#.dr" +
+      "ive_protocol.request.RequestInfo\0224\n\004cred" +
+      "\030\002 \001(\0132&.drive_protocol.request.Credenti" +
+      "alInfo\022\021\n\tfile_name\030\003 \001(\t\022\016\n\006offset\030\004 \001(" +
+      "\003\"\243\001\n\030SetAllocationSizeRequest\0220\n\003req\030\001 " +
+      "\001(\0132#.drive_protocol.request.RequestInfo" +
+      "\0224\n\004cred\030\002 \001(\0132&.drive_protocol.request." +
+      "CredentialInfo\022\021\n\tfile_name\030\003 \001(\t\022\014\n\004siz" +
+      "e\030\004 \001(\003\"\256\001\n\030SetFileAttributesRequest\0220\n\003" +
+      "req\030\001 \001(\0132#.drive_protocol.request.Reque" +
+      "stInfo\0224\n\004cred\030\002 \001(\0132&.drive_protocol.re" +
+      "quest.CredentialInfo\022\021\n\tfile_name\030\003 \001(\t\022" +
+      "\027\n\017file_attributes\030\004 \001(\004\"\256\001\n\021UnlockFileR" +
+      "equest\0220\n\003req\030\001 \001(\0132#.drive_protocol.req" +
+      "uest.RequestInfo\0224\n\004cred\030\002 \001(\0132&.drive_p" +
+      "rotocol.request.CredentialInfo\022\021\n\tfile_n" +
+      "ame\030\003 \001(\t\022\016\n\006offset\030\004 \001(\003\022\016\n\006length\030\005 \001(" +
+      "\003B\032\n\026drive_protocol.requestP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -217,19 +218,19 @@ public final class Request {
     internal_static_drive_protocol_request_CloseFileRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_request_CloseFileRequest_descriptor,
-        new java.lang.String[] { "Req", "Cred", "FileName", });
+        new java.lang.String[] { "Req", "Cred", "FileName", "ShareAccess", });
     internal_static_drive_protocol_request_ReadFileRequest_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_drive_protocol_request_ReadFileRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_request_ReadFileRequest_descriptor,
-        new java.lang.String[] { "Req", "Cred", "FileName", "Length", "Offset", });
+        new java.lang.String[] { "Req", "Cred", "FileName", "Length", "Offset", "FileMode", });
     internal_static_drive_protocol_request_WriteFileRequest_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_drive_protocol_request_WriteFileRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_request_WriteFileRequest_descriptor,
-        new java.lang.String[] { "Req", "Cred", "FileName", "Length", "Offset", "Buffer", });
+        new java.lang.String[] { "Req", "Cred", "FileName", "Length", "Offset", "Buffer", "FileMode", });
     internal_static_drive_protocol_request_FlushFileBufferRequest_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_drive_protocol_request_FlushFileBufferRequest_fieldAccessorTable = new

@@ -66,4 +66,10 @@ public interface WriteFileRequestOrBuilder extends
    * @return The buffer.
    */
   com.google.protobuf.ByteString getBuffer();
+
+  /**
+   * <code>uint32 file_mode = 7;</code>
+   * @return The fileMode.
+   */
+  int getFileMode();
 }

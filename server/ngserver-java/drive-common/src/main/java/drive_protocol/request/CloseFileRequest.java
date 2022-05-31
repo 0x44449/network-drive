@@ -81,6 +81,11 @@ private static final long serialVersionUID = 0L;
             fileName_ = s;
             break;
           }
+          case 32: {
+
+            shareAccess_ = input.readUInt32();
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -203,6 +208,17 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int SHARE_ACCESS_FIELD_NUMBER = 4;
+  private int shareAccess_;
+  /**
+   * <code>uint32 share_access = 4;</code>
+   * @return The shareAccess.
+   */
+  @java.lang.Override
+  public int getShareAccess() {
+    return shareAccess_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -226,6 +242,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(fileName_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, fileName_);
     }
+    if (shareAccess_ != 0) {
+      output.writeUInt32(4, shareAccess_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -245,6 +264,10 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(fileName_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, fileName_);
+    }
+    if (shareAccess_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeUInt32Size(4, shareAccess_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -273,6 +296,8 @@ private static final long serialVersionUID = 0L;
     }
     if (!getFileName()
         .equals(other.getFileName())) return false;
+    if (getShareAccess()
+        != other.getShareAccess()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -294,6 +319,8 @@ private static final long serialVersionUID = 0L;
     }
     hash = (37 * hash) + FILE_NAME_FIELD_NUMBER;
     hash = (53 * hash) + getFileName().hashCode();
+    hash = (37 * hash) + SHARE_ACCESS_FIELD_NUMBER;
+    hash = (53 * hash) + getShareAccess();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -441,6 +468,8 @@ private static final long serialVersionUID = 0L;
       }
       fileName_ = "";
 
+      shareAccess_ = 0;
+
       return this;
     }
 
@@ -478,6 +507,7 @@ private static final long serialVersionUID = 0L;
         result.cred_ = credBuilder_.build();
       }
       result.fileName_ = fileName_;
+      result.shareAccess_ = shareAccess_;
       onBuilt();
       return result;
     }
@@ -535,6 +565,9 @@ private static final long serialVersionUID = 0L;
       if (!other.getFileName().isEmpty()) {
         fileName_ = other.fileName_;
         onChanged();
+      }
+      if (other.getShareAccess() != 0) {
+        setShareAccess(other.getShareAccess());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -875,6 +908,37 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       fileName_ = value;
+      onChanged();
+      return this;
+    }
+
+    private int shareAccess_ ;
+    /**
+     * <code>uint32 share_access = 4;</code>
+     * @return The shareAccess.
+     */
+    @java.lang.Override
+    public int getShareAccess() {
+      return shareAccess_;
+    }
+    /**
+     * <code>uint32 share_access = 4;</code>
+     * @param value The shareAccess to set.
+     * @return This builder for chaining.
+     */
+    public Builder setShareAccess(int value) {
+      
+      shareAccess_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>uint32 share_access = 4;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearShareAccess() {
+      
+      shareAccess_ = 0;
       onChanged();
       return this;
     }
