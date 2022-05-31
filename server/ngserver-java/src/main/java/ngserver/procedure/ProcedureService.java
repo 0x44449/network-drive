@@ -82,6 +82,9 @@ public class ProcedureService extends DriveProcedureGrpc.DriveProcedureImplBase 
                         connectionManager.remove(connectionId);
                     }
                 }
+                else {
+                    // TODO: unhandled exception, log
+                }
             }
 
             @Override
