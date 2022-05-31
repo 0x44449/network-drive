@@ -13,8 +13,14 @@ public interface OplocksRepository extends JpaRepository<OplockEntity, String> {
     @Query(value = "CALL Oplocks_Select_OplockByFullPath(:in_full_path);", nativeQuery = true)
     List<OplockEntity> findOplockByFullPath(@Param("in_full_path") String fullPath);
 
-    @Query(value = "CALL Oplocks_Acquire_LockBitByFullPath(:in_full_path, :in_credential, :in_lock_bit);", nativeQuery = true)
-    int acquireOplockLockBitByFullPath(
+    @Query(value = "CALL Oplocks_Acquire_LockBit(:in_full_path, :in_credential, :in_lock_bit);", nativeQuery = true)
+    int acquireOplockLockBit(
+            @Param("in_full_path") String fullPath,
+            @Param("in_credential") String credential,
+            @Param("in_lock_bit") int lockBit);
+
+    @Query(value = "CALL Oplocks_Release_LockBit(:in_full_path, :in_credential, :in_lock_bit);", nativeQuery = true)
+    int releaseOplockLockBit(
             @Param("in_full_path") String fullPath,
             @Param("in_credential") String credential,
             @Param("in_lock_bit") int lockBit);
