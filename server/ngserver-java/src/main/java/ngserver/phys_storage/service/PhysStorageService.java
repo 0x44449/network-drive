@@ -1,5 +1,6 @@
 package ngserver.phys_storage.service;
 
+import com.google.protobuf.ByteString;
 import drive_common.dokan_port.constants.microsoft.*;
 import drive_common.drive_storage.NStorage;
 import drive_protocol.request.*;
@@ -8,6 +9,11 @@ import ngserver.phys_storage.repository.ObjectsRepository;
 import ngserver.phys_storage.repository.OplocksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.ByteBuffer;
 
 @Service
 public class PhysStorageService implements NStorage {
@@ -183,9 +189,43 @@ public class PhysStorageService implements NStorage {
         var offset = request.getOffset();
         var fileMode = FileMode.fromInt(request.getFileMode());
 
-        return ReadFileResponse.newBuilder()
-                .setStatus(0)
-                .build();
+        // TODO: read from object cache
+        var objectEntities = objectsRepository.findObjectByFullPath(fileName);
+        var objectInfo = objectEntities.size() > 0 ? objectEntities.get(0) : null;
+        if (objectInfo == null) { // unexpected
+            return ReadFileResponse.newBuilder()
+                    .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
+                    .build();
+        }
+        else if (objectInfo.isDirectory()) { // unexpected
+            return ReadFileResponse.newBuilder()
+                    .setStatus(NtStatus.FILE_IS_A_DIRECTORY.intValue())
+                    .build();
+        }
+
+        var underlyingPath = objectInfo.getFullPath();
+        // TODO: read from read cache block
+        try {
+            var fileInputStream = new FileInputStream(underlyingPath);
+            // TODO: get byte block from pool
+            var readBuffer = ByteBuffer.allocateDirect((int)length);
+            fileInputStream.getChannel().read(readBuffer, offset);
+
+            return ReadFileResponse.newBuilder()
+                    .setBuffer(ByteString.copyFrom(readBuffer))
+                    .setStatus(0)
+                    .build();
+        }
+        catch (FileNotFoundException fnfe) {
+            return ReadFileResponse.newBuilder()
+                    .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
+                    .build();
+        }
+        catch (IOException ioe) {
+            return ReadFileResponse.newBuilder()
+                    .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue()) // TODO: find correct code
+                    .build();
+        }
     }
 
     @Override
