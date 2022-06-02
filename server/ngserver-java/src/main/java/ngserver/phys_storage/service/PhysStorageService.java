@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
@@ -236,11 +237,42 @@ public class PhysStorageService implements NStorage {
         var fileName = request.getFileName();
         var length = request.getLength();
         var offset = request.getOffset();
+        var buffer = request.getBuffer();
         var fileMode = FileMode.fromInt(request.getFileMode());
 
-        return WriteFileResponse.newBuilder()
-                .setStatus(0)
-                .build();
+        // TODO: read from object cache
+        var objectEntities = objectsRepository.findObjectByFullPath(fileName);
+        var objectInfo = objectEntities.size() > 0 ? objectEntities.get(0) : null;
+        if (objectInfo == null) { // unexpected
+            return WriteFileResponse.newBuilder()
+                    .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
+                    .build();
+        }
+        else if (objectInfo.isDirectory()) { // unexpected
+            return WriteFileResponse.newBuilder()
+                    .setStatus(NtStatus.FILE_IS_A_DIRECTORY.intValue())
+                    .build();
+        }
+
+        var underlyingPath = objectInfo.getFullPath();
+        try {
+            var fileOutputStream = new FileOutputStream(underlyingPath);
+            fileOutputStream.getChannel().write(buffer.asReadOnlyByteBuffer(), offset);
+
+            return WriteFileResponse.newBuilder()
+                    .setStatus(0)
+                    .build();
+        }
+        catch (FileNotFoundException fnfe) {
+            return WriteFileResponse.newBuilder()
+                    .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
+                    .build();
+        }
+        catch (IOException ioe) {
+            return WriteFileResponse.newBuilder()
+                    .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue()) // TODO: find correct code
+                    .build();
+        }
     }
 
     @Override
