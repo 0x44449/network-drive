@@ -258,8 +258,11 @@ public class PhysStorageService implements NStorage {
 
         var underlyingPath = objectInfo.getFullPath();
         try {
-            var fileOutputStream = new FileOutputStream(underlyingPath);
-            fileOutputStream.getChannel().write(buffer.asReadOnlyByteBuffer(), offset);
+            try (var fileOutputStream = new FileOutputStream(underlyingPath)) {
+                var fileChannel = fileOutputStream.getChannel();
+                fileChannel.position(offset);
+                var writtenBytes = fileChannel.write(buffer.asReadOnlyByteBuffer());
+            }
 
             return WriteFileResponse.newBuilder()
                     .setStatus(0)
