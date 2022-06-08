@@ -37,6 +37,10 @@ message FlushFileBufferResponse {
 message GetFileInformationResponse {
   int32 status = 1;
   uint64 file_attributes = 2;
+  int64 file_creation_time = 3;
+  int64 file_last_access_time = 4;
+  int64 file_last_write_time = 5;
+  uint64 file_size = 6;
 }
 
 message DeleteFileResponse {
