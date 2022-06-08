@@ -216,8 +216,8 @@ public class PhysStorageService implements NStorage {
 
            return ReadFileResponse.newBuilder()
                    .setBuffer(ByteString.copyFrom(readBuffer))
-                    .setStatus(0)
-                    .build();
+                   .setStatus(0)
+                   .build();
         }
         catch (FileNotFoundException fnfe) {
             return ReadFileResponse.newBuilder()
