@@ -52,14 +52,15 @@ public class ReadFileTest {
 
     @AfterEach
     public void afterReadFile() {
-        objectsRepository.removeObjectByFullPath(targetPath.toString());
+        objectsRepository.removeObjectByFullPath("\\" + targetPath.getFileName().toString());
         // Files.deleteIfExists(targetPath);
     }
 
     @Test
     public void testReadFile() throws IOException {
-        long offset = 0;
-        long length = 10;
+        long offset = 100;
+        long length = 1024 * 2;
+
         var fileName = "\\" + targetPath.getFileName().toString();
         var request = ReadFileRequest.newBuilder()
                 .setFileName(fileName)
@@ -72,7 +73,7 @@ public class ReadFileTest {
         var buffer = response.getBuffer();
 
         assertThat(status).isEqualTo(NtStatus.SUCCESS.intValue());
-        assertThat(buffer.size()).isEqualTo(10);
+        assertThat(buffer.size()).isEqualTo((int)length);
 
         var objectEntities = objectsRepository.findObjectByFullPath(fileName);
         var objectInfo = objectEntities.size() > 0 ? objectEntities.get(0) : null;
@@ -80,13 +81,15 @@ public class ReadFileTest {
         assertThat(objectInfo).isNotNull();
 
         var underlyingPath = objectInfo.getPhysicalPath();
+        var readBuffer = new byte[(int) length];
+
         var fileInputStream = new FileInputStream(underlyingPath);
-        var readBuffer = ByteBuffer.allocateDirect((int) length);
-        fileInputStream.getChannel().read(readBuffer, offset);
+        fileInputStream.skip(offset);
+        fileInputStream.read(readBuffer);
+        fileInputStream.close();
 
         var bufferByteArray = buffer.toByteArray();
-        var readBufferByteArray = readBuffer.array();
 
-        assertThat(bufferByteArray).isEqualTo(readBufferByteArray);
+        assertThat(bufferByteArray).isEqualTo(readBuffer);
     }
 }
