@@ -18,4 +18,28 @@ public interface GetFileInformationResponseOrBuilder extends
    * @return The fileAttributes.
    */
   long getFileAttributes();
+
+  /**
+   * <code>int64 file_creation_time = 3;</code>
+   * @return The fileCreationTime.
+   */
+  long getFileCreationTime();
+
+  /**
+   * <code>int64 file_last_access_time = 4;</code>
+   * @return The fileLastAccessTime.
+   */
+  long getFileLastAccessTime();
+
+  /**
+   * <code>int64 file_last_write_time = 5;</code>
+   * @return The fileLastWriteTime.
+   */
+  long getFileLastWriteTime();
+
+  /**
+   * <code>uint64 file_size = 6;</code>
+   * @return The fileSize.
+   */
+  long getFileSize();
 }

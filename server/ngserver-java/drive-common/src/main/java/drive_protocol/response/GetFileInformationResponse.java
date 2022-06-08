@@ -58,6 +58,26 @@ private static final long serialVersionUID = 0L;
             fileAttributes_ = input.readUInt64();
             break;
           }
+          case 24: {
+
+            fileCreationTime_ = input.readInt64();
+            break;
+          }
+          case 32: {
+
+            fileLastAccessTime_ = input.readInt64();
+            break;
+          }
+          case 40: {
+
+            fileLastWriteTime_ = input.readInt64();
+            break;
+          }
+          case 48: {
+
+            fileSize_ = input.readUInt64();
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -112,6 +132,50 @@ private static final long serialVersionUID = 0L;
     return fileAttributes_;
   }
 
+  public static final int FILE_CREATION_TIME_FIELD_NUMBER = 3;
+  private long fileCreationTime_;
+  /**
+   * <code>int64 file_creation_time = 3;</code>
+   * @return The fileCreationTime.
+   */
+  @java.lang.Override
+  public long getFileCreationTime() {
+    return fileCreationTime_;
+  }
+
+  public static final int FILE_LAST_ACCESS_TIME_FIELD_NUMBER = 4;
+  private long fileLastAccessTime_;
+  /**
+   * <code>int64 file_last_access_time = 4;</code>
+   * @return The fileLastAccessTime.
+   */
+  @java.lang.Override
+  public long getFileLastAccessTime() {
+    return fileLastAccessTime_;
+  }
+
+  public static final int FILE_LAST_WRITE_TIME_FIELD_NUMBER = 5;
+  private long fileLastWriteTime_;
+  /**
+   * <code>int64 file_last_write_time = 5;</code>
+   * @return The fileLastWriteTime.
+   */
+  @java.lang.Override
+  public long getFileLastWriteTime() {
+    return fileLastWriteTime_;
+  }
+
+  public static final int FILE_SIZE_FIELD_NUMBER = 6;
+  private long fileSize_;
+  /**
+   * <code>uint64 file_size = 6;</code>
+   * @return The fileSize.
+   */
+  @java.lang.Override
+  public long getFileSize() {
+    return fileSize_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -132,6 +196,18 @@ private static final long serialVersionUID = 0L;
     if (fileAttributes_ != 0L) {
       output.writeUInt64(2, fileAttributes_);
     }
+    if (fileCreationTime_ != 0L) {
+      output.writeInt64(3, fileCreationTime_);
+    }
+    if (fileLastAccessTime_ != 0L) {
+      output.writeInt64(4, fileLastAccessTime_);
+    }
+    if (fileLastWriteTime_ != 0L) {
+      output.writeInt64(5, fileLastWriteTime_);
+    }
+    if (fileSize_ != 0L) {
+      output.writeUInt64(6, fileSize_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -148,6 +224,22 @@ private static final long serialVersionUID = 0L;
     if (fileAttributes_ != 0L) {
       size += com.google.protobuf.CodedOutputStream
         .computeUInt64Size(2, fileAttributes_);
+    }
+    if (fileCreationTime_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt64Size(3, fileCreationTime_);
+    }
+    if (fileLastAccessTime_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt64Size(4, fileLastAccessTime_);
+    }
+    if (fileLastWriteTime_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt64Size(5, fileLastWriteTime_);
+    }
+    if (fileSize_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeUInt64Size(6, fileSize_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -168,6 +260,14 @@ private static final long serialVersionUID = 0L;
         != other.getStatus()) return false;
     if (getFileAttributes()
         != other.getFileAttributes()) return false;
+    if (getFileCreationTime()
+        != other.getFileCreationTime()) return false;
+    if (getFileLastAccessTime()
+        != other.getFileLastAccessTime()) return false;
+    if (getFileLastWriteTime()
+        != other.getFileLastWriteTime()) return false;
+    if (getFileSize()
+        != other.getFileSize()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -184,6 +284,18 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + FILE_ATTRIBUTES_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         getFileAttributes());
+    hash = (37 * hash) + FILE_CREATION_TIME_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getFileCreationTime());
+    hash = (37 * hash) + FILE_LAST_ACCESS_TIME_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getFileLastAccessTime());
+    hash = (37 * hash) + FILE_LAST_WRITE_TIME_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getFileLastWriteTime());
+    hash = (37 * hash) + FILE_SIZE_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getFileSize());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -321,6 +433,14 @@ private static final long serialVersionUID = 0L;
 
       fileAttributes_ = 0L;
 
+      fileCreationTime_ = 0L;
+
+      fileLastAccessTime_ = 0L;
+
+      fileLastWriteTime_ = 0L;
+
+      fileSize_ = 0L;
+
       return this;
     }
 
@@ -349,6 +469,10 @@ private static final long serialVersionUID = 0L;
       drive_protocol.response.GetFileInformationResponse result = new drive_protocol.response.GetFileInformationResponse(this);
       result.status_ = status_;
       result.fileAttributes_ = fileAttributes_;
+      result.fileCreationTime_ = fileCreationTime_;
+      result.fileLastAccessTime_ = fileLastAccessTime_;
+      result.fileLastWriteTime_ = fileLastWriteTime_;
+      result.fileSize_ = fileSize_;
       onBuilt();
       return result;
     }
@@ -402,6 +526,18 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getFileAttributes() != 0L) {
         setFileAttributes(other.getFileAttributes());
+      }
+      if (other.getFileCreationTime() != 0L) {
+        setFileCreationTime(other.getFileCreationTime());
+      }
+      if (other.getFileLastAccessTime() != 0L) {
+        setFileLastAccessTime(other.getFileLastAccessTime());
+      }
+      if (other.getFileLastWriteTime() != 0L) {
+        setFileLastWriteTime(other.getFileLastWriteTime());
+      }
+      if (other.getFileSize() != 0L) {
+        setFileSize(other.getFileSize());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -490,6 +626,130 @@ private static final long serialVersionUID = 0L;
     public Builder clearFileAttributes() {
       
       fileAttributes_ = 0L;
+      onChanged();
+      return this;
+    }
+
+    private long fileCreationTime_ ;
+    /**
+     * <code>int64 file_creation_time = 3;</code>
+     * @return The fileCreationTime.
+     */
+    @java.lang.Override
+    public long getFileCreationTime() {
+      return fileCreationTime_;
+    }
+    /**
+     * <code>int64 file_creation_time = 3;</code>
+     * @param value The fileCreationTime to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFileCreationTime(long value) {
+      
+      fileCreationTime_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int64 file_creation_time = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearFileCreationTime() {
+      
+      fileCreationTime_ = 0L;
+      onChanged();
+      return this;
+    }
+
+    private long fileLastAccessTime_ ;
+    /**
+     * <code>int64 file_last_access_time = 4;</code>
+     * @return The fileLastAccessTime.
+     */
+    @java.lang.Override
+    public long getFileLastAccessTime() {
+      return fileLastAccessTime_;
+    }
+    /**
+     * <code>int64 file_last_access_time = 4;</code>
+     * @param value The fileLastAccessTime to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFileLastAccessTime(long value) {
+      
+      fileLastAccessTime_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int64 file_last_access_time = 4;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearFileLastAccessTime() {
+      
+      fileLastAccessTime_ = 0L;
+      onChanged();
+      return this;
+    }
+
+    private long fileLastWriteTime_ ;
+    /**
+     * <code>int64 file_last_write_time = 5;</code>
+     * @return The fileLastWriteTime.
+     */
+    @java.lang.Override
+    public long getFileLastWriteTime() {
+      return fileLastWriteTime_;
+    }
+    /**
+     * <code>int64 file_last_write_time = 5;</code>
+     * @param value The fileLastWriteTime to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFileLastWriteTime(long value) {
+      
+      fileLastWriteTime_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int64 file_last_write_time = 5;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearFileLastWriteTime() {
+      
+      fileLastWriteTime_ = 0L;
+      onChanged();
+      return this;
+    }
+
+    private long fileSize_ ;
+    /**
+     * <code>uint64 file_size = 6;</code>
+     * @return The fileSize.
+     */
+    @java.lang.Override
+    public long getFileSize() {
+      return fileSize_;
+    }
+    /**
+     * <code>uint64 file_size = 6;</code>
+     * @param value The fileSize to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFileSize(long value) {
+      
+      fileSize_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>uint64 file_size = 6;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearFileSize() {
+      
+      fileSize_ = 0L;
       onChanged();
       return this;
     }

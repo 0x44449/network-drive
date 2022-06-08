@@ -107,18 +107,21 @@ public final class Response {
       "esponse\022\016\n\006status\030\001 \001(\005\"2\n\020ReadFileRespo" +
       "nse\022\016\n\006status\030\001 \001(\005\022\016\n\006buffer\030\002 \001(\014\"#\n\021W" +
       "riteFileResponse\022\016\n\006status\030\001 \001(\005\")\n\027Flus" +
-      "hFileBufferResponse\022\016\n\006status\030\001 \001(\005\"E\n\032G" +
-      "etFileInformationResponse\022\016\n\006status\030\001 \001(" +
-      "\005\022\027\n\017file_attributes\030\002 \001(\004\"$\n\022DeleteFile" +
-      "Response\022\016\n\006status\030\001 \001(\005\")\n\027DeleteDirect" +
-      "oryResponse\022\016\n\006status\030\001 \001(\005\"\"\n\020MoveFileR" +
-      "esponse\022\016\n\006status\030\001 \001(\005\"\"\n\020LockFileRespo" +
-      "nse\022\016\n\006status\030\001 \001(\005\"&\n\024SetEndOfFileRespo" +
-      "nse\022\016\n\006status\030\001 \001(\005\"+\n\031SetAllocationSize" +
-      "Response\022\016\n\006status\030\001 \001(\005\"+\n\031SetFileAttri" +
-      "butesResponse\022\016\n\006status\030\001 \001(\005\"$\n\022UnlockF" +
-      "ileResponse\022\016\n\006status\030\001 \001(\005B\033\n\027drive_pro" +
-      "tocol.responseP\001b\006proto3"
+      "hFileBufferResponse\022\016\n\006status\030\001 \001(\005\"\261\001\n\032" +
+      "GetFileInformationResponse\022\016\n\006status\030\001 \001" +
+      "(\005\022\027\n\017file_attributes\030\002 \001(\004\022\032\n\022file_crea" +
+      "tion_time\030\003 \001(\003\022\035\n\025file_last_access_time" +
+      "\030\004 \001(\003\022\034\n\024file_last_write_time\030\005 \001(\003\022\021\n\t" +
+      "file_size\030\006 \001(\004\"$\n\022DeleteFileResponse\022\016\n" +
+      "\006status\030\001 \001(\005\")\n\027DeleteDirectoryResponse" +
+      "\022\016\n\006status\030\001 \001(\005\"\"\n\020MoveFileResponse\022\016\n\006" +
+      "status\030\001 \001(\005\"\"\n\020LockFileResponse\022\016\n\006stat" +
+      "us\030\001 \001(\005\"&\n\024SetEndOfFileResponse\022\016\n\006stat" +
+      "us\030\001 \001(\005\"+\n\031SetAllocationSizeResponse\022\016\n" +
+      "\006status\030\001 \001(\005\"+\n\031SetFileAttributesRespon" +
+      "se\022\016\n\006status\030\001 \001(\005\"$\n\022UnlockFileResponse" +
+      "\022\016\n\006status\030\001 \001(\005B\033\n\027drive_protocol.respo" +
+      "nseP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -166,7 +169,7 @@ public final class Response {
     internal_static_drive_protocol_response_GetFileInformationResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_drive_protocol_response_GetFileInformationResponse_descriptor,
-        new java.lang.String[] { "Status", "FileAttributes", });
+        new java.lang.String[] { "Status", "FileAttributes", "FileCreationTime", "FileLastAccessTime", "FileLastWriteTime", "FileSize", });
     internal_static_drive_protocol_response_DeleteFileResponse_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_drive_protocol_response_DeleteFileResponse_fieldAccessorTable = new
