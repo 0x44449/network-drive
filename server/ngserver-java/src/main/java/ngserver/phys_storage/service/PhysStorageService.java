@@ -209,6 +209,7 @@ public class PhysStorageService implements NStorage {
         try {
             var fileInputStream = new FileInputStream(underlyingPath);
             // TODO: get byte block from pool
+            // TODO: write to ByteString directly
             byte[] readBuffer = new byte[(int)length];
             fileInputStream.skip(offset);
             fileInputStream.read(readBuffer);
