@@ -10,11 +10,11 @@ import ngserver.phys_storage.repository.OplocksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 
 @Service
 public class PhysStorageService implements NStorage {
@@ -188,7 +188,7 @@ public class PhysStorageService implements NStorage {
         var fileName = request.getFileName();
         var length = request.getLength();
         var offset = request.getOffset();
-        var fileMode = FileMode.fromInt(request.getFileMode());
+        // var fileMode = FileMode.fromInt(request.getFileMode());
 
         // TODO: read from object cache
         var objectEntities = objectsRepository.findObjectByFullPath(fileName);
@@ -204,7 +204,7 @@ public class PhysStorageService implements NStorage {
                     .build();
         }
 
-        var underlyingPath = objectInfo.getFullPath();
+        var underlyingPath = objectInfo.getPhysicalPath();
         // TODO: read from read cache block
         try {
             var fileInputStream = new FileInputStream(underlyingPath);
@@ -282,9 +282,34 @@ public class PhysStorageService implements NStorage {
 
         var fileName = request.getFileName();
 
-        return GetFileInformationResponse.newBuilder()
-                .setStatus(0)
-                .build();
+        // TODO: read from object cache
+        var objectEntities = objectsRepository.findObjectByFullPath(fileName);
+        var objectInfo = objectEntities.size() > 0 ? objectEntities.get(0) : null;
+        if (objectInfo == null) { // unexpected
+            return GetFileInformationResponse.newBuilder()
+                    .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
+                    .build();
+        }
+
+        var underlyingPath = objectInfo.getFullPath();
+        // TODO: get information from object cache
+        try {
+            var filePath = Paths.get(underlyingPath);
+            var fileAttributes = Files.readAttributes(filePath, BasicFileAttributes.class);
+            var fileSize = fileAttributes.size();
+            var fileCreationTime = fileAttributes.creationTime();
+            var fileLastModifiedTime = fileAttributes.lastModifiedTime();
+            var fileLastAccessTime = fileAttributes.lastAccessTime();
+
+            return GetFileInformationResponse.newBuilder()
+                    .setStatus(NtStatus.SUCCESS.intValue())
+                    .build();
+        }
+        catch (IOException ioe) {
+            return GetFileInformationResponse.newBuilder()
+                    .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue()) // TODO: find correct code
+                    .build();
+        }
     }
 
     @Override
