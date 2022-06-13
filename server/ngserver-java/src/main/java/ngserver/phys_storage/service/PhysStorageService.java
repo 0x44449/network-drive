@@ -15,6 +15,7 @@ import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.DosFileAttributes;
 
 @Service
 public class PhysStorageService implements NStorage {
@@ -302,11 +303,20 @@ public class PhysStorageService implements NStorage {
         // TODO: get information from object cache
         try {
             var filePath = Paths.get(underlyingPath);
-            var fileAttributes = Files.readAttributes(filePath, BasicFileAttributes.class);
-            var fileSize = fileAttributes.size();
-            var fileCreationTime = fileAttributes.creationTime();
-            var fileLastModifiedTime = fileAttributes.lastModifiedTime();
-            var fileLastAccessTime = fileAttributes.lastAccessTime();
+            var basicFileAttributes = Files.readAttributes(filePath, DosFileAttributes.class);
+
+            var fileSize = basicFileAttributes.size();
+            var fileCreationTime = basicFileAttributes.creationTime();
+            var fileLastModifiedTime = basicFileAttributes.lastModifiedTime();
+            var fileLastAccessTime = basicFileAttributes.lastAccessTime();
+
+            var isArchive = basicFileAttributes.isArchive();
+            var isHidden = basicFileAttributes.isHidden();
+            var isDirectory = basicFileAttributes.isDirectory();
+            var isReadOnly = basicFileAttributes.isReadOnly();
+            var isSystem = basicFileAttributes.isSystem();
+
+            // TODO: assign file attributes and file property
 
             return GetFileInformationResponse.newBuilder()
                     .setStatus(NtStatus.SUCCESS.intValue())
