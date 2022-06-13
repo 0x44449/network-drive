@@ -261,6 +261,7 @@ public class PhysStorageService implements NStorage {
 
         var underlyingPath = objectInfo.getFullPath();
         try {
+            // TODO: check fileMode, for find write offset position and determine that modify file size
             try (var fileOutputStream = new FileOutputStream(underlyingPath)) {
                 var fileChannel = fileOutputStream.getChannel();
                 fileChannel.position(offset);
@@ -335,6 +336,30 @@ public class PhysStorageService implements NStorage {
         var credentialInfo = request.getCred();
 
         var fileName = request.getFileName();
+
+        // TODO: read from object cache
+        var objectEntities = objectsRepository.findObjectByFullPath(fileName);
+        var objectInfo = objectEntities.size() > 0 ? objectEntities.get(0) : null;
+        if (objectInfo == null) { // unexpected
+            return DeleteFileResponse.newBuilder()
+                    .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
+                    .build();
+        }
+        if (!objectInfo.isFile()) {
+            return DeleteFileResponse.newBuilder()
+                    .setStatus(NtStatus.FILE_IS_A_DIRECTORY.intValue())
+                    .build();
+        }
+
+        objectsRepository.removeObjectByFullPath(fileName);
+
+        var underlyingPath = Paths.get(objectInfo.getPhysicalPath());
+        try {
+            Files.deleteIfExists(underlyingPath);
+        }
+        catch (IOException ioe) {
+            // TODO: delete next time...? use scheduler or service
+        }
 
         return DeleteFileResponse.newBuilder()
                 .setStatus(0)
