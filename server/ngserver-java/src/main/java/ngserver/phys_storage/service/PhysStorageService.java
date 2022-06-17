@@ -203,7 +203,7 @@ public class PhysStorageService implements NStorage {
                     .build();
         }
 
-        var underlyingPath = objectInfo.getPhysicalPath();
+        var underlyingPath = objectInfo.getUnderlyingPath();
         // TODO: read from read cache block
         try {
             // TODO: write to ByteString directly
@@ -257,7 +257,7 @@ public class PhysStorageService implements NStorage {
                     .build();
         }
 
-        var underlyingPath = objectInfo.getFullPath();
+        var underlyingPath = objectInfo.getUnderlyingPath();
         try {
             // TODO: check fileMode, for find write offset position and determine that modify file size
             try (var fileOutputStream = new FileOutputStream(underlyingPath)) {
@@ -375,7 +375,7 @@ public class PhysStorageService implements NStorage {
 
         objectsRepository.removeObjectByFullPath(fileName);
 
-        var underlyingPath = Paths.get(objectInfo.getPhysicalPath());
+        var underlyingPath = Paths.get(objectInfo.getUnderlyingPath());
         try {
             Files.deleteIfExists(underlyingPath);
         }

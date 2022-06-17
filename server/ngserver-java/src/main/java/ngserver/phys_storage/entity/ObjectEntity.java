@@ -17,8 +17,8 @@ public class ObjectEntity {
     private String name;
     @Column(name = "type")
     private String type;
-    @Column(name = "physical_path")
-    private String physicalPath;
+    @Column(name = "underlying_path")
+    private String underlyingPath;
 
     public String getFullPath() {
         return fullPath;
@@ -36,8 +36,8 @@ public class ObjectEntity {
         return type;
     }
 
-    public String getPhysicalPath() {
-        return physicalPath;
+    public String getUnderlyingPath() {
+        return underlyingPath;
     }
 
     public void setFullPath(String fullPath) {
@@ -56,8 +56,8 @@ public class ObjectEntity {
         this.type = type;
     }
 
-    public void setPhysicalPath(String physicalPath) {
-        this.physicalPath = physicalPath;
+    public void setUnderlyingPath(String underlyingPath) {
+        this.underlyingPath = underlyingPath;
     }
 
     public boolean isFile() {
