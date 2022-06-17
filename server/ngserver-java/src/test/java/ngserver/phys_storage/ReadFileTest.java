@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -80,7 +79,7 @@ public class ReadFileTest {
 
         assertThat(objectInfo).isNotNull();
 
-        var underlyingPath = objectInfo.getPhysicalPath();
+        var underlyingPath = objectInfo.getUnderlyingPath();
         var readBuffer = new byte[(int) length];
 
         var fileInputStream = new FileInputStream(underlyingPath);
