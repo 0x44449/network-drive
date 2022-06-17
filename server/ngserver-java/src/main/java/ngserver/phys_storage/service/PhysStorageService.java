@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
-import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.DosFileAttributes;
 
 @Service
@@ -311,15 +309,39 @@ public class PhysStorageService implements NStorage {
             var fileLastModifiedTime = basicFileAttributes.lastModifiedTime();
             var fileLastAccessTime = basicFileAttributes.lastAccessTime();
 
-            var isArchive = basicFileAttributes.isArchive();
             var isHidden = basicFileAttributes.isHidden();
             var isDirectory = basicFileAttributes.isDirectory();
             var isReadOnly = basicFileAttributes.isReadOnly();
             var isSystem = basicFileAttributes.isSystem();
 
-            // TODO: assign file attributes and file property
+            var fileCreationTimeValue = fileCreationTime.toMillis();
+            var fileLastModifiedTimeValue = fileLastModifiedTime.toMillis();
+            var fileLastAccessTimeValue = fileLastAccessTime.toMillis();
+
+            var fileAttributeValue = FileAttribute.maskValueSet(0);
+            if (isDirectory) {
+                fileAttributeValue.add(FileAttribute.DIRECTORY);
+            }
+            if (isHidden) {
+                fileAttributeValue.add(FileAttribute.HIDDEN);
+            }
+            if (isSystem) {
+                fileAttributeValue.add(FileAttribute.SYSTEM);
+            }
+            if (isReadOnly) {
+                fileAttributeValue.add(FileAttribute.READONLY);
+            }
+            // final attribute check
+            if (fileAttributeValue.intValue() == 0) {
+                fileAttributeValue.add(FileAttribute.NORMAL);
+            }
 
             return GetFileInformationResponse.newBuilder()
+                    .setFileSize(fileSize)
+                    .setFileAttributes(fileAttributeValue.intValue())
+                    .setFileCreationTime(fileCreationTimeValue)
+                    .setFileLastWriteTime(fileLastModifiedTimeValue)
+                    .setFileLastAccessTime(fileLastAccessTimeValue)
                     .setStatus(NtStatus.SUCCESS.intValue())
                     .build();
         }
