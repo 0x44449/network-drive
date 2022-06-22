@@ -302,51 +302,16 @@ public class PhysStorageService implements NStorage {
         var underlyingPath = objectInfo.getFullPath();
         // TODO: get information from object cache
         try {
-            var filePath = Paths.get(underlyingPath);
-            var basicFileAttributes = Files.readAttributes(filePath, DosFileAttributes.class);
-
-            var fileSize = basicFileAttributes.size();
-            var fileCreationTime = basicFileAttributes.creationTime();
-            var fileLastModifiedTime = basicFileAttributes.lastModifiedTime();
-            var fileLastAccessTime = basicFileAttributes.lastAccessTime();
-
-            var isHidden = basicFileAttributes.isHidden();
-            var isDirectory = basicFileAttributes.isDirectory();
-            var isReadOnly = basicFileAttributes.isReadOnly();
-            var isSystem = basicFileAttributes.isSystem();
-
-            var fileCreationTimeValue = fileCreationTime.toMillis();
-            var fileLastModifiedTimeValue = fileLastModifiedTime.toMillis();
-            var fileLastAccessTimeValue = fileLastAccessTime.toMillis();
-
-            var fileAttributeValue = FileAttribute.maskValueSet(0);
-            if (isDirectory) {
-                fileAttributeValue.add(FileAttribute.DIRECTORY);
-            }
-            if (isHidden) {
-                fileAttributeValue.add(FileAttribute.HIDDEN);
-            }
-            if (isSystem) {
-                fileAttributeValue.add(FileAttribute.SYSTEM);
-            }
-            if (isReadOnly) {
-                fileAttributeValue.add(FileAttribute.READONLY);
-            }
-            // final attribute check
-            if (fileAttributeValue.intValue() == 0) {
-                fileAttributeValue.add(FileAttribute.NORMAL);
-            }
-
             return GetFileInformationResponse.newBuilder()
                     .setFileSize(objectInfo.getFileSize())
                     .setFileAttributes(objectInfo.getFileAttributes())
                     .setFileCreationTime(objectInfo.getFileCreationTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
-                    .setFileLastWriteTime(fileLastModifiedTimeValue)
-                    .setFileLastAccessTime(fileLastAccessTimeValue)
+                    .setFileLastWriteTime(objectInfo.getFileLastWriteTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
+                    .setFileLastAccessTime(objectInfo.getFileLastAccessTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
                     .setStatus(NtStatus.SUCCESS.intValue())
                     .build();
         }
-        catch (IOException ioe) {
+        catch (Exception ex) {
             return GetFileInformationResponse.newBuilder()
                     .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue()) // TODO: find correct code
                     .build();
