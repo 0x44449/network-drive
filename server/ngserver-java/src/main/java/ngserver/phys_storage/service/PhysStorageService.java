@@ -174,7 +174,7 @@ public class PhysStorageService implements NStorage {
         }
 
         return CloseFileResponse.newBuilder()
-                .setStatus(0)
+                .setStatus(NtStatus.SUCCESS.intValue())
                 .build();
     }
 
@@ -215,7 +215,7 @@ public class PhysStorageService implements NStorage {
 
            return ReadFileResponse.newBuilder()
                    .setBuffer(ByteString.copyFrom(readBuffer))
-                   .setStatus(0)
+                   .setStatus(NtStatus.SUCCESS.intValue())
                    .build();
         }
         catch (FileNotFoundException fnfe) {
@@ -264,7 +264,7 @@ public class PhysStorageService implements NStorage {
             }
 
             return WriteFileResponse.newBuilder()
-                    .setStatus(0)
+                    .setStatus(NtStatus.SUCCESS.intValue())
                     .build();
         }
         catch (FileNotFoundException fnfe) {
@@ -346,7 +346,7 @@ public class PhysStorageService implements NStorage {
         }
 
         return DeleteFileResponse.newBuilder()
-                .setStatus(0)
+                .setStatus(NtStatus.SUCCESS.intValue())
                 .build();
     }
 
@@ -383,7 +383,7 @@ public class PhysStorageService implements NStorage {
         // TODO: delete from object cache
 
         return DeleteDirectoryResponse.newBuilder()
-                .setStatus(0)
+                .setStatus(NtStatus.SUCCESS.intValue())
                 .build();
     }
 
@@ -438,7 +438,7 @@ public class PhysStorageService implements NStorage {
         // TODO: update path from object cache
 
         return MoveFileResponse.newBuilder()
-                .setStatus(0)
+                .setStatus(NtStatus.SUCCESS.intValue())
                 .build();
     }
 
@@ -450,7 +450,7 @@ public class PhysStorageService implements NStorage {
         var fileName = request.getFileName();
 
         return FlushFileBufferResponse.newBuilder()
-                .setStatus(0)
+                .setStatus(NtStatus.SUCCESS.intValue())
                 .build();
     }
 
@@ -462,7 +462,7 @@ public class PhysStorageService implements NStorage {
         var fileName = request.getFileName();
 
         return SetAllocationSizeResponse.newBuilder()
-                .setStatus(0)
+                .setStatus(NtStatus.SUCCESS.intValue())
                 .build();
     }
 
@@ -474,7 +474,7 @@ public class PhysStorageService implements NStorage {
         var fileName = request.getFileName();
 
         return SetEndOfFileResponse.newBuilder()
-                .setStatus(0)
+                .setStatus(NtStatus.SUCCESS.intValue())
                 .build();
     }
 
@@ -487,7 +487,7 @@ public class PhysStorageService implements NStorage {
         var fileAttributes = request.getFileAttributes();
 
         return SetFileAttributesResponse.newBuilder()
-                .setStatus(0)
+                .setStatus(NtStatus.SUCCESS.intValue())
                 .build();
     }
 
@@ -501,7 +501,7 @@ public class PhysStorageService implements NStorage {
         var length = request.getLength();
 
         return LockFileResponse.newBuilder()
-                .setStatus(0)
+                .setStatus(NtStatus.SUCCESS.intValue())
                 .build();
     }
 
@@ -515,7 +515,7 @@ public class PhysStorageService implements NStorage {
         var length = request.getLength();
 
         return UnlockFileResponse.newBuilder()
-                .setStatus(0)
+                .setStatus(NtStatus.SUCCESS.intValue())
                 .build();
     }
 }
