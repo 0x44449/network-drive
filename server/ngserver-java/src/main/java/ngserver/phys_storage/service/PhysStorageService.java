@@ -14,6 +14,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.DosFileAttributes;
+import java.time.ZoneId;
 
 @Service
 public class PhysStorageService implements NStorage {
@@ -337,9 +338,9 @@ public class PhysStorageService implements NStorage {
             }
 
             return GetFileInformationResponse.newBuilder()
-                    .setFileSize(fileSize)
-                    .setFileAttributes(fileAttributeValue.intValue())
-                    .setFileCreationTime(fileCreationTimeValue)
+                    .setFileSize(objectInfo.getFileSize())
+                    .setFileAttributes(objectInfo.getFileAttributes())
+                    .setFileCreationTime(objectInfo.getFileCreationTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
                     .setFileLastWriteTime(fileLastModifiedTimeValue)
                     .setFileLastAccessTime(fileLastAccessTimeValue)
                     .setStatus(NtStatus.SUCCESS.intValue())

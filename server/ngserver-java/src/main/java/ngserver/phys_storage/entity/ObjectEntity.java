@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "objects")
@@ -19,6 +20,16 @@ public class ObjectEntity {
     private String type;
     @Column(name = "underlying_path")
     private String underlyingPath;
+    @Column(name = "file_attributes")
+    private int fileAttributes;
+    @Column(name = "file_creation_time")
+    private LocalDateTime fileCreationTime;
+    @Column(name = "file_last_write_time")
+    private LocalDateTime fileLastWriteTime;
+    @Column(name = "file_last_access_time")
+    private LocalDateTime fileLastAccessTime;
+    @Column(name = "file_size")
+    private long fileSize;
 
     public String getFullPath() {
         return fullPath;
@@ -58,6 +69,46 @@ public class ObjectEntity {
 
     public void setUnderlyingPath(String underlyingPath) {
         this.underlyingPath = underlyingPath;
+    }
+
+    public int getFileAttributes() {
+        return fileAttributes;
+    }
+
+    public void setFileAttributes(int fileAttributes) {
+        this.fileAttributes = fileAttributes;
+    }
+
+    public LocalDateTime getFileCreationTime() {
+        return fileCreationTime;
+    }
+
+    public void setFileCreationTime(LocalDateTime fileCreationTime) {
+        this.fileCreationTime = fileCreationTime;
+    }
+
+    public LocalDateTime getFileLastWriteTime() {
+        return fileLastWriteTime;
+    }
+
+    public void setFileLastWriteTime(LocalDateTime fileLastWriteTime) {
+        this.fileLastWriteTime = fileLastWriteTime;
+    }
+
+    public LocalDateTime getFileLastAccessTime() {
+        return fileLastAccessTime;
+    }
+
+    public void setFileLastAccessTime(LocalDateTime fileLastAccessTime) {
+        this.fileLastAccessTime = fileLastAccessTime;
+    }
+
+    public long getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(long fileSize) {
+        this.fileSize = fileSize;
     }
 
     public boolean isFile() {
