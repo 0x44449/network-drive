@@ -1,5 +1,7 @@
 package ngserver.phys_storage.entity;
 
+import drive_common.dokan_port.constants.microsoft.FileAttribute;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,8 +18,6 @@ public class ObjectEntity {
     private String containerPath;
     @Column(name = "name")
     private String name;
-    @Column(name = "type")
-    private String type;
     @Column(name = "underlying_path")
     private String underlyingPath;
     @Column(name = "file_attributes")
@@ -43,10 +43,6 @@ public class ObjectEntity {
         return name;
     }
 
-    public String getType() {
-        return type;
-    }
-
     public String getUnderlyingPath() {
         return underlyingPath;
     }
@@ -61,10 +57,6 @@ public class ObjectEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public void setUnderlyingPath(String underlyingPath) {
@@ -112,10 +104,10 @@ public class ObjectEntity {
     }
 
     public boolean isFile() {
-        return this.type.equals("F");
+        return !FileAttribute.maskValueSet(this.fileAttributes).contains(FileAttribute.DIRECTORY);
     }
 
     public boolean isDirectory() {
-        return this.type.equals("D");
+        return FileAttribute.maskValueSet(this.fileAttributes).contains(FileAttribute.DIRECTORY);
     }
 }
