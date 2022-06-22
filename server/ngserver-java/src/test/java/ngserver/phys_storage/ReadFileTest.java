@@ -1,5 +1,6 @@
 package ngserver.phys_storage;
 
+import drive_common.dokan_port.constants.microsoft.FileAttribute;
 import drive_common.dokan_port.constants.microsoft.NtStatus;
 import drive_protocol.request.ReadFileRequest;
 import ngserver.phys_storage.repository.ObjectsRepository;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.UUID;
 
@@ -46,7 +48,12 @@ public class ReadFileTest {
                 "\\",
                 targetPath.getFileName().toString(),
                 "F",
-                targetPath.toString());
+                targetPath.toString(),
+                FileAttribute.NORMAL.intValue(),
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                1024 * 100);
     }
 
     @AfterEach
