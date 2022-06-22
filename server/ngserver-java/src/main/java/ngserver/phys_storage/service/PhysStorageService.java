@@ -40,8 +40,7 @@ public class PhysStorageService implements NStorage {
         var fileMode = FileMode.fromInt(request.getFileMode());
         var isDirectory = requestInfo.getIsDirectory();
 
-        var objectEntities = objectsRepository.findObjectByFullPath(fileName);
-        var objectInfo = objectEntities.size() > 0 ? objectEntities.get(0) : null;
+        var objectInfo = objectsRepository.findObjectByFullPath(fileName);
 
         /*
         If the file is a directory, CreateFile is also called.
@@ -191,8 +190,7 @@ public class PhysStorageService implements NStorage {
         // var fileMode = FileMode.fromInt(request.getFileMode());
 
         // TODO: read from object cache
-        var objectEntities = objectsRepository.findObjectByFullPath(fileName);
-        var objectInfo = objectEntities.size() > 0 ? objectEntities.get(0) : null;
+        var objectInfo = objectsRepository.findObjectByFullPath(fileName);
         if (objectInfo == null) { // unexpected
             return ReadFileResponse.newBuilder()
                     .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
@@ -245,8 +243,7 @@ public class PhysStorageService implements NStorage {
         var fileMode = FileMode.fromInt(request.getFileMode());
 
         // TODO: read from object cache
-        var objectEntities = objectsRepository.findObjectByFullPath(fileName);
-        var objectInfo = objectEntities.size() > 0 ? objectEntities.get(0) : null;
+        var objectInfo = objectsRepository.findObjectByFullPath(fileName);
         if (objectInfo == null) { // unexpected
             return WriteFileResponse.newBuilder()
                     .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
@@ -291,8 +288,7 @@ public class PhysStorageService implements NStorage {
         var fileName = request.getFileName();
 
         // TODO: read from object cache
-        var objectEntities = objectsRepository.findObjectByFullPath(fileName);
-        var objectInfo = objectEntities.size() > 0 ? objectEntities.get(0) : null;
+        var objectInfo = objectsRepository.findObjectByFullPath(fileName);
         if (objectInfo == null) { // unexpected
             return GetFileInformationResponse.newBuilder()
                     .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
@@ -326,8 +322,7 @@ public class PhysStorageService implements NStorage {
         var fileName = request.getFileName();
 
         // TODO: read from object cache
-        var objectEntities = objectsRepository.findObjectByFullPath(fileName);
-        var objectInfo = objectEntities.size() > 0 ? objectEntities.get(0) : null;
+        var objectInfo = objectsRepository.findObjectByFullPath(fileName);
         if (objectInfo == null) { // unexpected
             return DeleteFileResponse.newBuilder()
                     .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
@@ -340,6 +335,8 @@ public class PhysStorageService implements NStorage {
         }
 
         objectsRepository.removeObjectByFullPath(fileName);
+
+        // TODO: delete from object cache
 
         var underlyingPath = Paths.get(objectInfo.getUnderlyingPath());
         try {
