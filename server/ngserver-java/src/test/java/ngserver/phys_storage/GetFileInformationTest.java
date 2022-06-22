@@ -80,8 +80,7 @@ public class GetFileInformationTest {
 
         assertThat(status).isEqualTo(NtStatus.SUCCESS.intValue());
 
-        var objectEntities = objectsRepository.findObjectByFullPath(fileName);
-        var objectInfo = objectEntities.size() > 0 ? objectEntities.get(0) : null;
+        var objectInfo = objectsRepository.findObjectByFullPath(fileName);
 
         assertThat(objectInfo).isNotNull();
         assertThat(objectInfo.getFileCreationTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()).isEqualTo(response.getFileCreationTime());

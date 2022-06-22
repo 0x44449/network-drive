@@ -80,8 +80,7 @@ public class ReadFileTest {
         assertThat(status).isEqualTo(NtStatus.SUCCESS.intValue());
         assertThat(buffer.size()).isEqualTo((int)length);
 
-        var objectEntities = objectsRepository.findObjectByFullPath(fileName);
-        var objectInfo = objectEntities.size() > 0 ? objectEntities.get(0) : null;
+        var objectInfo = objectsRepository.findObjectByFullPath(fileName);
 
         assertThat(objectInfo).isNotNull();
 
