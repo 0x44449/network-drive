@@ -28,4 +28,12 @@ public interface ObjectsRepository extends JpaRepository<ObjectEntity, String> {
 
     @Query(value = "CALL Objects_Delete_ObjectByFullPath(:in_full_path);", nativeQuery = true)
     void removeObjectByFullPath(@Param("in_full_path") String fullPath);
+
+    @Query(value = "CALL Objects_Has_ChildObjectByFullPath", nativeQuery = true)
+    boolean hasChildObjectByFullPath(@Param("in_full_path") String fullPath);
+
+    @Query(value = "CALL Objects_Update_FullPathWithReplace")
+    void updateObjectFullPathWithReplace(
+            @Param("in_full_path") String fullPath,
+            @Param("in_new_full_path") String newFullPath);
 }

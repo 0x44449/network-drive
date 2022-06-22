@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.attribute.DosFileAttributes;
 import java.time.ZoneId;
 
 @Service
@@ -358,6 +357,31 @@ public class PhysStorageService implements NStorage {
 
         var fileName = request.getFileName();
 
+        // TODO: read from object cache
+        var objectInfo = objectsRepository.findObjectByFullPath(fileName);
+        if (objectInfo == null) { // unexpected
+            return DeleteDirectoryResponse.newBuilder()
+                    .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
+                    .build();
+        }
+        if (!objectInfo.isDirectory()) {
+            return DeleteDirectoryResponse.newBuilder()
+                    .setStatus(NtStatus.NOT_A_DIRECTORY.intValue())
+                    .build();
+        }
+
+        // check directory is empty
+        var isDirectoryEmpty = objectsRepository.hasChildObjectByFullPath(fileName);
+        if (!isDirectoryEmpty) {
+            return DeleteDirectoryResponse.newBuilder()
+                    .setStatus(NtStatus.DIRECTORY_NOT_EMPTY.intValue())
+                    .build();
+        }
+
+        objectsRepository.removeObjectByFullPath(fileName);
+
+        // TODO: delete from object cache
+
         return DeleteDirectoryResponse.newBuilder()
                 .setStatus(0)
                 .build();
@@ -370,6 +394,48 @@ public class PhysStorageService implements NStorage {
 
         var fileName = request.getFileName();
         var newFileName = request.getNewFileName();
+        var replaceIfExisting = request.getReplaceIfExisting();
+
+        // TODO: read from object cache
+        var objectInfo = objectsRepository.findObjectByFullPath(fileName);
+        if (objectInfo == null) { // unexpected
+            return MoveFileResponse.newBuilder()
+                    .setStatus(NtStatus.OBJECT_NAME_NOT_FOUND.intValue())
+                    .build();
+        }
+        var newObjectInfo = objectsRepository.findObjectByFullPath(newFileName);
+        if (newObjectInfo != null) {
+            if (replaceIfExisting) { // only apply that overwrite file to file, directory to directory
+                if (objectInfo.isFile() && !newObjectInfo.isFile()) {
+                    return MoveFileResponse.newBuilder()
+                            .setStatus(NtStatus.FILE_IS_A_DIRECTORY.intValue()) // TODO: find correct code
+                            .build();
+                }
+                else if (objectInfo.isDirectory() && !newObjectInfo.isDirectory()) {
+                    return MoveFileResponse.newBuilder()
+                            .setStatus(NtStatus.NOT_A_DIRECTORY.intValue()) // TODO: find correct code
+                            .build();
+                }
+
+                if (newObjectInfo.isDirectory()) { // target directory must empty
+                    var targetDirectoryIsEmpty = objectsRepository.hasChildObjectByFullPath(newFileName);
+                    if (!targetDirectoryIsEmpty) {
+                        return MoveFileResponse.newBuilder()
+                                .setStatus(NtStatus.DIRECTORY_NOT_EMPTY.intValue()) // TODO: find correct code
+                                .build();
+                    }
+                }
+            }
+            else { // target is exists, failure
+                return MoveFileResponse.newBuilder()
+                        .setStatus(NtStatus.OBJECT_NAME_COLLISION.intValue()) // TODO: find correct code
+                        .build();
+            }
+        }
+
+        objectsRepository.updateObjectFullPathWithReplace(fileName, newFileName);
+
+        // TODO: update path from object cache
 
         return MoveFileResponse.newBuilder()
                 .setStatus(0)
