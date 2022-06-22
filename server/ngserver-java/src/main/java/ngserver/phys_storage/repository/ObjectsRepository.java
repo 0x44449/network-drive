@@ -22,10 +22,10 @@ public interface ObjectsRepository extends JpaRepository<ObjectEntity, String> {
             @Param("in_type") String type,
             @Param("in_underlying_path") String underlyingPath,
             @Param("in_file_attributes") int fileAttributes,
-            @Param("") LocalDateTime fileCreationTime,
-            @Param("") LocalDateTime fileLastWriteTime,
-            @Param("") LocalDateTime fileLastAccessTime,
-            @Param("") long fileSize);
+            @Param("in_file_creation_time") LocalDateTime fileCreationTime,
+            @Param("in_file_last_write_time") LocalDateTime fileLastWriteTime,
+            @Param("in_file_last_access_time") LocalDateTime fileLastAccessTime,
+            @Param("in_file_size") long fileSize);
 
     @Query(value = "CALL Objects_Delete_ObjectByFullPath(:in_full_path);", nativeQuery = true)
     void removeObjectByFullPath(@Param("in_full_path") String fullPath);
