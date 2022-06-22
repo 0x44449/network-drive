@@ -47,7 +47,6 @@ public class ReadFileTest {
                 "\\" + targetPath.getFileName().toString(),
                 "\\",
                 targetPath.getFileName().toString(),
-                "F",
                 targetPath.toString(),
                 FileAttribute.NORMAL.intValue(),
                 LocalDateTime.now(),

@@ -54,7 +54,6 @@ public class GetFileInformationTest {
                 "\\" + targetPath.getFileName().toString(),
                 "\\",
                 targetPath.getFileName().toString(),
-                "F",
                 targetPath.toString(),
                 FileAttribute.NORMAL.intValue(),
                 fileCreateTime,
